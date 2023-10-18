@@ -1,0 +1,17 @@
+.loginBox {
+  margin: auto;
+  --padding-start: 10vw;
+  --padding-end: 10vw;
+  .inputBox {
+    padding: 0px;
+  }
+  .loginText {
+    padding-top: 50px;
+  }
+}
+
+.fixedButton {
+  display: flex;
+  padding: 5px;
+  height: auto;
+}

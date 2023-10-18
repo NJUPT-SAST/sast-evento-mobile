@@ -1,0 +1,14 @@
+.slidebox {
+  height: 150px;
+  width: 100vw;
+  background-color: blue;
+}
+
+.eventContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  // background-color: blue;
+}

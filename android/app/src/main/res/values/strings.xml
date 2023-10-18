@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">sast-evento-mobile</string>
+    <string name="title_activity_main">sast-evento-mobile</string>
+    <string name="package_name">sast.evento.mobile</string>
+    <string name="custom_url_scheme">sast.evento.mobile</string>
+</resources>
