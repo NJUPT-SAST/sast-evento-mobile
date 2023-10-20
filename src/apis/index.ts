@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const BASEURL = 'http://localhost:19711/api';
+const BASEURL = 'http://192.168.0.154:19711/api';
 // const BASEURL = 'https://evento.sast.fun/api';
 const TIMEOUT = 10000;
 

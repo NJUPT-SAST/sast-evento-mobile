@@ -1,0 +1,61 @@
+.eventBox {
+  --padding-end: 10vw;
+  --padding-start: 10vw;
+  h1 {
+    font-weight: bolder;
+  }
+  h2 {
+    font-weight: bold;
+  }
+  .categryBox {
+    display: flex;
+    flex-direction: row;
+    p {
+      margin: 0;
+      margin-left: 6px;
+    }
+    .typeBox {
+      display: flex;
+      flex-direction: row;
+    }
+    .tagBox {
+      margin-left: 10px;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .departmentBox {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+    .deparments {
+      display: flex;
+      flex-direction: row;
+      p {
+        margin: 0;
+        margin-left: 6px;
+      }
+    }
+  }
+  .titleBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+ion-button[slot='fixed'] {
+  bottom: 2%;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  position: relative;
+}
+.backBar {
+  --padding-start: 0vw !important;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  margin: 0px 5px 0px 5px;
+}

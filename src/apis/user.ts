@@ -10,3 +10,8 @@ export const getEventList = async (page: number, size: number = 5) => {
   const response = await request.get<any>('/event/list', { params: { page, size } });
   return response.data;
 };
+
+export const getEventInfo = async (eventId: number) => {
+  const response = await request.get<Event>('/event/info', { params: { eventId } });
+  return response.data;
+}
