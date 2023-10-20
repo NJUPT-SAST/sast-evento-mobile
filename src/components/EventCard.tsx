@@ -1,9 +1,8 @@
-// a component of event including an image, its title, its group and its discription
-// using ionic
 import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle, IonIcon } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
+import { folderOpenOutline, pricetagsOutline } from 'ionicons/icons';
 
 interface EventCardProps {
 	event: Event;
@@ -11,24 +10,27 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
 	const departmentNames: string = event.departments.map((department) => department.departmentName).join(' ');
+	const href = `/event/${event.id}`;
 	return (
-		<IonCard className='eventCard'>
-			<IonImg src="https://ionicframework.com/docs/demos/api/card/madison.jpg" class='img' />
-			<IonContent>
-				<IonCardHeader>
-					<IonCardTitle>{event.title}</IonCardTitle>
-					<IonCardSubtitle>{departmentNames}</IonCardSubtitle>
-				</IonCardHeader>
-				<IonCardContent className='eventDetail'>
-					<IonContent>活动时间: </IonContent>
-					<IonContent>{event.gmtEventStart} - {event.gmtEventEnd}</IonContent>
-				</IonCardContent>
-				<IonCardContent>
-					<IonContent>报名时间:</IonContent>
-					<IonContent>{event.gmtRegistrationStart} - {event.gmtRegistrationEnd}</IonContent>
-				</IonCardContent>
-			</IonContent>
-			<IonButton color="primary" size="small" expand="block">报名</IonButton>
+		<IonCard className='eventCard' href={href}>
+			<IonCardHeader>
+				<IonCardTitle>{event.title}</IonCardTitle>
+				<IonCardSubtitle>{departmentNames}</IonCardSubtitle>
+			</IonCardHeader>
+			<IonCardContent>
+				<p>{event.description}</p>
+				<div className='categryBox'>
+          <div className='typeBox'>
+            <IonIcon icon={folderOpenOutline}></IonIcon>
+            <p>{event.eventType.typeName}</p>
+          </div>
+          <div className='tagBox'>
+            <IonIcon icon={pricetagsOutline}></IonIcon>
+            <p>{event.tag}</p>
+          </div>
+        </div>
+			</IonCardContent>
+			<IonButton color="light" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton>
 		</IonCard>
 	);
 };

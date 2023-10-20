@@ -15,6 +15,8 @@ const Login: React.FC = () => {
     if (username === 'admin' && password === 'admin') {
       history.push('/home');
     } else {
+      setUsername('');
+      setPassword('');
       setShowToast(true);
     }
   }
@@ -29,31 +31,29 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <IonContent>
         <IonHeader collapse="condense" className="fixedButton">
           <IonToolbar>
             <IonButtons slot="start" onClick={close}>
               <IonIcon icon={closeOutline} size='large'></IonIcon>
             </IonButtons>
-            {/* <IonTitle>登录</IonTitle> */}
           </IonToolbar>
         </IonHeader>
         <IonContent className='loginBox'>
+          <IonLabel>
+            <h1 className='loginText'>登录</h1>
+          </IonLabel>
           <IonList>
-            <IonLabel>
-              <h1 className='loginText'>登录</h1>
-            </IonLabel>
             <IonItem className='inputBox'>
-              <IonLabel position="floating">用户名</IonLabel>
-              <IonInput fill={'outline'} value={username} onIonChange={e => setUsername(e.detail.value!)}></IonInput>
+              <IonInput label='用户名' labelPlacement='floating' value={username} onIonChange={e => setUsername(e.detail.value!)}></IonInput>
             </IonItem>
             <IonItem>
-              <IonLabel position="floating">密码</IonLabel>
-              <IonInput type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
+              <IonInput label='密码' labelPlacement='floating' type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
             </IonItem>
           </IonList>
           <IonButton expand="block" shape="round" onClick={login}>登录</IonButton>
-          <IonLabel>还没有账号？</IonLabel><IonLabel color="tertiary">注册</IonLabel>
+          <IonLabel>还没有账号？ </IonLabel>
+          <IonLabel color="tertiary">注册</IonLabel>
         </IonContent>
         <IonToast
           isOpen={showToast}
