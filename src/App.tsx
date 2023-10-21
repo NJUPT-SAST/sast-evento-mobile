@@ -26,7 +26,8 @@ import BottomNaviBar from './components/BottomNaviBar';
 
 /* Pages */
 import Event from './pages/Event';
-import Login from './pages/Login'
+import Login from './pages/Login';
+import OAuth from './pages/OAuth';
 
 setupIonicReact();
 
@@ -37,7 +38,7 @@ const App: React.FC = () => (
         <Route path="/">
           <BottomNaviBar></BottomNaviBar>
         </Route>
-        
+        <Route path="/oauth" component={OAuth}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/event/:eventId" component={Event}></Route>
       </IonRouterOutlet>

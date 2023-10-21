@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 const BASEURL = 'http://192.168.0.154:19711/api';
+// const BASEURL = 'http://192.168.0.154:2222';
 // const BASEURL = 'https://evento.sast.fun/api';
 const TIMEOUT = 10000;
 
@@ -11,7 +12,7 @@ const createAxiosInstance = (): AxiosInstance => {
   });
   
   instance.interceptors.request.use((config) => {
-    config.headers['Content-Type'] = 'application/json';
+    // config.headers['Content-Type'] = 'application/json';
     config.headers['TOKEN'] = window.localStorage.getItem('token');
     return config;
   },
