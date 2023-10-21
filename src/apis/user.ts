@@ -15,3 +15,8 @@ export const getEventInfo = async (eventId: number) => {
   const response = await request.get<Event>('/event/info', { params: { eventId } });
   return response.data;
 }
+
+export const getUserParticipant = async (eventId: number) => {
+  const response = await request.get<any>('/user/participate', { params: { eventId } });
+  return response.data;
+}

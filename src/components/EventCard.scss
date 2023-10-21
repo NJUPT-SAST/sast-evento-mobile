@@ -9,10 +9,18 @@
   ion-card-header {
     padding-bottom: 5px;
     padding-top: 0px;
+
+    ion-card-title,
+    ion-card-subtitle {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   ion-card-content {
     padding-bottom: 5px;
+
     p {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -20,17 +28,21 @@
       -webkit-line-clamp: 3;
       -webkit-Box-orient: vertical;
     }
+
     .categryWarpper {
       display: flex;
       flex-direction: row;
+
       p {
         margin: 0;
         margin-left: 6px;
       }
+
       .typeWarpper {
         display: flex;
         flex-direction: row;
       }
+
       .tagWarpper {
         margin-left: 10px;
         display: flex;
