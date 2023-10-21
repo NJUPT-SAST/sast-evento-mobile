@@ -1,9 +1,9 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
+  "short_name": "SAST-EVENTO",
+  "name": "SAST-EVENTO",
   "icons": [
     {
-      "src": "assets/icon/favicon.png",
+      "src": "assets/icon/app.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },

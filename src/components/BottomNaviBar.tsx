@@ -2,7 +2,6 @@ import React from 'react';
 import { IonIcon, IonLabel, IonRouterOutlet, IonSegment, IonSegmentButton, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar } from '@ionic/react';
 import Home from '../pages/Home';
 import Me from '../pages/Me';
-import Login from '../pages/Login';
 import { homeOutline, personOutline } from 'ionicons/icons';
 import { Route, Redirect } from 'react-router';
 
@@ -12,7 +11,6 @@ const BottomNaviBar: React.FC = () => {
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact />
         <Route path="/me" component={Me} exact />
-        <Route path="/login" component={Login}></Route>
         <Redirect exact from="/" to="/home" />
       </IonRouterOutlet>
 

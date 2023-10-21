@@ -1,37 +1,43 @@
 import { IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import EventCard from '../components/EventCard';
 import './Home.scss';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getAllConductingEvent, getEventList } from '../apis/user';
+import { Event } from '../context';
 
 const Home: React.FC = () => {
-  const [items, setItems] = useState<string[]>([]);
-
-  const generateItems = () => {
-    const newItems = [];
-    for (let i = 0; i < 5; i++) {
-      newItems.push(`Item ${1 + items.length + i}`);
-    }
-    setItems([...items, ...newItems]);
-  };
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    generateItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getAllConductingEvent().then(res => {
+      console.log(res);
+      setEvents(res);
+    });
   }, []);
+
+  const getItems = () => {
+    let page: number = 1;
+    let total: number = 0;
+    let newEvents: Event[] = [];
+    getEventList(page++, 5).then((response) => {
+      newEvents = response.data.result;
+      total = response.data.total;
+    })
+    setEvents([...events, ...newEvents]);
+  };
   return (
     <IonPage>
       <IonContent fullscreen>
-        {/* <IonContent class='slidebox'></IonContent> */}
         <IonList class='eventContainer'>
-          {items.map((item, index) => (
-            <IonItem key={item}>
-              <EventCard></EventCard>
+          {events.map((item, index) => (
+            <IonItem key={item.id}>
+              <EventCard event={item} ></EventCard>
             </IonItem>
           ))}
         </IonList>
         <IonInfiniteScroll
           onIonInfinite={(ev) => {
-            generateItems();
+            getItems();
             setTimeout(() => ev.target.complete(), 500);
           }}
         >

@@ -1,5 +1,5 @@
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonFooter, IonHeader, IonRouterOutlet, IonTitle, IonToolbar, setupIonicReact } from '@ionic/react';
+import { Route } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -21,8 +21,13 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-/* Pages */
+/* Components */
 import BottomNaviBar from './components/BottomNaviBar';
+
+/* Pages */
+import Event from './pages/Event';
+import Login from './pages/Login';
+import OAuth from './pages/OAuth';
 
 setupIonicReact();
 
@@ -33,6 +38,9 @@ const App: React.FC = () => (
         <Route path="/">
           <BottomNaviBar></BottomNaviBar>
         </Route>
+        <Route path="/oauth" component={OAuth}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/event/:eventId" component={Event}></Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

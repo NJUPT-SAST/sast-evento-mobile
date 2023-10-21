@@ -1,16 +1,48 @@
-.loginBox {
+.loginWarpper {
   margin: auto;
-  --padding-start: 10vw;
-  --padding-end: 10vw;
-  .inputBox {
+  width: 80%;
+  max-width: 400px;
+  .inputWarpper {
     padding: 0px;
   }
+
   .loginText {
     padding-top: 50px;
   }
+
+  ion-button {
+    padding: 5px;
+    font-weight: 600;
+  }
+
+  .oauthIconWarpper {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 312px;
+    margin: 0;
+
+    .oauthIcon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      img {
+        width: 35px;
+        aspect-ratio: auto 35 / 35;
+        height: 35px;
+      }
+    }
+  }
 }
 
-.fixedButton {
+.headerWarpper {
   display: flex;
   padding: 5px;
   height: auto;

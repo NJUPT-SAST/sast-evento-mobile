@@ -1,0 +1,22 @@
+import request from '.';
+import { Event } from '../context';
+
+export const getAllConductingEvent = async () => {
+  const response = await request.get<Event[]>('/event/conducting');
+  return response.data;
+};
+
+export const getEventList = async (page: number, size: number = 5) => {
+  const response = await request.get<any>('/event/list', { params: { page, size } });
+  return response.data;
+};
+
+export const getEventInfo = async (eventId: number) => {
+  const response = await request.get<Event>('/event/info', { params: { eventId } });
+  return response.data;
+}
+
+export const getUserParticipant = async (eventId: number) => {
+  const response = await request.get<any>('/user/participate', { params: { eventId } });
+  return response.data;
+}

@@ -1,28 +1,36 @@
-// a component of event including an image, its title, its group and its discription
-// using ionic
 import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle } from '@ionic/react';
-import './Event.scss';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle, IonIcon } from '@ionic/react';
+import './EventCard.scss';
+import { Event } from '../context';
+import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
 
-const EventCard: React.FC = () => {
+interface EventCardProps {
+	event: Event;
+}
+
+const EventCard: React.FC<EventCardProps> = ({ event }) => {
+	const departmentNames: string = event.departments.map((department) => department.departmentName).join(' ');
+	const href = `/event/${event.id}`;
 	return (
-		<IonCard className='eventCard'>
-			<IonImg src="https://ionicframework.com/docs/demos/api/card/madison.jpg" class='img' />
-			<IonContent>
-				<IonCardHeader>
-					<IonCardTitle>前后端数据交互</IonCardTitle>
-					<IonCardSubtitle>前端组 后端组</IonCardSubtitle>
-				</IonCardHeader>
-				<IonCardContent className='eventDetail'>
-					<IonContent>活动时间: </IonContent>
-					<IonContent>2021-05-01 12:00 - 2021-05-01 14:00</IonContent>
-				</IonCardContent>
-				<IonCardContent>
-					<IonContent>报名时间:</IonContent>
-					<IonContent>2021-04-01 12:00 - 2021-04-30 12:00</IonContent>
-				</IonCardContent>
-			</IonContent>
-			<IonButton color="primary" size="small" expand="block">报名</IonButton>
+		<IonCard className='eventCard' href={href}>
+			<IonCardHeader>
+				<IonCardTitle>{event.title}</IonCardTitle>
+				<IonCardSubtitle><IonIcon icon={peopleOutline}></IonIcon> {departmentNames}</IonCardSubtitle>
+			</IonCardHeader>
+			<IonCardContent>
+				<p>{event.description}</p>
+				<div className='categryWarpper'>
+          <div className='typeWarpper'>
+            <IonIcon icon={folderOpenOutline}></IonIcon>
+            <p>{event.eventType.typeName}</p>
+          </div>
+          <div className='tagWarpper'>
+            <IonIcon icon={pricetagsOutline}></IonIcon>
+            <p>{event.tag}</p>
+          </div>
+        </div>
+			</IonCardContent>
+			<IonButton color="light" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton>
 		</IonCard>
 	);
 };
