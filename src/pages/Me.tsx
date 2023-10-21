@@ -1,23 +1,29 @@
 import { IonContent, IonItem, IonPage } from '@ionic/react';
-import React from 'react';
+
+import React, { useState } from 'react';
 
 const Me: React.FC = () => {
-	const isLoggedIn = false; // You can replace this with your authentication logic
+	const [userInfo, setUserInfo] = useState<any | null>(JSON.parse(String(localStorage.getItem('userInfo'))));
+	const isLoggedIn = (() => {
+		const token = localStorage.getItem('token');
+		console.log(userInfo);
+		return token !== null;
+	});
 
 	return (
 		<IonPage>
 			<IonContent fullscreen>
-				<IonContent className='userProfile'>
-					{isLoggedIn ? (
+				<div className='userProfile'>
+					{isLoggedIn() ? (
 						<IonItem>
-							<h1 className='userProfile__name'>B22000000</h1>
+							<h1 className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h1>
 						</IonItem>
 					) : (
 						<IonItem href="/login">
 							<h1 className='userProfile__name'>请登录/注册</h1>
 						</IonItem>
 					)}
-				</IonContent>
+				</div>
 			</IonContent>
 		</IonPage>
 	);
