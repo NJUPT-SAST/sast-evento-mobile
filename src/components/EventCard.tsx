@@ -2,7 +2,7 @@ import React from 'react';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle, IonIcon } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
-import { folderOpenOutline, pricetagsOutline } from 'ionicons/icons';
+import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
 
 interface EventCardProps {
 	event: Event;
@@ -15,16 +15,16 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 		<IonCard className='eventCard' href={href}>
 			<IonCardHeader>
 				<IonCardTitle>{event.title}</IonCardTitle>
-				<IonCardSubtitle>{departmentNames}</IonCardSubtitle>
+				<IonCardSubtitle><IonIcon icon={peopleOutline}></IonIcon> {departmentNames}</IonCardSubtitle>
 			</IonCardHeader>
 			<IonCardContent>
 				<p>{event.description}</p>
-				<div className='categryBox'>
-          <div className='typeBox'>
+				<div className='categryWarpper'>
+          <div className='typeWarpper'>
             <IonIcon icon={folderOpenOutline}></IonIcon>
             <p>{event.eventType.typeName}</p>
           </div>
-          <div className='tagBox'>
+          <div className='tagWarpper'>
             <IonIcon icon={pricetagsOutline}></IonIcon>
             <p>{event.tag}</p>
           </div>

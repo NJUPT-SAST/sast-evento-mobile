@@ -1,43 +1,73 @@
-.eventBox {
+.eventWarpper {
   --padding-end: 10vw;
   --padding-start: 10vw;
+
   h1 {
     font-weight: bolder;
   }
+
   h2 {
     font-weight: bold;
   }
-  .categryBox {
+
+  .detailInfoWarpper {
     display: flex;
     flex-direction: row;
+    padding-bottom: 5px;
+
     p {
       margin: 0;
       margin-left: 6px;
     }
-    .typeBox {
+
+    .typeWarpper {
       display: flex;
       flex-direction: row;
     }
-    .tagBox {
+
+    .tagWarpper {
       margin-left: 10px;
+      padding-bottom: 10px;
       display: flex;
       flex-direction: row;
     }
-  }
-  .departmentBox {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 5px;
+
+    .infoTimeTitleWarpper {
+      font-size: 14px;
+      color: #99a2aa;
+      line-height: 14px;
+      margin-right: 15px;
+    }
+
+    .infoLocationTitleWarpper {
+      font-size: 14px;
+      color: #99a2aa;
+      line-height: 38px;
+      margin-right: 15px;
+    }
+
+    .infoLocationWarpper {
+      font-size: 14px;
+      line-height: 38px;
+    }
+
+    .infoTimeWarpper {
+      font-size: 14px;
+      line-height: 14px;
+    }
+
     .deparments {
       display: flex;
       flex-direction: row;
+
       p {
         margin: 0;
         margin-left: 6px;
       }
     }
   }
-  .titleBox {
+
+  .titleWarpper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -52,6 +82,7 @@ ion-button[slot='fixed'] {
   margin: auto;
   position: relative;
 }
+
 .backBar {
   --padding-start: 0vw !important;
   width: 100vw;

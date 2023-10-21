@@ -1,7 +1,7 @@
 .eventCard {
   max-width: 500px;
   width: 80vw;
-  height: 190px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -18,20 +18,20 @@
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
+      -webkit-Box-orient: vertical;
     }
-    .categryBox {
+    .categryWarpper {
       display: flex;
       flex-direction: row;
       p {
         margin: 0;
         margin-left: 6px;
       }
-      .typeBox {
+      .typeWarpper {
         display: flex;
         flex-direction: row;
       }
-      .tagBox {
+      .tagWarpper {
         margin-left: 10px;
         display: flex;
         flex-direction: row;

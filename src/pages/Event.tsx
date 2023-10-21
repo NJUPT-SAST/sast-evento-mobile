@@ -34,12 +34,12 @@ const EventPage: React.FC = () => {
           <IonIcon icon={chevronBack} size='large' onClick={close}></IonIcon>
         </div>
       </IonHeader>
-      <IonContent fullscreen={true} className='eventBox'>
-        <div className='titleBox'>
+      <IonContent fullscreen={true} className='eventWarpper'>
+        <div className='titleWarpper'>
           <h1>{event.title}</h1>
           <IonButton fill="outline" size="small" disabled={event.state !== "NOT_STARTED" && event.state !== "CHECKING_IN"}>订阅</IonButton>
         </div>
-        <div className='departmentBox'>
+        <div className='detailInfoWarpper'>
           <IonIcon icon={peopleOutline}></IonIcon>
           <div className='deparments'>
             {event.departments.map((department) => (
@@ -49,24 +49,29 @@ const EventPage: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className='categryBox'>
-          <div className='typeBox'>
+        <div className='detailInfoWarpper'>
+          <div className='typeWarpper'>
             <IonIcon icon={folderOpenOutline}></IonIcon>
             <p>{event.eventType.typeName}</p>
           </div>
-          <div className='tagBox'>
+          <div className='tagWarpper'>
             <IonIcon icon={pricetagsOutline}></IonIcon>
             <p>{event.tag}</p>
           </div>
         </div>
-        <h2>描述</h2>
+        <div className='detailInfoWarpper'>
+          <div className='infoTimeTitleWarpper'>活动时间: </div>
+          <div className='infoTimeWarpper'>{event.gmtEventStart.slice(5, -3).replace("-", ".")} - {event.gmtEventEnd.slice(5, -3).replace("-", ".")}</div>
+        </div>
+        <div className='detailInfoWarpper'>
+          <div className='infoTimeTitleWarpper'>报名时间: </div>
+          <div className='infoTimeWarpper'>{event.gmtRegistrationStart.slice(5, -3).replace("-", ".")} - {event.gmtRegistrationEnd.slice(5, -3).replace("-", ".")}</div>
+        </div>
+        <div className='detailInfoWarpper'>
+          <div className='infoLocationTitleWarpper'>活动地点: </div>
+          <div className='infoLocationWarpper'>{event.location}</div>
+        </div>
         <p>{event.description}</p>
-        <h2>活动时间</h2>
-        <p>{event.gmtEventStart} - {event.gmtEventEnd}</p>
-        <h2>报名时间</h2>
-        <p>{event.gmtRegistrationStart} - {event.gmtRegistrationEnd}</p>
-        <h2>活动地点</h2>
-        <p>{event.location}</p>
       </IonContent>
       <IonButton slot="fixed" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton>
     </IonPage >
