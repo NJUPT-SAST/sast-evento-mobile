@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle, IonIcon } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
@@ -9,7 +9,7 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
-	const departmentNames: string = event.departments.map((department) => department.departmentName).join(' ');
+	const departmentNames: string = (event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : "";
 	const href = `/event/${event.id}`;
 	return (
 		<IonCard className='eventCard' href={href}>
