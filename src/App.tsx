@@ -40,7 +40,7 @@ const App: React.FC = () => (
         </Route>
         <Route path="/oauth" component={OAuth}></Route>
         <Route path="/login" component={Login}></Route>
-        <Route path="/event/:eventId" component={Event}></Route>
+        {/* <Route path="/event/:eventId" component={Event}></Route> */}
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
