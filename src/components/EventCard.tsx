@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButton, IonContent, IonLabel, IonBadge, IonHeader, IonCardSubtitle, IonIcon } from '@ionic/react';
+import React from 'react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonIcon } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
 import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
 
 interface EventCardProps {
 	event: Event;
@@ -10,9 +11,14 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
 	const departmentNames: string = (event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : "";
+	const history = useHistory();
 	const href = `/event/${event.id}`;
+	const toEvent = () => {
+		history.push(href, { direction: 'forward' });
+	}
+	
 	return (
-		<IonCard className='eventCard' href={href}>
+		<IonCard className='eventCard' onClick={toEvent}>
 			<IonCardHeader>
 				<IonCardTitle>{event.title}</IonCardTitle>
 				<IonCardSubtitle><IonIcon icon={peopleOutline}></IonIcon> {departmentNames}</IonCardSubtitle>
@@ -30,7 +36,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           </div>
         </div>
 			</IonCardContent>
-			<IonButton color="light" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton>
+			{/* <IonButton color="light" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton> */}
 		</IonCard>
 	);
 };
