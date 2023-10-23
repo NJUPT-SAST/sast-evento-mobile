@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IonContent, IonPage, IonButton, IonIcon, IonHeader } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert } from '@ionic/react';
 import { Event } from '../context';
 import { getEventInfo, getUserParticipant } from '../apis/user';
 import { chevronBack, folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
@@ -10,8 +10,8 @@ import './Event.scss';
 const EventPage: React.FC = () => {
   const { eventId } = useParams<{ eventId: string }>();
   const [event, setEvent] = useState<Event | null>(null);
-  const [isRegistration, setIsRegistration] = useState<boolean>(false);
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [isRegistration, setIsRegistration] = useState<boolean>(true);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(true);
   const [isParticipate, setIsParticipate] = useState<boolean>(false);
   const history = useHistory();
 
@@ -40,7 +40,7 @@ const EventPage: React.FC = () => {
   const subscribeButton = () => {
     if (isSubscribed) {
       return (
-        <IonButton color="danger" fill="outline" size="small" onClick={unsubscribe}>
+        <IonButton id="unsubscribe-alert" color="danger" fill="outline" size="small" onClick={unsubscribe}>
           取消订阅
         </IonButton>
       );
@@ -61,7 +61,7 @@ const EventPage: React.FC = () => {
   const registerButton = () => {
     if (isRegistration) {
       return (
-        <IonButton slot="fixed" color="danger" size="small" onClick={unregister}>
+        <IonButton id='unregister-alert' slot="fixed" color="danger" size="small" onClick={unregister}>
           取消报名
         </IonButton>
       );
@@ -75,21 +75,45 @@ const EventPage: React.FC = () => {
   }
 
   const close = () => {
-    history.push('/home');
+    history.push('/home', { direction: 'back' });
   }
 
   return (
     <IonPage>
       <IonHeader>
-        <div className='backBar'>
-          <IonIcon icon={chevronBack} size='large' onClick={close}></IonIcon>
-        </div>
+        <IonToolbar>
+          <IonButton slot="start" fill="clear" onClick={close}>
+            <IonBackButton></IonBackButton>
+          </IonButton>
+        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true} >
         <div className='eventWarpper'>
           <div className='titleWarpper'>
             <h1>{event.title}</h1>
             <div>{subscribeButton()}</div>
+            <IonAlert
+              header="真的要取消订阅吗"
+              trigger="unsubscribe-alert"
+              buttons={[
+                {
+                  text: '放弃',
+                  role: 'cancel',
+                  handler: () => {
+                    console.log('Alert canceled');
+                  },
+                },
+                {
+                  text: '确认',
+                  role: 'confirm',
+                  handler: () => {
+                    console.log('Alert confirmed');
+                    unsubscribe();
+                  },
+                },
+              ]}
+              onDidDismiss={({ detail }) => console.log(`Dismissed with role: ${detail.role}`)}
+            ></IonAlert>
           </div>
           <div className='detailInfoWarpper'>
             <IonIcon icon={peopleOutline}></IonIcon>
@@ -126,8 +150,29 @@ const EventPage: React.FC = () => {
           <p>{event.description}</p>
         </div>
       </IonContent>
-      {/* <IonButton slot="fixed" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton> */}
       {registerButton()}
+      <IonAlert
+              header="真的要取消报名吗"
+              trigger="unregister-alert"
+              buttons={[
+                {
+                  text: '放弃',
+                  role: 'cancel',
+                  handler: () => {
+                    console.log('Alert canceled');
+                  },
+                },
+                {
+                  text: '确认',
+                  role: 'confirm',
+                  handler: () => {
+                    console.log('Alert confirmed');
+                    unregister();
+                  },
+                },
+              ]}
+              onDidDismiss={({ detail }) => console.log(`Dismissed with role: ${detail.role}`)}
+            ></IonAlert>
     </IonPage >
   );
 };
