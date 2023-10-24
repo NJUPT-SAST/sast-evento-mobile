@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert } from '@ionic/react';
 import { Event } from '../context';
 import { getEventInfo, getUserParticipant } from '../apis/user';
-import { chevronBack, folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
+import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
 import './Event.scss';
 
 

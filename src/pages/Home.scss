@@ -3,29 +3,9 @@
   width: 100vw;
   background-color: blue;
 }
-.conductingEventCardWarpper {
-  max-width: 500px;
-  width: 90vw;
-  .slideWarpper {
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-}
 
-.eventContainer {
+.homeComponentsWarpper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100vw;
-  // background-color: blue;
-}
-
-.eventsTitleWarpper {
-  ion-icon {
-    padding-right: 5px;
-  }
-  font-size: large;
 }
