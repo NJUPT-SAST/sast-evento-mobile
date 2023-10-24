@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [conductingEvent, setConductingEvent] = useState<Event[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [total, setTotal] = useState<number>(5);
+  const [total, setTotal] = useState<number>(10);
   const [isEnded, setIsEnded] = useState(false);
 
   useEffect(() => {
@@ -62,13 +62,14 @@ const Home: React.FC = () => {
   const getItems = () => {
     console.log(total);
     console.log(page);
+    const size = 10;
 
-    if (total / 5 < page) {
+    if (total / size < page) {
       setIsEnded(true);
       return;
     }
 
-    getEventList(page, 10).then((response) => {
+    getEventList(page, size).then((response) => {
       const newEvents: Event[] = response.result;
       console.log(newEvents);
       setEvents([...events, ...newEvents])
