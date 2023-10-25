@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert, IonProgressBar } from '@ionic/react';
 import { Event } from '../context';
 import { getEventInfo, getUserParticipant } from '../apis/user';
 import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
@@ -10,8 +10,8 @@ import './Event.scss';
 const EventPage: React.FC = () => {
   const { eventId } = useParams<{ eventId: string }>();
   const [event, setEvent] = useState<Event | null>(null);
-  const [isRegistration, setIsRegistration] = useState<boolean>(true);
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(true);
+  const [isRegistration, setIsRegistration] = useState<boolean>(false);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [isParticipate, setIsParticipate] = useState<boolean>(false);
   const history = useHistory();
 

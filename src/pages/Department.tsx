@@ -5,6 +5,7 @@ import { getEventWithFilter } from '../apis/user';
 import EventCard from '../components/EventCard';
 import { useLocation } from 'react-router-dom';
 
+import './Department.scss'
 import { Department, Event } from '../context';
 
 const DepartmentPage: React.FC = () => {
@@ -43,13 +44,15 @@ const DepartmentPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList>
-          {events.map((item, index) => (
-            <IonItem key={item.id}>
-              <EventCard event={item}></EventCard>
-            </IonItem>
-          ))}
-        </IonList>
+        <div className='eventContainer'>
+          <IonList>
+            {events.map((item, index) => (
+              <IonItem key={item.id}>
+                <EventCard event={item}></EventCard>
+              </IonItem>
+            ))}
+          </IonList>
+        </div>
       </IonContent>
     </IonPage>
   );
