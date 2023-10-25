@@ -10,8 +10,8 @@ import { Department, Event } from '../context';
 
 const DepartmentPage: React.FC = () => {
   const history = useHistory();
-  const location = useLocation<{ departmentName?: string }>();
-  let departmentName = location.state?.departmentName;
+  const location = useLocation<{ departmentName: string }>();
+  const [departmentName, setDepartmentName] = useState<string>(location.state?.departmentName);
   const { departmentId } = useParams<{ departmentId: string }>();
 
   const [events, setEvents] = useState<Event[]>([]);
@@ -21,11 +21,11 @@ const DepartmentPage: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(departmentName);
     if (departmentName === undefined) {
-      departmentName = Array<any>(localStorage.getItem('departments')).find((department: Department) => department.id === Number(departmentId))?.departmentName;
-      console.log(departmentName);
-
+      setDepartmentName(
+        JSON.parse(String(localStorage.getItem('departments')))
+          .find((department: Department) => department.id === Number(departmentId)).departmentName
+      );
     }
     getEventWithFilter('', departmentId, '').then((res) => {
       console.log(res);

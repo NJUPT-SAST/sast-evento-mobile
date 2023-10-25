@@ -32,6 +32,10 @@ const EventPage: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  const toDepartment = (id: number) => () => {
+    history.push(`/department/${id}`, { direction: 'forward' });
+  }
+
   // TODO: subscribe
   const subscribe = () => { }
 
@@ -117,9 +121,9 @@ const EventPage: React.FC = () => {
           </div>
           <div className='detailInfoWarpper'>
             <IonIcon icon={peopleOutline}></IonIcon>
-            <div className='deparments'>
+            <div className='departments'>
               {event.departments.map((department) => (
-                <p key={department.id}>
+                <p key={department.id} onClick={toDepartment(department.id)}>
                   {department.departmentName}
                 </p>
               ))}
