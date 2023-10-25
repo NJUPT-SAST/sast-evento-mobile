@@ -29,8 +29,6 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 		CANCELED(4, "已取消"),
 		ENDED(5, "已结束");
 		 */
-		console.log(event.state);
-
 		switch (event.state) {
 			case 'NOT_STARTED':
 				return '1';
