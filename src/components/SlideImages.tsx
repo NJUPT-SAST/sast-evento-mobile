@@ -14,11 +14,10 @@ const SlideImages: React.FC = () => {
   useEffect(() => {
     getHomeSlideList().then((res) => {
       console.log(res);
-      setSlideImages(res.slides);
+      setSlideImages(res.slides.slice(0, 2));
     });
   }, []);
 
-  // TODO: FIX BUG: PART OF THE IMAGE MOVE TO THE TOP
   return (
     <div className="slideWarpper">
       <Swiper
@@ -26,12 +25,11 @@ const SlideImages: React.FC = () => {
         slidesPerView={1}
         loop={true}
         modules={[Autoplay]}
-        autoplay={{ delay: 100000 }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
       >
         {slideImages.map((item, index) => (
           <SwiperSlide key={item.id}>
-            {/* <IonImg src={item.url} alt={item.title} className="slideImage"></IonImg> */}
-            <p>123</p>
+            <IonImg src={item.url} alt={item.title} className="slideImage"></IonImg>
           </SwiperSlide>
         ))}
       </Swiper>
