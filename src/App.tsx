@@ -25,7 +25,6 @@ import './theme/variables.css';
 import BottomNaviBar from './components/BottomNaviBar';
 
 /* Pages */
-import Event from './pages/Event';
 import Login from './pages/Login';
 import OAuth from './pages/OAuth';
 

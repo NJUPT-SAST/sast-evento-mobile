@@ -1,49 +1,37 @@
 import { IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonPage, IonSegment, IonSegmentButton, IonTitle, IonToast, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
 import ConductingEvents from '../components/ConductingEvents';
 import AllEvent from '../components/AllEvents';
+import { useHistory } from 'react-router';
+import SlideImages from '../components/SlideImages';
+import { menuOutline } from 'ionicons/icons';
 
 import 'swiper/css';
-import 'swiper/css/effect-cards';
 import './Home.scss';
-import AllDepartments from '../components/AllDepartments';
-import SlideImages from '../components/SlideImages';
 
 const Home: React.FC = () => {
-  const [selectedEventSegment, setSelectedEventSegment] = useState<string>('recommend');
+  const history = useHistory();
 
-  const switchBar = (e: any) => {
-    console.log(e);
-    setSelectedEventSegment(e.detail.value)
+  const toDepartmentsPage = () => {
+    history.push('/departments', { direction: 'forward' });
   }
-
 
   // TODO: change layout styles to falls
   return (
     <IonPage>
       <IonHeader>
-          <IonToolbar>
-            <IonSegment value={selectedEventSegment} onIonChange={e => switchBar(e)}>
-              <IonSegmentButton value="recommend">
-                <IonLabel>推荐</IonLabel>
-              </IonSegmentButton>
-              <IonSegmentButton value="department">
-                <IonLabel>部门</IonLabel>
-              </IonSegmentButton>
-            </IonSegment>
-          </IonToolbar>
-        </IonHeader>
+        <IonToolbar className='headerWarpper'>
+          <IonTitle slot='secondary'>
+            首页
+          </IonTitle>
+          <IonIcon style={{ 'margin': "auto" }} slot='end' icon={menuOutline} size='large' onClick={toDepartmentsPage}></IonIcon>
+        </IonToolbar>
+      </IonHeader>
       <IonContent fullscreen>
-        {selectedEventSegment === 'recommend' &&
-          <div className='homeComponentsWarpper'>
-            <SlideImages></SlideImages>
-            <ConductingEvents></ConductingEvents>
-            <AllEvent></AllEvent>
-          </div>}
-        {selectedEventSegment === 'department' &&
-          <div className='homeComponentsWarpper'>
-            <AllDepartments></AllDepartments>
-          </div>}
+        <div className='homeComponentsWarpper'>
+          <SlideImages></SlideImages>
+          <ConductingEvents></ConductingEvents>
+          <AllEvent></AllEvent>
+        </div>
       </IonContent>
     </IonPage >
   );
