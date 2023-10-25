@@ -53,8 +53,12 @@ const AllEvent: React.FC = () => {
       </IonList>
       <IonInfiniteScroll
         onIonInfinite={(ev) => {
-          getItems();
-          setTimeout(() => ev.target.complete(), 2000);
+          if (!isEnded) {
+            getItems();
+            setTimeout(() => ev.target.complete(), 2000);
+          } else {
+            ev.target.complete();
+          }
         }}
       >
         <IonInfiniteScrollContent></IonInfiniteScrollContent>
