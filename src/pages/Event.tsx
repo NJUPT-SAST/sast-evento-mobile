@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert, IonProgressBar } from '@ionic/react';
 import { Event } from '../context';
 import { getEventInfo, getUserParticipant } from '../apis/user';
-import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
+import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline } from 'ionicons/icons';
 import './Event.scss';
 
 
@@ -40,6 +40,9 @@ const EventPage: React.FC = () => {
   const subscribe = () => { }
 
   const unsubscribe = () => { }
+
+  // TODO: share
+  const share = () => { }
 
   const subscribeButton = () => {
     if (isSubscribed) {
@@ -86,8 +89,11 @@ const EventPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButton slot="start" fill="clear" onClick={close}>
+          <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton></IonBackButton>
+          </IonButton>
+          <IonButton slot="end" fill="clear" size='small' onClick={share}>
+            <IonIcon icon={shareSocialOutline}></IonIcon>
           </IonButton>
         </IonToolbar>
       </IonHeader>

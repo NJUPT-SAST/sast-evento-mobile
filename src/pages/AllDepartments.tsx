@@ -55,17 +55,19 @@ function AllDepartments() {
 
   // TODO get square img/ico and change layout into grid
   return (
-    <IonPage className='allDepartmentsWarpper'>
+    <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>分类</IonTitle>
-          <IonButton slot="start" fill="clear" onClick={close}>
+          <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton></IonBackButton>
           </IonButton>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        {departmentsGrid()}
+      <IonContent fullscreen={true} >
+        <div className='allDepartmentsWarpper'>
+          {departmentsGrid()}
+        </div>
       </IonContent>
     </IonPage>
   );

@@ -37,7 +37,7 @@ const DepartmentPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButton slot="start" fill="clear" onClick={close}>
+          <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton></IonBackButton>
           </IonButton>
           <IonTitle>{departmentName}</IonTitle>
