@@ -1,13 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules"
-
+import { Autoplay, Pagination } from "swiper/modules"
+import { IonImg } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { getHomeSlideList } from "../apis/user";
 
 import 'swiper/scss';
-import 'swiper/scss/autoplay'
-import "./SlideImages.scss"
-import { IonImg } from "@ionic/react";
+import 'swiper/scss/pagination';
+import 'swiper/scss/autoplay';
+import "./SlideImages.scss";
 
 const SlideImages: React.FC = () => {
   const [slideImages, setSlideImages] = useState<Array<any>>([{"id": "1"}]);
@@ -24,7 +24,10 @@ const SlideImages: React.FC = () => {
         spaceBetween={50}
         slidesPerView={1}
         loop={true}
-        modules={[Autoplay]}
+        pagination={{
+          dynamicBullets: true,
+        }}
+        modules={[Autoplay, Pagination]}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
       >
         {slideImages.map((item, index) => (

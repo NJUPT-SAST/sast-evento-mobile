@@ -48,8 +48,8 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 	return (
 		<IonCard className='eventCard' onClick={toEvent}>
 			<IonCardHeader>
-				<IonCardTitle className='oneLineTextOverflow'>
-					<div>{event.title}</div>
+				<IonCardTitle>
+					<div className='oneLineTextOverflow'>{event.title}</div>
 					<div className='stateWarpper'>
 						{states[stateInfo()]}
 						<div className='stateCircle' style={{ '--circle-color': stateColor[stateInfo()] }}></div>

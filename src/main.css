@@ -10,7 +10,7 @@
   --ion-tab-bar-background: #fff;
   --ion-background-color: #e6e6e6;
   --ion-toolbar-background: #fff;
-  --ion-item-background: #e6e6e6;
+  --ion-item-background: #fff;
 }
 
 .ios body.dark {
@@ -40,7 +40,7 @@
   --ion-color-step-900: #e6e6e6;
   --ion-color-step-950: #f2f2f2;
 
-  --ion-item-background: #4d4d4d;
+  --ion-item-background: #262626;
 
   --ion-background-color: #4d4d4d;
 
@@ -62,7 +62,7 @@
   --ion-tab-bar-background: #fff;
   --ion-background-color: #e6e6e6;
   --ion-toolbar-background: #fff;
-  --ion-item-background: #e6e6e6;
+  --ion-item-background: #fff;
 }
 
 .md body.dark {
@@ -94,7 +94,7 @@
   --ion-color-step-900: #e7e7e7;
   --ion-color-step-950: #f3f3f3;
 
-  --ion-item-background: #4d4d4d;
+  --ion-item-background: #262626;
 
   --ion-toolbar-background: var(--ion-color-step-200);
 
