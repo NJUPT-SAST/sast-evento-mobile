@@ -1,7 +1,9 @@
-import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonList, IonPage, IonToggle, IonToolbar, ToggleCustomEvent } from '@ionic/react';
-import { moon, scanOutline, sunnyOutline } from 'ionicons/icons';
+import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent } from '@ionic/react';
+import { albumsOutline, logOutOutline, moon, pencilOutline, scanOutline, settingsOutline, sunnyOutline } from 'ionicons/icons';
 import { ThemeContext } from '../components/ThemeChange';
 import React, { useState } from 'react';
+
+import './Me.scss';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
@@ -13,7 +15,7 @@ const Me: React.FC = () => {
 	});
 
 	const themeIcon = themeToggle ? moon : sunnyOutline;
-	
+
 	return (
 		<IonPage>
 			<IonHeader>
@@ -27,17 +29,49 @@ const Me: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
-				<IonList className='userProfile'>
-					{isLoggedIn() ? (
-						<IonItem>
-							<h2 className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
-						</IonItem>
-					) : (
-						<IonItem href="/login">
-							<h2 className='userProfile__name'>请登录/注册</h2>
-						</IonItem>
-					)}
-				</IonList>
+				<div className='meWarpper'>
+					<IonCard className='userProfileWarpper'>
+						{isLoggedIn() ? (
+							<IonItem lines="none">
+								<IonThumbnail slot="start">
+									<IonImg src="/link.ico" alt="avatar" />
+								</IonThumbnail>
+								<h2 slot="start" className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
+							</IonItem>
+						) : (
+							<IonItem href="/login" lines="none">
+								<IonThumbnail slot="start">
+									<IonImg src="/link.ico" alt="avatar" />
+								</IonThumbnail>
+								<h2 slot="start" className='userProfile__name'>请登录/注册</h2>
+							</IonItem>
+						)}
+					</IonCard>
+					<IonCard className='functionsWarpper'>
+						<IonList>
+							<IonItem button={true}>
+								<IonIcon icon={albumsOutline} className='functionIcon'></IonIcon>
+								<IonLabel>我的活动</IonLabel>
+							</IonItem>
+							<IonItem button={true}>
+								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
+								<IonLabel>意见反馈</IonLabel>
+							</IonItem>
+							<IonItem button={true}>
+								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
+								<IonLabel>设置</IonLabel>
+							</IonItem>
+						</IonList>
+					</IonCard>
+					<IonCard className='logoutWarpper'>
+						<IonList>
+							<IonItem button={true}>
+								<IonIcon icon={logOutOutline} color='danger' className='functionIcon'></IonIcon>
+								<IonLabel color="danger">退出登录</IonLabel>
+							</IonItem>
+						</IonList>
+					</IonCard>
+				</div>
 			</IonContent>
 		</IonPage>
 	);
