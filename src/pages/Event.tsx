@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert, IonProgressBar } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert, IonProgressBar, useIonRouter } from '@ionic/react';
 import { Event } from '../context';
 import { getEventInfo, getUserParticipant } from '../apis/user';
 import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline } from 'ionicons/icons';
@@ -13,7 +13,8 @@ const EventPage: React.FC = () => {
   const [isRegistration, setIsRegistration] = useState<boolean>(false);
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [isParticipate, setIsParticipate] = useState<boolean>(false);
-  const history = useHistory();
+  // const history = useHistory();
+  const router = useIonRouter();
 
   useEffect(() => {
     getEventInfo(Number(eventId)).then(res => {
@@ -33,7 +34,12 @@ const EventPage: React.FC = () => {
   }
 
   const toDepartment = (id: number) => () => {
-    history.push(`/department/${id}`, { direction: 'forward' });
+    router.push(`/department/${id}`, 'forward');
+  }
+
+  
+  const close = () => {
+    router.goBack;
   }
 
   // TODO: subscribe
@@ -68,21 +74,17 @@ const EventPage: React.FC = () => {
   const registerButton = () => {
     if (isRegistration) {
       return (
-        <IonButton id='unregister-alert' slot="fixed" color="danger" size="small" onClick={unregister}>
+        <IonButton id='unregister-alert' slot="fixed" color="danger" onClick={unregister}>
           取消报名
         </IonButton>
       );
     } else {
       return (
-        <IonButton slot="fixed" size="small" onClick={register} disabled={event.state !== "REGISTRATION"}>
+        <IonButton slot="fixed" onClick={register} disabled={event.state !== "REGISTRATION"}>
           报名
         </IonButton>
       );
     }
-  }
-
-  const close = () => {
-    history.push('/home', { direction: 'back' });
   }
 
   return (
