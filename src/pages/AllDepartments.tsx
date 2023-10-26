@@ -53,7 +53,6 @@ function AllDepartments() {
     history.push(`/home`, { direction: 'back' });
   }
 
-  // TODO get square img/ico and change layout into grid
   return (
     <IonPage>
       <IonHeader>

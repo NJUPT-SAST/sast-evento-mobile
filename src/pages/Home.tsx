@@ -5,7 +5,6 @@ import { useHistory } from 'react-router';
 import SlideImages from '../components/SlideImages';
 import { menuOutline } from 'ionicons/icons';
 
-import 'swiper/css';
 import './Home.scss';
 
 const Home: React.FC = () => {
@@ -23,7 +22,7 @@ const Home: React.FC = () => {
           <IonTitle slot='secondary'>
             首页
           </IonTitle>
-          <IonIcon style={{ 'margin': "auto" }} slot='end' icon={menuOutline} size='large' onClick={toDepartmentsPage}></IonIcon>
+          <IonIcon slot='end' icon={menuOutline} size='large' color='primary' onClick={toDepartmentsPage}></IonIcon>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

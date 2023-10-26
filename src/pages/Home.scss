@@ -1,11 +1,8 @@
-.slidebox {
-  height: 150px;
-  width: 100vw;
-  background-color: blue;
-}
-
 .homeComponentsWarpper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 85vw;
+  margin: auto;
+  --ion-item-background: 0;
 }
