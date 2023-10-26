@@ -1,20 +1,55 @@
 .eventCard {
   max-width: 500px;
-  width: 80vw;
-  height: 200px;
+  width: 85vw;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  margin-top: 5px;
+  margin-bottom: 5px;
 
   ion-card-header {
     padding-bottom: 5px;
     padding-top: 0px;
 
-    ion-card-title,
-    ion-card-subtitle {
+    .oneLineTextOverflow {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: calc(85% - 15px);
+    }
+
+    ion-card-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .stateWarpper {
+        display: flex;
+        align-items: center;
+        color: var(--ion-color-step-550, #737373);
+        font-size: 0.875rem;
+        font-weight: 500;
+        .stateCircle {
+          height: 5px;
+          width: 5px;
+          border-radius: 50%;
+          background-color: var(--circle-color, #3498db);
+          margin-left: 5px;
+          margin-bottom: 2px;
+        }
+      }
+    }
+
+    ion-card-subtitle {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+
+      ion-icon {
+        padding-right: 5px;
+      }
     }
   }
 
@@ -22,6 +57,7 @@
     padding-bottom: 5px;
 
     p {
+      height: 60px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -34,6 +70,7 @@
       flex-direction: row;
 
       p {
+        height: 20px;
         margin: 0;
         margin-left: 6px;
       }

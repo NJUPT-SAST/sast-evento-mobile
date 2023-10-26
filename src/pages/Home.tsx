@@ -1,48 +1,36 @@
-import { IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import EventCard from '../components/EventCard';
+import { IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonPage, IonSegment, IonSegmentButton, IonTitle, IonToast, IonToolbar } from '@ionic/react';
+import ConductingEvents from '../components/ConductingEvents';
+import AllEvent from '../components/AllEvents';
+import { useHistory } from 'react-router';
+import SlideImages from '../components/SlideImages';
+import { menuOutline } from 'ionicons/icons';
+
 import './Home.scss';
-import { useEffect, useState } from 'react';
-import { getAllConductingEvent, getEventList } from '../apis/user';
-import { Event } from '../context';
 
 const Home: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const history = useHistory();
 
-  useEffect(() => {
-    getAllConductingEvent().then(res => {
-      console.log(res);
-      setEvents(res);
-    });
-  }, []);
+  const toDepartmentsPage = () => {
+    history.push('/departments', { direction: 'forward' });
+  }
 
-  const getItems = () => {
-    let page: number = 1;
-    let total: number = 0;
-    let newEvents: Event[] = [];
-    getEventList(page++, 5).then((response) => {
-      newEvents = response.data.result;
-      total = response.data.total;
-    })
-    setEvents([...events, ...newEvents]);
-  };
+  // TODO: change layout styles to falls
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar className='headerWarpper'>
+          <IonTitle slot='secondary'>
+            首页
+          </IonTitle>
+          <IonIcon slot='end' icon={menuOutline} size='large' color='primary' onClick={toDepartmentsPage}></IonIcon>
+        </IonToolbar>
+      </IonHeader>
       <IonContent fullscreen>
-        <IonList class='eventContainer'>
-          {events.map((item, index) => (
-            <IonItem key={item.id}>
-              <EventCard event={item} ></EventCard>
-            </IonItem>
-          ))}
-        </IonList>
-        <IonInfiniteScroll
-          onIonInfinite={(ev) => {
-            getItems();
-            setTimeout(() => ev.target.complete(), 500);
-          }}
-        >
-          <IonInfiniteScrollContent></IonInfiniteScrollContent>
-        </IonInfiniteScroll>
+        <div className='homeComponentsWarpper'>
+          <SlideImages></SlideImages>
+          <ConductingEvents></ConductingEvents>
+          <AllEvent></AllEvent>
+        </div>
       </IonContent>
     </IonPage >
   );

@@ -1,0 +1,22 @@
+.slideWarpper {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: 85vw;
+  max-width: 500px;
+  border-radius: 1rem;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  .slideImage {
+    object-fit: cover;
+    margin: 0 auto;
+  }
+  .swiper-slide {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 160px;
+  }
+}

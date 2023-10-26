@@ -13,7 +13,8 @@ const createAxiosInstance = (): AxiosInstance => {
   
   instance.interceptors.request.use((config) => {
     // config.headers['Content-Type'] = 'application/json';
-    config.headers['TOKEN'] = window.localStorage.getItem('token');
+    const token = window.localStorage.getItem('token');
+    config.headers['TOKEN'] = token !== null ? token : null;
     return config;
   },
     (error) => {
@@ -27,8 +28,9 @@ const createAxiosInstance = (): AxiosInstance => {
         window.localStorage.removeItem('token');
         window.location.href = '/login';
       } else {
-        throw new Error(response.data.errMsg);
+        console.log(response.data.errCode + ": " + response.data.errMsg);
       }
+      throw new Error("Error");
     }
     console.log(response.data);
     

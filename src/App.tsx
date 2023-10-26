@@ -23,9 +23,9 @@ import './theme/variables.css';
 
 /* Components */
 import BottomNaviBar from './components/BottomNaviBar';
+import ThemeChange from './components/ThemeChange'
 
 /* Pages */
-import Event from './pages/Event';
 import Login from './pages/Login';
 import OAuth from './pages/OAuth';
 
@@ -35,12 +35,14 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/">
-          <BottomNaviBar></BottomNaviBar>
-        </Route>
-        <Route path="/oauth" component={OAuth}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/event/:eventId" component={Event}></Route>
+        <ThemeChange>
+          <Route path="/">
+            <BottomNaviBar></BottomNaviBar>
+          </Route>
+          <Route path="/oauth" component={OAuth}></Route>
+          <Route path="/login" component={Login}></Route>
+          {/* <Route path="/event/:eventId" component={Event}></Route> */}
+        </ThemeChange>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

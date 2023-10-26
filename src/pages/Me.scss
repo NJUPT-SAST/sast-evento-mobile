@@ -1,27 +1,31 @@
-.userProfile {
+.meWarpper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
-  .userProfile__avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  margin: auto;
+  .userProfileWarpper {
+    max-width: 500px;
+    width: 87vw;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
     margin-bottom: 10px;
+    .userProfile__name {
+      margin: auto;
+    }
   }
-  .userProfile__name {
-    margin: 20px;
+  .functionsWarpper, .logoutWarpper {
+    max-width: 500px;
+    width: 87vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    .functionIcon {
+      padding-right: 15px;
+    }
   }
-  .userProfile__logout {
-    width: 100%;
-    height: 40px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-  }
-
 }
