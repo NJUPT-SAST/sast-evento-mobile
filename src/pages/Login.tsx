@@ -63,10 +63,23 @@ const Login: React.FC = () => {
             </IonLabel>
             <IonList>
               <IonItem className='inputWarpper'>
-                <IonInput label='用户名' labelPlacement='floating' value={username} onIonChange={e => setUsername(e.detail.value!)}></IonInput>
+                <IonInput
+                  label='用户名'
+                  labelPlacement='floating'
+                  value={username}
+                  clearOnEdit={true}
+                  onIonChange={e => setUsername(e.detail.value!)}
+                ></IonInput>
               </IonItem>
               <IonItem>
-                <IonInput label='密码' labelPlacement='floating' type="password" value={password} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
+                <IonInput
+                  label='密码'
+                  labelPlacement='floating'
+                  type="password"
+                  value={password}
+                  clearOnEdit={true}
+                  onIonChange={e => setPassword(e.detail.value!)}
+                ></IonInput>
               </IonItem>
             </IonList>
             <IonButton expand="block" shape="round" onClick={login}>
@@ -86,7 +99,7 @@ const Login: React.FC = () => {
               <img src='/link.ico'></img>
             </div>
           </div> */}
-            <div>
+            <div className='registerWarpper'>
               <IonLabel>还没有账号？ </IonLabel>
               <IonLabel color="tertiary">注册</IonLabel>
             </div>
