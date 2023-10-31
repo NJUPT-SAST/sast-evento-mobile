@@ -42,17 +42,17 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <ThemeChange>
-          <Route path="/departments" component={DepartmentsPage} exact />
-          <Route path="/event/:eventId" component={EventPage} exact />
-          <Route path="/department/:departmentId" component={DepartmentPage} exact />
-          <Route path="/oauth" component={OAuth}></Route>
-          <Route path="/login" component={Login}></Route>
+
           <IonTabs>
             <IonRouterOutlet>
+              <Route path="/departments" component={DepartmentsPage} exact />
+              <Route path="/event/:eventId" component={EventPage} exact />
+              <Route path="/department/:departmentId" component={DepartmentPage} exact />
+              <Route path="/oauth" component={OAuth}></Route>
+              <Route path="/login" component={Login}></Route>
               <Route path="/home" component={Home} exact />
               <Route path="/me" component={Me} exact />
               <Route path="/subscriptions" component={SubscriptionsPage} exact />
-
               <Redirect exact from="/" to="/home" />
             </IonRouterOutlet>
 
