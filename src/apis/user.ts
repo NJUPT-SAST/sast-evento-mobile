@@ -39,3 +39,13 @@ export const getHomeSlideList = async () => {
   const response = await request.get<any>('/slide/home/list');
   return response.data;
 }
+
+export const registerEvent = async (eventId: number, isRegister: boolean) => {
+  const response = await request.get<any>('/user/register', { params: { eventId, isRegister }});
+  return response.data;
+}
+
+export const subcribeEvent = async (eventId: number, isSubcribe: boolean) => {
+  const response = await request.get<any>('/user/subscribe', { params: { eventId, isSubcribe }});
+  return response.data;
+}
