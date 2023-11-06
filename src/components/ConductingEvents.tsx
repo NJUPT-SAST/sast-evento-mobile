@@ -1,4 +1,3 @@
-import EventCard from "./EventCard";
 import { IonItem, IonLabel, IonIcon, IonList } from "@ionic/react";
 import { paperPlaneOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { Event } from "../context";
 import { getAllConductingEvent } from "../apis/user";
 
 import './ConductingEvent.scss'
+import EventCardList from "./EventCardList";
 
 const ConductingEvents: React.FC = () => {
   const [conductingEvent, setConductingEvent] = useState<Event[]>([]);
@@ -27,13 +27,7 @@ const ConductingEvents: React.FC = () => {
           进行中的活动
         </IonLabel>
       </IonItem>
-      <IonList class='eventContainer'>
-        {conductingEvent.map((item, index) => (
-          <IonItem key={item.id}>
-            <EventCard event={item} ></EventCard>
-          </IonItem>
-        ))}
-      </IonList>
+      <EventCardList events={conductingEvent}></EventCardList>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const EventPage: React.FC = () => {
   const [event, setEvent] = useState<Event | null>(null);
   const [isRegistration, setIsRegistration] = useState<boolean>(false);
   const [showRegisterAlert, setShowRegisterAlert] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
+  const [isSubscribe, setIsSubscribe] = useState<boolean>(false);
   const [showSubscribeAlert, setShowSubscribeAlert] = useState(false);
   const [isParticipate, setIsParticipate] = useState<boolean>(false);
 
@@ -26,10 +26,12 @@ const EventPage: React.FC = () => {
     });
     getUserParticipant(Number(eventId)).then(res => {
       console.log(res);
-      setIsParticipate(Boolean(res.isParticipate));
-      setIsRegistration(Boolean(res.isRegistration));
-      setIsSubscribed(Boolean(res.isSubscribed));
+      setIsParticipate(res.isParticipate === null ? false : Boolean(res.isParticipate));
+      setIsRegistration(res.isRegistration === null ? false : Boolean(res.isRegistration));
+      setIsSubscribe(res.isSubscribe === null ? false : Boolean(res.isSubscribe));
     });
+    
+    
   }, [eventId]);
 
   if (!event) {
@@ -59,19 +61,19 @@ const EventPage: React.FC = () => {
 
   const subscribe = () => {
     subcribeEvent(Number(eventId), true).then(() => {
-      setIsSubscribed(true);
+      setIsSubscribe(true);
     }, (error) => {
       console.log(error);
-      setIsSubscribed(false);
+      setIsSubscribe(false);
     });
   }
 
   const unsubscribe = () => {
     subcribeEvent(Number(eventId), false).then(() => {
-      setIsSubscribed(false);
+      setIsSubscribe(false);
     }, (error) => {
       console.log(error);
-      setIsSubscribed(true);
+      setIsSubscribe(true);
     });
   }
 
@@ -80,7 +82,7 @@ const EventPage: React.FC = () => {
   }
 
   const subscribeButton = () => {
-    if (isSubscribed) {
+    if (isSubscribe) {
       return (
         <IonButton id="unsubscribe-alert" size="small" color="danger" onClick={() => setShowSubscribeAlert(true)} className='subscribeButton'>
           <IonIcon icon={alarmSharp}></IonIcon>

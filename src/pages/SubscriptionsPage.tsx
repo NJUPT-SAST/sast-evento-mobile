@@ -1,6 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonSegment, IonSegmentButton, IonTab, IonToolbar } from '@ionic/react';
 import './SubscriptionsPage.scss'
 import { useState } from 'react';
+import SubscribePage from '../components/Subscribe';
+import RegisteredEvents from '../components/RegisteredEvents';
 
 const SubscriptionsPage: React.FC = () => {
   const [selectedSegment, setSelectedSegment] = useState<string>('subscriptions');
@@ -25,13 +27,13 @@ const SubscriptionsPage: React.FC = () => {
       <IonContent>
         {selectedSegment === 'subscriptions' &&
           <div>
-
+            <SubscribePage></SubscribePage>
           </div>
         }
         {
           selectedSegment === 'participate' &&
           <div>
-
+            <RegisteredEvents></RegisteredEvents>
           </div>
         }
       </IonContent>

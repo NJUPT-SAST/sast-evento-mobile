@@ -1,12 +1,12 @@
 import { IonItem, IonLabel, IonIcon, IonList, IonInfiniteScroll, IonInfiniteScrollContent, IonToast } from "@ionic/react";
 import { archiveOutline } from "ionicons/icons";
-import EventCard from "./EventCard";
 import { useEffect, useState } from "react";
 
 import { Event } from "../context";
 import { getEventList } from "../apis/user";
 
 import './AllEvents.scss'
+import EventCardList from "./EventCardList";
 
 const AllEvent: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -44,13 +44,7 @@ const AllEvent: React.FC = () => {
           所有活动
         </IonLabel>
       </IonItem>
-      <IonList class='eventContainer'>
-        {events.map((item, index) => (
-          <IonItem key={item.id}>
-            <EventCard event={item} ></EventCard>
-          </IonItem>
-        ))}
-      </IonList>
+      <EventCardList events={events}></EventCardList>
       <IonInfiniteScroll
         onIonInfinite={(ev) => {
           if (!isEnded) {

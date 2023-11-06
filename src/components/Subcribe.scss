@@ -1,0 +1,41 @@
+.subscribePageWarpper {
+  .mySubscribeDepartmentsWarpper {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 500px;
+    ion-card {
+      margin-bottom: 0;
+    }
+    .mySubscribeDepartmentsTitleWarpper {
+      margin: 0;
+    }
+
+    .mySubscribeDepartmentsContentWarpper {
+      overflow-x: auto;
+      margin: 15px 0 15px 0;
+    }
+  }
+  .mySubscribeEventsWarpper {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    max-width: 500px;
+    .mySubscribeEventsTitleWarpper {
+      margin: 0;
+    }
+    .mySubscribeEventsContentWarpper {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin: auto;
+  --ion-item-background: 0;
+}

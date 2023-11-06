@@ -10,12 +10,14 @@ const Me: React.FC = () => {
 	const [userInfo, setUserInfo] = useState<any | null>(JSON.parse(String(localStorage.getItem('userInfo'))));
 	const isLoggedIn = (() => {
 		const token = localStorage.getItem('token');
-		// console.log(userInfo);
 		return token !== null;
 	});
 
 	const themeIcon = themeToggle ? moon : sunnyOutline;
-
+	const logOut = () => {
+		localStorage.clear();
+		setUserInfo(null)
+	}
 	return (
 		<IonPage>
 			<IonHeader>
@@ -34,7 +36,7 @@ const Me: React.FC = () => {
 						{isLoggedIn() ? (
 							<IonItem lines="none">
 								<IonThumbnail slot="start">
-									<IonImg src="/link.ico" alt="avatar" />
+									<IonImg src={userInfo.avatar !== null ? userInfo.avatar : "/link.ico"} alt="avatar" />
 								</IonThumbnail>
 								<h2 slot="start" className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
 							</IonItem>
@@ -65,7 +67,7 @@ const Me: React.FC = () => {
 					</IonCard>
 					<IonCard className='logoutWarpper'>
 						<IonList>
-							<IonItem button={true}>
+							<IonItem button={true} onClick={logOut}>
 								<IonIcon icon={logOutOutline} color='danger' className='functionIcon'></IonIcon>
 								<IonLabel color="danger">退出登录</IonLabel>
 							</IonItem>
