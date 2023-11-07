@@ -33,14 +33,26 @@ const DepartmentPage: React.FC = () => {
           );
         })
       }
-      
+      getEventWithFilter('', departmentId, '').then((res) => {
+        console.log(res);
+        setEvents(res);
+      });
     }
-    getEventWithFilter('', departmentId, '').then((res) => {
-      console.log(res);
-      setEvents(res);
-    });
-    console.log(isSubscribed);
-    
+    if (localStorage.getItem('subscribeDepartments') !== null) {
+      console.log(JSON.parse(String(localStorage.getItem('subscribeDepartments')))
+        .find((department: Department) => department.id === Number(departmentId)) !== undefined);
+
+      if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
+        .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
+        setIsSubscribed(true);
+      }
+    } else {
+      updateSubscribeDepartments();
+      if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
+        .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
+        setIsSubscribed(true);
+      }
+    }
   }, [departmentId]);
 
   const updateSubscribeDepartments = () => {

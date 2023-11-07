@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { getAllDepartments } from '../apis/user';
 import { Department } from '../context';
-import { IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 
 import './AllDepartments.scss'
 import DepartmentIcon from '../components/DepartmentIcon';
 
 function AllDepartments() {
   const [departments, setDepartments] = useState<Department[]>([]);
-  const history = useHistory();
+  const router = useIonRouter();
 
   useEffect(() => {
     getAllDepartments().then((res) => {
@@ -35,7 +34,7 @@ function AllDepartments() {
   }
 
   const close = () => {
-    history.push(`/home`, { direction: 'back' });
+    router.push('/home', 'back');
   }
 
   return (
@@ -44,7 +43,7 @@ function AllDepartments() {
         <IonToolbar>
           <IonTitle>分类</IonTitle>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>
-            <IonBackButton></IonBackButton>
+            <IonBackButton text="首页"></IonBackButton>
           </IonButton>
         </IonToolbar>
       </IonHeader>
