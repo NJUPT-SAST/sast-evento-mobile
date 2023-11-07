@@ -34,6 +34,7 @@ import Home from './pages/Home';
 import Me from './pages/Me';
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import DepartmentPage from './pages/Department';
+import HistoryEvents from './pages/HistoryEvents';
 
 setupIonicReact();
 
@@ -52,6 +53,7 @@ const App: React.FC = () => (
               <Route path="/login" component={Login}></Route>
               <Route path="/home" component={Home} exact />
               <Route path="/me" component={Me} exact />
+              <Route path="/history" component={HistoryEvents} exact />
               <Route path="/subscriptions" component={SubscriptionsPage} exact />
               <Redirect exact from="/" to="/home" />
             </IonRouterOutlet>

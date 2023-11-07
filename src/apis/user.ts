@@ -69,3 +69,8 @@ export const getRegisteredEvents = async () => {
   const response = await request.get<Event[]>('/user/registered');
   return response.data;
 }
+
+export const getHistoryEvents =async () => {
+  const response = await request.get<Event[]>('/event/history');
+  return response.data;
+}
