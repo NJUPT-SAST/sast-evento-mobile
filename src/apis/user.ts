@@ -39,3 +39,38 @@ export const getHomeSlideList = async () => {
   const response = await request.get<any>('/slide/home/list');
   return response.data;
 }
+
+export const registerEvent = async (eventId: number, isRegister: boolean) => {
+  const response = await request.get<any>('/user/register', { params: { eventId, isRegister } });
+  return response.data;
+}
+
+export const subcribeEvent = async (eventId: number, isSubscribe: boolean) => {
+  const response = await request.get<any>('/user/subscribe', { params: { eventId, isSubscribe } });
+  return response.data;
+}
+
+export const subscribeDepartment = async (departmentId: number, isSubscribe: boolean) => {
+  const response = await request.get<any>('/user/subscribe/department', { params: { departmentId, isSubscribe } });
+  return response.data;
+}
+
+export const getSubscribeDepartments = async () => {
+  const response = await request.get<Department[]>('/user/subscribe/departments');
+  return response.data;
+}
+
+export const getSubscribedEvents = async () => {
+  const response = await request.get<Event[]>('/user/subscribed');
+  return response.data;
+}
+
+export const getRegisteredEvents = async () => {
+  const response = await request.get<Event[]>('/user/registered');
+  return response.data;
+}
+
+export const getHistoryEvents =async () => {
+  const response = await request.get<Event[]>('/event/history');
+  return response.data;
+}

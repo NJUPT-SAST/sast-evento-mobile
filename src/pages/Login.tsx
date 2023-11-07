@@ -4,42 +4,45 @@ import './Login.scss';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { closeOutline } from 'ionicons/icons';
+import { getLoginKey, pwLogin } from '../apis/login';
+import JSEncrypt from 'jsencrypt';
+import { Browser } from '@capacitor/browser';
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [showToast, setShowToast] = useState(false);
   const history = useHistory();
+  // const linkUrl = 'http://192.168.0.154:3000/auth?client_id=f04a5a82-d394-456c-82d0-57623b8549d7&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=http://192.168.0.154:8102/oauth&response_type=code&scope=all&state=xyz'
   const linkUrl = 'https://link.sast.fun/auth?client_id=f04a5a82-d394-456c-82d0-57623b8549d7&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=http://192.168.0.154:8102/oauth&response_type=code&scope=all&state=xyz'
 
   const login = () => {
-    if (username === 'admin' && password === 'admin') {
-      history.push('/home');
-    } else {
-      setUsername('');
-      setPassword('');
-      setShowToast(true);
-    }
+    getLoginKey(username).then(res => {
+      const encrypt = new JSEncrypt();
+      encrypt.setPublicKey('-----BEGIN RSA PUBLIC KEY-----\n' +
+        res.str +
+        '\n-----END RSA PUBLIC KEY-----');
+      const encryptedPassword = encrypt.encrypt(password);
+      pwLogin(username, String(encryptedPassword)).then(res => {
+        localStorage.setItem("token", res);
+        history.push('/me');
+      }, (error) => {
+        setUsername('');
+        setPassword('');
+        setShowToast(true);
+      })
+    }, (error) => {
+      console.log();
+
+    })
   }
 
   const register = () => {
     history.push('/register');
   }
 
-  const linkLogin = () => {
-    // a tag href linkUrl
-    let a = document.createElement("a");
-    a.setAttribute(
-      "href",
-      linkUrl
-    );
-    a.setAttribute("target", "_blank");
-    a.setAttribute("id", "link");
-    if (!document.getElementById("link")) {
-      document.body.appendChild(a);
-    }
-    a.click();
-    a.remove();
+  const linkLogin = async () => {
+    await Browser.open({url: linkUrl});
   }
 
   const close = () => {

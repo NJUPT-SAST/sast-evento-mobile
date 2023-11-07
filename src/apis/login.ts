@@ -14,3 +14,18 @@ export const linkLogin = async (code: string, type: number = 2) => {
   });
   return response.data;
 }
+
+export const getLoginKey = async (studentId: string) => {
+  const response = await request.get<any>('/user/login/key', { params: { studentId } });
+  return response.data;
+}
+
+export const pwLogin = async (studentId: string, password: string) => {
+  let data = new FormData();
+  data.append('studentId', studentId);
+  data.append('password', password);
+  const response = await request.post<any>('/user/login/password', data, {
+    headers: { "Content-Type": "multipart/form-data;" }
+  });
+  return response.data;
+}

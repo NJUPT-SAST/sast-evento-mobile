@@ -1,5 +1,5 @@
-import { Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { Redirect, Route } from 'react-router-dom';
+import { IonApp, IonIcon, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -22,12 +22,19 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 /* Components */
-import BottomNaviBar from './components/BottomNaviBar';
 import ThemeChange from './components/ThemeChange'
 
 /* Pages */
 import Login from './pages/Login';
 import OAuth from './pages/OAuth';
+import { homeOutline, layersOutline, personOutline } from 'ionicons/icons';
+import DepartmentsPage from './pages/AllDepartments';
+import EventPage from './pages/Event';
+import Home from './pages/Home';
+import Me from './pages/Me';
+import SubscriptionsPage from './pages/SubscriptionsPage';
+import DepartmentPage from './pages/Department';
+import HistoryEvents from './pages/HistoryEvents';
 
 setupIonicReact();
 
@@ -36,12 +43,35 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <ThemeChange>
-          <Route path="/">
-            <BottomNaviBar></BottomNaviBar>
-          </Route>
-          <Route path="/oauth" component={OAuth}></Route>
-          <Route path="/login" component={Login}></Route>
-          {/* <Route path="/event/:eventId" component={Event}></Route> */}
+
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route path="/departments" component={DepartmentsPage} exact />
+              <Route path="/event/:eventId" component={EventPage} exact />
+              <Route path="/department/:departmentId" component={DepartmentPage} exact />
+              <Route path="/oauth" component={OAuth}></Route>
+              <Route path="/login" component={Login}></Route>
+              <Route path="/home" component={Home} exact />
+              <Route path="/me" component={Me} exact />
+              <Route path="/history" component={HistoryEvents} exact />
+              <Route path="/subscriptions" component={SubscriptionsPage} exact />
+              <Redirect exact from="/" to="/home" />
+            </IonRouterOutlet>
+
+            <IonTabBar slot="bottom" id="app-tab-bar">
+              <IonTabButton tab="home" href="/home">
+                <IonIcon icon={homeOutline}></IonIcon>
+                {/* <IonLabel>首页</IonLabel> */}
+              </IonTabButton>
+              <IonTabButton tab="subscriptions" href="/subscriptions">
+                <IonIcon icon={layersOutline}></IonIcon>
+              </IonTabButton>
+              <IonTabButton tab="me" href="/me">
+                <IonIcon icon={personOutline}></IonIcon>
+                {/* <IonLabel>我的</IonLabel> */}
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
         </ThemeChange>
       </IonRouterOutlet>
     </IonReactRouter>
