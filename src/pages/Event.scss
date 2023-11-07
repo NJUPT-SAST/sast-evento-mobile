@@ -2,7 +2,7 @@
   display: flex;
   margin: auto;
   width: 80%;
-  min-width: 340px;
+  min-width: 240px;
   max-width: 440px;
   display: flex;
   flex-direction: column;
@@ -59,17 +59,18 @@
     .departmentsWarpper {
       display: flex;
       flex-direction: row;
-
+      align-items: center;
+      padding-bottom: 7px;
       .departments {
         display: flex;
         flex-direction: row;
-        padding-bottom: 5px;
       }
     }
 
     .categoryWarpper {
       display: flex;
       flex-direction: row;
+      align-items: center;
 
       .typeWarpper {
         display: flex;
