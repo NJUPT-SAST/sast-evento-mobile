@@ -13,7 +13,6 @@ const SlideImages: React.FC = () => {
   const [slideImages, setSlideImages] = useState<Array<any>>([{"id": "1"}]);
   useEffect(() => {
     getHomeSlideList().then((res) => {
-      console.log(res);
       setSlideImages(res.slides.slice(0, 2));
     });
   }, []);

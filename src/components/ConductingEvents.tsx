@@ -14,20 +14,19 @@ const ConductingEvents: React.FC = () => {
 
   useEffect(() => {
     getAllConductingEvent().then((res) => {
-      console.log(res);
       setConductingEvent(res);
     });
   }, []);
 
   return (
     <div className="conductingEvents">
-      <IonItem>
+      <IonItem lines="full">
         <IonLabel className='eventsTitleWarpper'>
           <IonIcon icon={paperPlaneOutline}></IonIcon>
           进行中的活动
         </IonLabel>
       </IonItem>
-      <EventCardList events={conductingEvent}></EventCardList>
+      <EventCardList events={conductingEvent} lines="none"></EventCardList>
     </div>
   );
 };

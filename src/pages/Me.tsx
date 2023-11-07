@@ -58,15 +58,15 @@ const Me: React.FC = () => {
 					</IonCard>
 					<IonCard className='functionsWarpper'>
 						<IonList>
-							<IonItem button={true} onClick={toHistoryEvents}>
+							<IonItem button={true} onClick={toHistoryEvents} lines='full'>
 								<IonIcon icon={albumsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>历史活动</IonLabel>
 							</IonItem>
-							<IonItem button={true}>
+							<IonItem button={true} lines='full'>
 								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
 								<IonLabel>意见反馈</IonLabel>
 							</IonItem>
-							<IonItem button={true}>
+							<IonItem button={true} lines='none'>
 								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>设置</IonLabel>
 							</IonItem>
@@ -74,7 +74,7 @@ const Me: React.FC = () => {
 					</IonCard>
 					<IonCard className='logoutWarpper'>
 						<IonList>
-							<IonItem button={true} onClick={logOut}>
+							<IonItem button={true} onClick={logOut} lines='none'>
 								<IonIcon icon={logOutOutline} color='danger' className='functionIcon'></IonIcon>
 								<IonLabel color="danger">退出登录</IonLabel>
 							</IonItem>

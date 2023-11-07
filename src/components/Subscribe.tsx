@@ -7,7 +7,7 @@ const subcribePage = () => {
     <div className="subscribePageWarpper">
       <div className="mySubscribeDepartmentsWarpper">
         <IonCard>
-          <IonItem>
+          <IonItem lines="full">
             <div className="mySubscribeDepartmentsTitleWarpper">
               我订阅的部门
             </div>
@@ -21,7 +21,7 @@ const subcribePage = () => {
       </div>
       <div className="mySubscribeEventsWarpper">
         <IonCard>
-          <IonItem>
+          <IonItem lines="full">
             <div className="mySubscribeEventsTitleWarpper">
               我订阅的活动
             </div>

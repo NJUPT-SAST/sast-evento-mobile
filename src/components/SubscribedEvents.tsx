@@ -14,7 +14,7 @@ const SubscribedEvents = () => {
   }, [])
   return (
     <div className="subscribedEventsWarpper">
-      <EventCardList events={subcribeEvents}></EventCardList>
+      <EventCardList events={subcribeEvents} lines="full" isShadow={true}></EventCardList>
     </div>
   )
 }

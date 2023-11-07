@@ -1,21 +1,22 @@
-import React from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonIcon, IonLabel, IonNote } from '@ionic/react';
+import React, { useEffect, useState } from 'react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonIcon, IonLabel, IonNote, isPlatform } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
-import { folderOpenOutline, peopleOutline, pricetagsOutline } from 'ionicons/icons';
+import { folderOpenOutline, peopleOutline, pricetagsOutline, timeOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 
 interface EventCardProps {
 	event: Event;
+	isShadow?: true | false | undefined;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
+const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 	const departmentNames: string = (event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : "";
 	const history = useHistory();
 	const href = `/event/${event.id}`;
 	const states = ['未知', '未开始', '报名中', '进行中', '已取消', '已结束'];
 	const stateColor = ['#92949c', '#3dc2ff', '#2dd36f', '#ffc409', '#eb445a', '#92949c'];
-
+	const titleWidth = isPlatform('ios') ? "100%" : "calc(100% - 60px)";
 	const toEvent = () => {
 		history.push(href, { direction: 'forward' });
 	}
@@ -46,14 +47,10 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 	}
 
 	return (
-		<IonCard className='eventCard' onClick={toEvent}>
+		<IonCard className='eventCard' onClick={toEvent} style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
 			<IonCardHeader>
 				<IonCardTitle>
-					<div className='oneLineTextOverflow'>{event.title}</div>
-					<div className='stateWarpper'>
-						{states[stateInfo()]}
-						<div className='stateCircle' style={{ '--circle-color': stateColor[stateInfo()] }}></div>
-					</div>
+					<div className='oneLineTextOverflow' style={{'width': titleWidth}}>{event.title}</div>
 				</IonCardTitle>
 				<IonCardSubtitle>
 					<div className='oneLineTextOverflow'>
@@ -72,9 +69,16 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 						<IonIcon icon={pricetagsOutline}></IonIcon>
 						<p>{event.tag}</p>
 					</div>
+					<div className='timeWarpper'>
+						<IonIcon icon={timeOutline}></IonIcon>
+						<p>{event.gmtEventStart.slice(5, 10)}</p>
+					</div>
 				</div>
 			</IonCardContent>
-			{/* <IonButton color="light" size="small" expand="block" disabled={event.state !== "CHECKING_IN"}>报名</IonButton> */}
+			<div className='stateWarpper'>
+				{states[stateInfo()]}
+				<div className='stateCircle' style={{ '--circle-color': stateColor[stateInfo()] }}></div>
+			</div>
 		</IonCard>
 	);
 };

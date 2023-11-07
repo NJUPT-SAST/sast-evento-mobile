@@ -19,8 +19,6 @@ const AllEvent: React.FC = () => {
   }, []);
 
   const getItems = () => {
-    console.log(total);
-    console.log(page);
     const size = 10;
 
     if (total / size < page) {
@@ -30,7 +28,6 @@ const AllEvent: React.FC = () => {
 
     getEventList(page, size).then((response) => {
       const newEvents: Event[] = response.result;
-      console.log(newEvents);
       setEvents([...events, ...newEvents])
       setTotal(response.total);
       setPage(page + 1);
@@ -38,13 +35,13 @@ const AllEvent: React.FC = () => {
   };
   return (
     <div>
-      <IonItem>
+      <IonItem lines="full">
         <IonLabel className='eventsTitleWarpper'>
           <IonIcon icon={archiveOutline}></IonIcon>
           所有活动
         </IonLabel>
       </IonItem>
-      <EventCardList events={events}></EventCardList>
+      <EventCardList events={events} lines="none"></EventCardList>
       <IonInfiniteScroll
         onIonInfinite={(ev) => {
           if (!isEnded) {
@@ -61,8 +58,9 @@ const AllEvent: React.FC = () => {
         isOpen={isEnded}
         onDidDismiss={() => setIsEnded(false)}
         message="到底了  qaq"
-        duration={2000}
+        duration={1500}
         color="medium"
+        position="top"
       />
     </div>
   )

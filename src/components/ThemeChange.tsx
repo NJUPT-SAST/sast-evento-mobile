@@ -11,7 +11,6 @@ const ThemeChange = (props: { children?: ReactNode }) => {
 
   // Listen for the toggle check/uncheck to toggle the dark theme
   const toggleChange = () => {
-    console.log(!themeToggle);
     setThemeToggle(!themeToggle)
     localStorage.setItem('themeToggle', String(!themeToggle));
     toggleDarkTheme(!themeToggle);
@@ -19,7 +18,6 @@ const ThemeChange = (props: { children?: ReactNode }) => {
 
   // Add or remove the "dark" class on the document body
   const toggleDarkTheme = (shouldAdd: boolean) => {
-    console.log(document.body.classList);
     document.body.classList.toggle('dark', shouldAdd);
     // document.body.classList.toggle('light', !shouldAdd);
   };
@@ -27,7 +25,6 @@ const ThemeChange = (props: { children?: ReactNode }) => {
   // Check/uncheck the toggle and update the theme based on isDark
   const initializeDarkTheme = (isDark: boolean) => {
     setThemeToggle(isDark);
-    console.log(isDark);
     toggleDarkTheme(isDark);
   };
   useEffect(() => {

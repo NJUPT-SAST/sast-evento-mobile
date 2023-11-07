@@ -14,7 +14,7 @@ const RegisteredEvents = () => {
 
   return (
     <div>
-      <EventCardList events={registeredEvents} />
+      <EventCardList events={registeredEvents} lines="none" />
     </div>
   )
 }
