@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { closeOutline } from 'ionicons/icons';
 import { getLoginKey, pwLogin } from '../apis/login';
 import JSEncrypt from 'jsencrypt';
+import { Browser } from '@capacitor/browser';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -40,20 +41,8 @@ const Login: React.FC = () => {
     history.push('/register');
   }
 
-  const linkLogin = () => {
-    // a tag href linkUrl
-    let a = document.createElement("a");
-    a.setAttribute(
-      "href",
-      linkUrl
-    );
-    a.setAttribute("target", "_blank");
-    a.setAttribute("id", "link");
-    if (!document.getElementById("link")) {
-      document.body.appendChild(a);
-    }
-    a.click();
-    a.remove();
+  const linkLogin = async () => {
+    await Browser.open({url: linkUrl});
   }
 
   const close = () => {

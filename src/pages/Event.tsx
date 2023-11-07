@@ -5,6 +5,7 @@ import { Event } from '../context';
 import { getEventInfo, getUserParticipant, registerEvent, subcribeEvent } from '../apis/user';
 import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline, alarmOutline, alarmSharp, timeOutline, businessOutline, documentOutline, statsChartOutline, statsChartSharp } from 'ionicons/icons';
 import './Event.scss';
+import { Share } from '@capacitor/share';
 
 
 const EventPage: React.FC = () => {
@@ -78,7 +79,13 @@ const EventPage: React.FC = () => {
   }
 
   // TODO: share
-  const share = () => {
+  const share = async () => {
+    await Share.share({
+      title: event.title,
+      text: event.description,
+      url: window.location.href,
+      dialogTitle: '分享活动'
+    })
   }
 
   const subscribeButton = () => {
