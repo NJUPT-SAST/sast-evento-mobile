@@ -10,11 +10,10 @@ const DepartmentIcon = ({ department }: any) => {
     if (str === null || str.length <= 2) {
       return "000000";
     }
-    let hexResult = '';
-    for (let i = 0; i < str.length; i++) {
-      var charCode = str.charCodeAt(i).toString(16);
-      hexResult += charCode;
-    }
+    let hexResult = '7';
+    hexResult += str.charCodeAt(0).toString(16);
+    hexResult += 'f';
+    hexResult += str.charCodeAt(2).toString(16);
     const output = hexResult;
     return output.substring(0, 6);
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonToolbar, IonButton, IonInput, IonItem, IonLabel, IonList, IonToast, IonIcon, IonBackButton, IonButtons } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonButton, IonInput, IonItem, IonLabel, IonList, IonToast, IonIcon, IonBackButton, IonButtons, isPlatform } from '@ionic/react';
 import './Login.scss';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -33,7 +33,6 @@ const Login: React.FC = () => {
       })
     }, (error) => {
       console.log();
-
     })
   }
 
@@ -41,8 +40,19 @@ const Login: React.FC = () => {
     history.push('/register');
   }
 
-  const linkLogin = async () => {
-    await Browser.open({url: linkUrl});
+  const linkLogin = () => {
+    if (isPlatform("ios")) {
+      Browser.open({url: linkUrl});
+    } else {
+      const a = document.createElement('a');
+      a.setAttribute('href', linkUrl);
+      a.setAttribute('id', "oauth");
+      if (!document.getElementById('oauth')) {
+        document.body.appendChild(a);
+      }
+      a.click();
+      a.remove();
+    }
   }
 
   const close = () => {
@@ -55,7 +65,7 @@ const Login: React.FC = () => {
         <IonHeader collapse="condense" className="headerWarpper">
           <IonToolbar>
             <IonButtons slot="start" onClick={close}>
-              <IonIcon icon={closeOutline} size='large'></IonIcon>
+              <IonIcon icon={closeOutline} size='small'></IonIcon>
             </IonButtons>
           </IonToolbar>
         </IonHeader>

@@ -4,6 +4,7 @@ import { ThemeContext } from '../components/ThemeChange';
 import React, { useState } from 'react';
 
 import './Me.scss';
+import OnDevAlert from '../components/OnDevAlert';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
@@ -29,9 +30,10 @@ const Me: React.FC = () => {
 		<IonPage>
 			<IonHeader>
 				<IonToolbar>
-					<IonButton fill="clear" slot="end" size='small'>
+					<IonButton id='scaning' fill="clear" slot="end" size='small'>
 						<IonIcon icon={scanOutline} color="primary"></IonIcon>
 					</IonButton>
+					<OnDevAlert trigger='scaning'></OnDevAlert>
 					<IonButton fill='clear' slot='end' size='small' onClick={toggleChange}>
 						<IonIcon icon={themeIcon} color="primary"></IonIcon>
 					</IonButton>
@@ -62,14 +64,16 @@ const Me: React.FC = () => {
 								<IonIcon icon={albumsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>历史活动</IonLabel>
 							</IonItem>
-							<IonItem button={true} lines='full'>
+							<IonItem id='suggestion' button={true} lines='full'>
 								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
 								<IonLabel>意见反馈</IonLabel>
 							</IonItem>
-							<IonItem button={true} lines='none'>
+							<OnDevAlert trigger='suggestion'></OnDevAlert>
+							<IonItem id='setting' button={true} lines='none'>
 								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>设置</IonLabel>
 							</IonItem>
+							<OnDevAlert trigger='setting'></OnDevAlert>
 						</IonList>
 					</IonCard>
 					<IonCard className='logoutWarpper'>

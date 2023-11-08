@@ -39,25 +39,22 @@ const DepartmentPage: React.FC = () => {
       });
     }
     if (localStorage.getItem('subscribeDepartments') !== null) {
-      console.log(JSON.parse(String(localStorage.getItem('subscribeDepartments')))
-        .find((department: Department) => department.id === Number(departmentId)) !== undefined);
-
       if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
         .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
         setIsSubscribed(true);
       }
     } else {
       updateSubscribeDepartments();
-      if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
-        .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
-        setIsSubscribed(true);
-      }
     }
   }, [departmentId]);
 
   const updateSubscribeDepartments = () => {
     getSubscribeDepartments().then((res) => {
       localStorage.setItem('subscribeDepartments', JSON.stringify(res));
+      if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
+        .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
+        setIsSubscribed(true);
+      }
     });
   }
 

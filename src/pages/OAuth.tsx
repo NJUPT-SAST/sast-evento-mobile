@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { linkLogin } from '../apis/login';
 import './OAuth.scss';
 import { IonButton, IonPage } from '@ionic/react';
+import { Browser } from '@capacitor/browser';
 
 const OAuth: React.FC = () => {
   const searchParams = new URLSearchParams(document.location.search)
@@ -11,20 +12,19 @@ const OAuth: React.FC = () => {
 
   useEffect(() => {
     const code = String(searchParams.get('code'));
-    console.log(code);
-    
     linkLogin(code).then((res: any) => {
-      info = "Jumping to home page"
       localStorage.setItem('token', res.token);
       localStorage.setItem('userInfo', JSON.stringify(res.userInfo));
-      history.push('/home');
+      history.push('/me');
+      Browser.removeAllListeners();
+      Browser.close();
     });
-  }, [history]);
+  }, []);
 
   return (
     <IonPage className='infoWarpper'>
       <p>{info}</p>
-      <IonButton color="medium" fill='outline' onClick={() => history.push('/home')}>Cancel</IonButton>
+      <IonButton color="medium" fill='outline' onClick={() => {Browser.close();history.push('/home')}}>Cancel</IonButton>
     </IonPage>);
 };
 
