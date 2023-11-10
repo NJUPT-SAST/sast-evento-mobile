@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllDepartments } from '../apis/user';
 import { Department } from '../context';
-import { IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonList, IonPage, IonRow, IonSkeletonText, IonThumbnail, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 
 import './AllDepartments.scss'
 import DepartmentIcon from '../components/DepartmentIcon';
@@ -37,9 +37,47 @@ function AllDepartments() {
     router.push('/home', 'back');
   }
 
+  if (departments.length === 0 || departments === null) {
+
+    return (
+      <IonPage>
+        <IonHeader translucent={true}>
+          <IonToolbar>
+            <IonTitle>分类</IonTitle>
+            <IonButton slot="start" fill="clear" size='small' onClick={close}>
+              <IonBackButton text="首页"></IonBackButton>
+            </IonButton>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonGrid>
+            <IonRow key="departmentRow0">
+              {Array.from({ length: 3 }, (_, i) => (
+                <IonCol key={i} size="4">
+                  <IonItem lines='none' style={{"--background": "none"}}>
+                    <IonThumbnail style={{"--border-radius": "5px", "--size": "70px", "margin": "8px auto 0px auto"}}>
+                      <IonSkeletonText animated={true}></IonSkeletonText>
+                    </IonThumbnail>
+                  </IonItem>
+                  <IonItem lines='none' style={{"--background": "none"}}>
+                    <IonLabel>
+                      <p>
+                        <IonSkeletonText animated={true}></IonSkeletonText>
+                      </p>
+                    </IonLabel>
+                  </IonItem>
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonGrid>
+        </IonContent>
+      </IonPage>
+    )
+  }
+
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={true}>
         <IonToolbar>
           <IonTitle>分类</IonTitle>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>

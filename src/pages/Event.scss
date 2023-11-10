@@ -19,34 +19,6 @@
     font-weight: bold;
   }
 
-  .operationWarpper {
-    display: flex;
-    flex-direction: row;
-    height: 45px;
-    justify-content: space-between;
-    margin: 10px 0px 15px 0px;
-
-    .subscribeButtonWarpper {
-      .subscribeButton {
-        min-height: 2.1rem;
-      }
-    }
-
-    .registerButtonWarpper {
-      width: 90%;
-      max-width: 400px;
-      padding-right: 5px;
-
-      .registerButton {
-        width: 100%;
-        min-height: 2.1rem;
-        ion-icon {
-          padding-right: 5px;
-        }
-      }
-    }
-  }
-
   .metaInfoWarpper {
     display: flex;
     flex-direction: column;
@@ -81,6 +53,34 @@
         margin-left: 10px;
         display: flex;
         flex-direction: row;
+      }
+    }
+  }
+
+  .operationWarpper {
+    display: flex;
+    flex-direction: row;
+    height: 45px;
+    justify-content: space-between;
+    margin: 10px 0px 15px 0px;
+
+    .subscribeButtonWarpper {
+      .subscribeButton {
+        min-height: 2.1rem;
+      }
+    }
+
+    .registerButtonWarpper {
+      width: 90%;
+      max-width: 400px;
+      padding-right: 5px;
+
+      .registerButton {
+        width: 100%;
+        min-height: 2.1rem;
+        ion-icon {
+          padding-right: 5px;
+        }
       }
     }
   }

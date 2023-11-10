@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, useIonRouter } from '@ionic/react';
+import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonRefresher, IonRefresherContent, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, useIonRouter } from '@ionic/react';
 import { albumsOutline, logOutOutline, moon, pencilOutline, scanOutline, settingsOutline, sunnyOutline } from 'ionicons/icons';
 import { ThemeContext } from '../components/ThemeChange';
 import React, { useState } from 'react';
@@ -26,9 +26,13 @@ const Me: React.FC = () => {
 		router.push("/history", 'forward');
 	}
 
+	const handleRefresh = () => {
+    window.location.reload();
+  }
+
 	return (
 		<IonPage>
-			<IonHeader>
+			<IonHeader translucent={true}>
 				<IonToolbar>
 					<IonButton id='scaning' fill="clear" slot="end" size='small'>
 						<IonIcon icon={scanOutline} color="primary"></IonIcon>
@@ -40,6 +44,9 @@ const Me: React.FC = () => {
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
+				<IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+					<IonRefresherContent></IonRefresherContent>
+				</IonRefresher>
 				<div className='meWarpper'>
 					<IonCard className='userProfileWarpper'>
 						{isLoggedIn() ? (
@@ -50,7 +57,7 @@ const Me: React.FC = () => {
 								<h2 slot="start" className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
 							</IonItem>
 						) : (
-							<IonItem href="/login" lines="none">
+							<IonItem onClick={() => {router.push("/login", "forward")}} lines="none">
 								<IonThumbnail slot="start">
 									<IonImg src="/link.ico" alt="avatar" />
 								</IonThumbnail>

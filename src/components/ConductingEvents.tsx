@@ -10,13 +10,19 @@ import './ConductingEvent.scss'
 import EventCardList from "./EventCardList";
 
 const ConductingEvents: React.FC = () => {
-  const [conductingEvent, setConductingEvent] = useState<Event[]>([]);
+  const [conductingEvent, setConductingEvent] = useState<Event[] | null>(null);
 
   useEffect(() => {
     getAllConductingEvent().then((res) => {
       setConductingEvent(res);
     });
   }, []);
+
+  if (conductingEvent?.length === 0) {
+    return (
+      <></>
+    )
+  }
 
   return (
     <div className="conductingEvents">

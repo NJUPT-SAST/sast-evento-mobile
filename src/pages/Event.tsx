@@ -31,8 +31,6 @@ const EventPage: React.FC = () => {
       setIsRegistration(res.isRegistration === null ? false : Boolean(res.isRegistration));
       setIsSubscribe(res.isSubscribe === null ? false : Boolean(res.isSubscribe));
     });
-    
-    
   }, [eventId]);
 
   if (!event) {
@@ -78,7 +76,6 @@ const EventPage: React.FC = () => {
     });
   }
 
-  // TODO: share
   const share = async () => {
     await Share.share({
       title: event.title,
@@ -140,7 +137,7 @@ const EventPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={true}>
         <IonToolbar>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton></IonBackButton>

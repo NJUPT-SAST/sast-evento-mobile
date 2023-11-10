@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonIcon, IonLabel, IonNote, isPlatform } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonIcon, IonLabel, IonNote, isPlatform, IonSkeletonText, useIonRouter } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
 import { folderOpenOutline, peopleOutline, pricetagsOutline, timeOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
+import { Toast } from '@capacitor/toast';
 
 interface EventCardProps {
 	event: Event;
@@ -11,15 +12,10 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
-	const departmentNames: string = (event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : "";
-	const history = useHistory();
-	const href = `/event/${event.id}`;
+	const router = useIonRouter();
 	const states = ['未知', '未开始', '报名中', '进行中', '已取消', '已结束'];
 	const stateColor = ['#92949c', '#3dc2ff', '#2dd36f', '#ffc409', '#eb445a', '#92949c'];
 	const titleWidth = isPlatform('ios') ? "100%" : "calc(100% - 60px)";
-	const toEvent = () => {
-		history.push(href, { direction: 'forward' });
-	}
 
 	const stateInfo = () => {
 		/*    
@@ -46,15 +42,66 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 		}
 	}
 
+	if (event.id === null) {
+		return (
+			<IonCard className='eventCard' style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
+				<IonCardHeader>
+					<IonCardTitle>
+						<div className='oneLineTextOverflow' style={{ 'width': titleWidth }}>
+							<IonSkeletonText animated={true} style={{ width: '80%', "height": "30px" }}></IonSkeletonText>
+						</div>
+					</IonCardTitle>
+					<IonCardSubtitle>
+						<div className='oneLineTextOverflow'>
+							<IonIcon icon={peopleOutline}></IonIcon> <IonSkeletonText animated={true} style={{ width: '90px' }}></IonSkeletonText>
+						</div>
+					</IonCardSubtitle>
+				</IonCardHeader>
+				<IonCardContent>
+					<IonSkeletonText animated={true} style={{ width: '100%' }}></IonSkeletonText>
+					<IonSkeletonText animated={true} style={{ width: '100%', "marginBottom": "15px" }}></IonSkeletonText>
+					<div className='categryWarpper'>
+						<div className='typeWarpper'>
+							<IonIcon icon={folderOpenOutline}></IonIcon>
+							<IonSkeletonText animated={true} style={{ width: '30px' }}></IonSkeletonText>
+						</div>
+						<div className='tagWarpper'>
+							<IonIcon icon={pricetagsOutline}></IonIcon> <IonSkeletonText animated={true} style={{ width: '30px' }}></IonSkeletonText>
+						</div>
+						<div className='timeWarpper'>
+							<IonIcon icon={timeOutline}></IonIcon> <IonSkeletonText animated={true} style={{ width: '50px' }}></IonSkeletonText>
+						</div>
+					</div>
+				</IonCardContent>
+				<div className='stateWarpper'>
+					{states[0]}
+					<div className='stateCircle' style={{ '--circle-color': stateColor[0] }}></div>
+				</div>
+			</IonCard>
+		)
+	}
+
+	const toEvent = () => {
+		if (typeof event.id === 'number' && event.id !== 0) {
+			router.push(`/event/${event.id}`, 'forward');
+		} else {
+			Toast.show({
+				text: '这里不可以 (⋟﹏⋞)',
+				duration: 'short',
+				position: 'center'
+			});
+		}
+	}
+
 	return (
 		<IonCard className='eventCard' onClick={toEvent} style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
 			<IonCardHeader>
 				<IonCardTitle>
-					<div className='oneLineTextOverflow' style={{'width': titleWidth}}>{event.title}</div>
+					<div className='oneLineTextOverflow' style={{ 'width': titleWidth }}>{event.title}</div>
 				</IonCardTitle>
 				<IonCardSubtitle>
 					<div className='oneLineTextOverflow'>
-						<IonIcon icon={peopleOutline}></IonIcon> {departmentNames}
+						<IonIcon icon={peopleOutline}></IonIcon> {(event.departments !== undefined && event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : ""}
 					</div>
 				</IonCardSubtitle>
 			</IonCardHeader>

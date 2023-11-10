@@ -58,7 +58,7 @@ const App: React.FC = () => (
               <Redirect exact from="/" to="/home" />
             </IonRouterOutlet>
 
-            <IonTabBar slot="bottom" id="app-tab-bar">
+            <IonTabBar slot="bottom" id="app-tab-bar" translucent={true}>
               <IonTabButton tab="home" href="/home">
                 <IonIcon icon={homeOutline}></IonIcon>
                 {/* <IonLabel>首页</IonLabel> */}

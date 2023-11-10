@@ -7,6 +7,7 @@ import { closeOutline } from 'ionicons/icons';
 import { getLoginKey, pwLogin } from '../apis/login';
 import JSEncrypt from 'jsencrypt';
 import { Browser } from '@capacitor/browser';
+import OnDevAlert from '../components/OnDevAlert';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -37,7 +38,7 @@ const Login: React.FC = () => {
   }
 
   const register = () => {
-    history.push('/register');
+    // history.push('/register');
   }
 
   const linkLogin = () => {
@@ -62,10 +63,10 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonHeader collapse="condense" className="headerWarpper">
+        <IonHeader collapse="condense" className="headerWarpper" translucent={true}>
           <IonToolbar>
             <IonButtons slot="start" onClick={close}>
-              <IonIcon icon={closeOutline} size='small'></IonIcon>
+              <IonIcon icon={closeOutline} size='large'></IonIcon>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -112,10 +113,11 @@ const Login: React.FC = () => {
               <img src='/link.ico'></img>
             </div>
           </div> */}
-            <div className='registerWarpper'>
+            <div className='registerWarpper' id='registerButton'>
               <IonLabel>还没有账号？ </IonLabel>
               <IonLabel color="tertiary">注册</IonLabel>
             </div>
+            <OnDevAlert trigger='registerButton'></OnDevAlert>
           </div>
         </IonContent>
         <IonToast
