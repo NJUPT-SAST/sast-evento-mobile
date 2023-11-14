@@ -1,5 +1,5 @@
 {
-  "name": "sast-evento-mobile",
+  "name": "Sast-Evento-Mobile",
   "integrations": {
     "capacitor": {}
   },
