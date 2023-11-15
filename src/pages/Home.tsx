@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   // TODO: change layout styles to falls
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={false}>
         <IonToolbar className='headerWarpper'>
           <IonTitle slot='secondary'>
             首页

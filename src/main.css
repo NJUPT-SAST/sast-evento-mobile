@@ -44,15 +44,13 @@
 
   --ion-background-color: #4d4d4d;
 
-  --ion-toolbar-background: var(--ion-color-step-200);
+  --ion-toolbar-background: #414141;
 
-  --ion-toolbar-border-color: var(--ion-color-step-200);
+  --ion-toolbar-border-color: #414141;
 
   --ion-card-background: #262626;
 
-  --ion-tab-bar-background: var(--ion-color-step-200);
-
-  --ion-safe-area-top: 0;
+  --ion-tab-bar-background: #414141;
 }
 
 /* This sets a different background and item background in light mode on md */

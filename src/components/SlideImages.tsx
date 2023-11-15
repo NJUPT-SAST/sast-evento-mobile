@@ -10,10 +10,9 @@ import 'swiper/scss/autoplay';
 import "./SlideImages.scss";
 
 const SlideImages: React.FC = () => {
-  const [slideImages, setSlideImages] = useState<Array<any>>([{"id": "1"}]);
+  const [slideImages, setSlideImages] = useState<Array<any>>([{"id": "1", "url": "https://aliyun.sastimg.mxte.cc/images/2023/07/02/Frame-1438eeca56671d68ff.png", "title": "123"}]);
   useEffect(() => {
     getHomeSlideList().then((res) => {
-      console.log(res);
       setSlideImages(res.slides.slice(0, 2));
     });
   }, []);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonToolbar, IonButton, IonInput, IonItem, IonLabel, IonList, IonToast, IonIcon, IonBackButton, IonButtons } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonButton, IonInput, IonItem, IonLabel, IonList, IonToast, IonIcon, IonBackButton, IonButtons, isPlatform } from '@ionic/react';
 import './Login.scss';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { closeOutline } from 'ionicons/icons';
 import { getLoginKey, pwLogin } from '../apis/login';
 import JSEncrypt from 'jsencrypt';
 import { Browser } from '@capacitor/browser';
+import OnDevAlert from '../components/OnDevAlert';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -14,7 +15,7 @@ const Login: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const history = useHistory();
   // const linkUrl = 'http://192.168.0.154:3000/auth?client_id=f04a5a82-d394-456c-82d0-57623b8549d7&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=http://192.168.0.154:8102/oauth&response_type=code&scope=all&state=xyz'
-  const linkUrl = 'https://link.sast.fun/auth?client_id=f04a5a82-d394-456c-82d0-57623b8549d7&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=http://192.168.0.154:8102/oauth&response_type=code&scope=all&state=xyz'
+  const linkUrl = 'https://link.sast.fun/auth?client_id=a5047c7f-d8ae-40f5-85de-5c380ecc0b51&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=https://evento.sast.fun/oauth&response_type=code&scope=all&state=xyz'
 
   const login = () => {
     getLoginKey(username).then(res => {
@@ -33,16 +34,26 @@ const Login: React.FC = () => {
       })
     }, (error) => {
       console.log();
-
     })
   }
 
   const register = () => {
-    history.push('/register');
+    // history.push('/register');
   }
 
-  const linkLogin = async () => {
-    await Browser.open({url: linkUrl});
+  const linkLogin = () => {
+    if (isPlatform("ios")) {
+      Browser.open({url: linkUrl});
+    } else {
+      const a = document.createElement('a');
+      a.setAttribute('href', linkUrl);
+      a.setAttribute('id', "oauth");
+      if (!document.getElementById('oauth')) {
+        document.body.appendChild(a);
+      }
+      a.click();
+      a.remove();
+    }
   }
 
   const close = () => {
@@ -52,7 +63,7 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonHeader collapse="condense" className="headerWarpper">
+        <IonHeader collapse="condense" className="headerWarpper" translucent={false}>
           <IonToolbar>
             <IonButtons slot="start" onClick={close}>
               <IonIcon icon={closeOutline} size='large'></IonIcon>
@@ -102,10 +113,11 @@ const Login: React.FC = () => {
               <img src='/link.ico'></img>
             </div>
           </div> */}
-            <div className='registerWarpper'>
+            <div className='registerWarpper' id='registerButton'>
               <IonLabel>还没有账号？ </IonLabel>
               <IonLabel color="tertiary">注册</IonLabel>
             </div>
+            <OnDevAlert trigger='registerButton'></OnDevAlert>
           </div>
         </IonContent>
         <IonToast

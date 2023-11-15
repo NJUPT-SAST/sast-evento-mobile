@@ -10,24 +10,29 @@ import './ConductingEvent.scss'
 import EventCardList from "./EventCardList";
 
 const ConductingEvents: React.FC = () => {
-  const [conductingEvent, setConductingEvent] = useState<Event[]>([]);
+  const [conductingEvent, setConductingEvent] = useState<Event[] | null>(null);
 
   useEffect(() => {
     getAllConductingEvent().then((res) => {
-      console.log(res);
       setConductingEvent(res);
     });
   }, []);
 
+  if (conductingEvent?.length === 0) {
+    return (
+      <></>
+    )
+  }
+
   return (
     <div className="conductingEvents">
-      <IonItem>
+      <IonItem lines="full">
         <IonLabel className='eventsTitleWarpper'>
           <IonIcon icon={paperPlaneOutline}></IonIcon>
           进行中的活动
         </IonLabel>
       </IonItem>
-      <EventCardList events={conductingEvent}></EventCardList>
+      <EventCardList events={conductingEvent} lines="none"></EventCardList>
     </div>
   );
 };

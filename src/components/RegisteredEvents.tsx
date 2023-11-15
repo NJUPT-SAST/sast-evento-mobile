@@ -4,17 +4,19 @@ import { Event } from "../context";
 import EventCardList from "./EventCardList";
 
 const RegisteredEvents = () => {
-  const [registeredEvents, setRegisteredEvents] = useState<Event[]>([]);
+  const [registeredEvents, setRegisteredEvents] = useState<Event[] | null>(null);
 
   useEffect(() => {
     getRegisteredEvents().then((res) => {
       setRegisteredEvents(res);
+    }, () => {
+      setRegisteredEvents([]);
     });
   }, []);
 
   return (
     <div>
-      <EventCardList events={registeredEvents} />
+      <EventCardList events={registeredEvents} lines="none" />
     </div>
   )
 }

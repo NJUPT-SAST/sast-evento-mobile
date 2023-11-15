@@ -4,11 +4,13 @@ import { getHistoryEvents } from "../apis/user";
 import { IonBackButton, IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from "@ionic/react";
 import EventCardList from "../components/EventCardList";
 const HistoryEvents = () => {
-  const [historyEvents, setHistoryEvents] = useState<Event[]>([]);
+  const [historyEvents, setHistoryEvents] = useState<Event[] | null>(null);
   const router = useIonRouter();
   useEffect(() => {
     getHistoryEvents().then(res => {
       setHistoryEvents(res);
+    }, () => {
+      setHistoryEvents([]);
     });
   }, []);
   const close = () => {
@@ -17,7 +19,7 @@ const HistoryEvents = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton text="我的"></IonBackButton>
@@ -26,7 +28,7 @@ const HistoryEvents = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <EventCardList events={historyEvents} />
+        <EventCardList events={historyEvents} lines="none" />
       </IonContent>
     </IonPage>
   )

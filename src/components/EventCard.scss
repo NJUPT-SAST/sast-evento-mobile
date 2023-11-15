@@ -1,7 +1,7 @@
 .eventCard {
   max-width: 500px;
   width: 85vw;
-  height: 150px;
+  height: 143px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -9,14 +9,15 @@
   margin-bottom: 5px;
 
   ion-card-header {
-    padding-bottom: 5px;
-    padding-top: 0px;
+    padding-bottom: 10px;
 
     .oneLineTextOverflow {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: calc(85% - 15px);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
 
     ion-card-title {
@@ -24,22 +25,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
-
-      .stateWarpper {
-        display: flex;
-        align-items: center;
-        color: var(--ion-color-step-550, #737373);
-        font-size: 0.875rem;
-        font-weight: 500;
-        .stateCircle {
-          height: 5px;
-          width: 5px;
-          border-radius: 50%;
-          background-color: var(--circle-color, #3498db);
-          margin-left: 5px;
-          margin-bottom: 2px;
-        }
-      }
+      font-size: 18px;
     }
 
     ion-card-subtitle {
@@ -72,19 +58,49 @@
       p {
         height: 20px;
         margin: 0;
-        margin-left: 6px;
+      }
+
+      ion-icon {
+        margin-right: 6px;
       }
 
       .typeWarpper {
         display: flex;
         flex-direction: row;
+        align-items: center;
       }
 
       .tagWarpper {
         margin-left: 10px;
         display: flex;
         flex-direction: row;
+        align-items: center;
+      }
+      .timeWarpper {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
       }
     }
+  }
+}
+
+.stateWarpper {
+  position: fixed;
+  top: 8%;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  color: var(--ion-color-step-550, #737373);
+  font-size: 0.8rem;
+  font-weight: 500;
+  .stateCircle {
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--circle-color, #3498db);
+    margin-left: 5px;
+    margin-bottom: 2px;
   }
 }

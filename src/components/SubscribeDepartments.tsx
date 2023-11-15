@@ -6,11 +6,20 @@ import "./SubscribeDepartments.scss";
 
 const SubscribedDepartments = () => {
   const [departments, setDepartments] = useState<Department[]>(localStorage.getItem('subscribeDepartments') === null ? [] : JSON.parse(String(localStorage.getItem('subscribeDepartments'))));
+  // TODO: import zustand
+  function arraysHaveSameElements(arr1: Array<any>, arr2: Array<any>) {
+    return arr1.toString() === arr2.toString();
+  }
 
   useEffect(() => {
     getSubscribeDepartments().then((res) => {
-      setDepartments(res);
-      localStorage.setItem('subscribeDepartments', JSON.stringify(res));
+      if (res === null) {
+        return;
+      }
+      if (!arraysHaveSameElements(res, departments)) {
+        setDepartments(res);
+        localStorage.setItem('subscribeDepartments', JSON.stringify(res));
+      }
     });
   }, []);
 

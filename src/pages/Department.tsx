@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IonBackButton, IonButton, IonContent, IonHeader, IonIcon, IonItem, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonContent, IonHeader, IonIcon, IonItem, IonList, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import { getAllDepartments, getEventWithFilter, getSubscribeDepartments, subscribeDepartment } from '../apis/user';
 import EventCard from '../components/EventCard';
 import { useLocation } from 'react-router-dom';
@@ -39,25 +39,22 @@ const DepartmentPage: React.FC = () => {
       });
     }
     if (localStorage.getItem('subscribeDepartments') !== null) {
-      console.log(JSON.parse(String(localStorage.getItem('subscribeDepartments')))
-        .find((department: Department) => department.id === Number(departmentId)) !== undefined);
-
       if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
         .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
         setIsSubscribed(true);
       }
     } else {
       updateSubscribeDepartments();
-      if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
-        .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
-        setIsSubscribed(true);
-      }
     }
   }, [departmentId]);
 
   const updateSubscribeDepartments = () => {
     getSubscribeDepartments().then((res) => {
       localStorage.setItem('subscribeDepartments', JSON.stringify(res));
+      if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
+        .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
+        setIsSubscribed(true);
+      }
     });
   }
 
@@ -67,24 +64,39 @@ const DepartmentPage: React.FC = () => {
 
   const subscribe = () => {
     subscribeDepartment(Number(departmentId), true).then((res) => {
-      console.log(res);
       setIsSubscribed(true);
       updateSubscribeDepartments();
     });
   }
 
+  const [presentAlert] = useIonAlert();
+
   const unsubscribe = () => {
-    subscribeDepartment(Number(departmentId), false).then((res) => {
-      console.log(res);
-      setIsSubscribed(false);
-      updateSubscribeDepartments();
-    });
+    presentAlert({
+      "header": "真的要取消订阅吗",
+      "buttons": [
+        {
+          "text": "取消",
+          "role": "cancel"
+        },
+        {
+          "text": "确认",
+          "role": "confirm",
+          "handler": () => {
+            subscribeDepartment(Number(departmentId), false).then((res) => {
+              setIsSubscribed(false);
+              updateSubscribeDepartments();
+            });
+          }
+        }
+      ]
+    })
   }
 
   const subscribeButton = () => {
     if (isSubscribed) {
       return (
-        <IonButton slot='end' fill='clear' size='small' onClick={unsubscribe}>
+        <IonButton id='unsubscribeButton' slot='end' fill='clear' size='small' onClick={unsubscribe}>
           <IonIcon icon={alarmSharp} color='danger'></IonIcon>
         </IonButton>
       );
@@ -98,7 +110,7 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton></IonBackButton>

@@ -1,9 +1,10 @@
-import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, useIonRouter } from '@ionic/react';
+import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonRefresher, IonRefresherContent, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, useIonRouter } from '@ionic/react';
 import { albumsOutline, logOutOutline, moon, pencilOutline, scanOutline, settingsOutline, sunnyOutline } from 'ionicons/icons';
 import { ThemeContext } from '../components/ThemeChange';
 import React, { useState } from 'react';
 
 import './Me.scss';
+import OnDevAlert from '../components/OnDevAlert';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
@@ -18,26 +19,34 @@ const Me: React.FC = () => {
 
 	const logOut = () => {
 		localStorage.clear();
-		setUserInfo(null)
+		setUserInfo(null);
 	}
 
 	const toHistoryEvents = () => {
 		router.push("/history", 'forward');
 	}
 
+	const handleRefresh = () => {
+    window.location.reload();
+  }
+
 	return (
 		<IonPage>
-			<IonHeader>
+			<IonHeader translucent={false}>
 				<IonToolbar>
-					<IonButton fill="clear" slot="end" size='small'>
+					<IonButton id='scaning' fill="clear" slot="end" size='small'>
 						<IonIcon icon={scanOutline} color="primary"></IonIcon>
 					</IonButton>
+					<OnDevAlert trigger='scaning'></OnDevAlert>
 					<IonButton fill='clear' slot='end' size='small' onClick={toggleChange}>
 						<IonIcon icon={themeIcon} color="primary"></IonIcon>
 					</IonButton>
 				</IonToolbar>
 			</IonHeader>
 			<IonContent fullscreen>
+				<IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+					<IonRefresherContent></IonRefresherContent>
+				</IonRefresher>
 				<div className='meWarpper'>
 					<IonCard className='userProfileWarpper'>
 						{isLoggedIn() ? (
@@ -48,7 +57,7 @@ const Me: React.FC = () => {
 								<h2 slot="start" className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
 							</IonItem>
 						) : (
-							<IonItem href="/login" lines="none">
+							<IonItem onClick={() => {router.push("/login", "forward")}} lines="none">
 								<IonThumbnail slot="start">
 									<IonImg src="/link.ico" alt="avatar" />
 								</IonThumbnail>
@@ -58,23 +67,25 @@ const Me: React.FC = () => {
 					</IonCard>
 					<IonCard className='functionsWarpper'>
 						<IonList>
-							<IonItem button={true} onClick={toHistoryEvents}>
+							<IonItem button={true} onClick={toHistoryEvents} lines='full'>
 								<IonIcon icon={albumsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>历史活动</IonLabel>
 							</IonItem>
-							<IonItem button={true}>
+							<IonItem id='suggestion' button={true} lines='full'>
 								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
 								<IonLabel>意见反馈</IonLabel>
 							</IonItem>
-							<IonItem button={true}>
+							<OnDevAlert trigger='suggestion'></OnDevAlert>
+							<IonItem id='setting' button={true} lines='none'>
 								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>设置</IonLabel>
 							</IonItem>
+							<OnDevAlert trigger='setting'></OnDevAlert>
 						</IonList>
 					</IonCard>
 					<IonCard className='logoutWarpper'>
 						<IonList>
-							<IonItem button={true} onClick={logOut}>
+							<IonItem button={true} onClick={logOut} lines='none'>
 								<IonIcon icon={logOutOutline} color='danger' className='functionIcon'></IonIcon>
 								<IonLabel color="danger">退出登录</IonLabel>
 							</IonItem>
