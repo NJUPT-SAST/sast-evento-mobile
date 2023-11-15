@@ -1,3 +1,4 @@
+import { StatusBar, Style } from '@capacitor/status-bar';
 import React, { ReactNode, useState } from 'react';
 import { useEffect } from 'react';
 
@@ -19,7 +20,15 @@ const ThemeChange = (props: { children?: ReactNode }) => {
   // Add or remove the "dark" class on the document body
   const toggleDarkTheme = (shouldAdd: boolean) => {
     document.body.classList.toggle('dark', shouldAdd);
-    // document.body.classList.toggle('light', !shouldAdd);
+    if (shouldAdd) {
+      document.getElementsByTagName('meta')["theme-color"].content = "#414141";
+      StatusBar.setBackgroundColor({'color': '#414141'});
+      StatusBar.setStyle({"style": "Dark"});
+    } else {
+      document.getElementsByTagName('meta')["theme-color"].content = "#fff";
+      StatusBar.setBackgroundColor({'color': '#ffffff'});
+      StatusBar.setStyle({"style": "Light"});
+    }
   };
 
   // Check/uncheck the toggle and update the theme based on isDark

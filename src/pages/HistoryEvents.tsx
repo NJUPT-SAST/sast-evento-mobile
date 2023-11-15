@@ -19,7 +19,7 @@ const HistoryEvents = () => {
 
   return (
     <IonPage>
-      <IonHeader translucent={true}>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton text="我的"></IonBackButton>

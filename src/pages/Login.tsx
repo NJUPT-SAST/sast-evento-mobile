@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const history = useHistory();
   // const linkUrl = 'http://192.168.0.154:3000/auth?client_id=f04a5a82-d394-456c-82d0-57623b8549d7&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=http://192.168.0.154:8102/oauth&response_type=code&scope=all&state=xyz'
-  const linkUrl = 'https://link.sast.fun/auth?client_id=f04a5a82-d394-456c-82d0-57623b8549d7&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=http://192.168.0.154:8102/oauth&response_type=code&scope=all&state=xyz'
+  const linkUrl = 'https://link.sast.fun/auth?client_id=a5047c7f-d8ae-40f5-85de-5c380ecc0b51&code_challenge=YillThSRrGTj6mXqFfDPinX7G35qEQ1QEyWV6PDSEuc%3D&code_challenge_method=S256&redirect_uri=https://evento.sast.fun/oauth&response_type=code&scope=all&state=xyz'
 
   const login = () => {
     getLoginKey(username).then(res => {
@@ -63,7 +63,7 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonHeader collapse="condense" className="headerWarpper" translucent={true}>
+        <IonHeader collapse="condense" className="headerWarpper" translucent={false}>
           <IonToolbar>
             <IonButtons slot="start" onClick={close}>
               <IonIcon icon={closeOutline} size='large'></IonIcon>

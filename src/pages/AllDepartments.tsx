@@ -41,7 +41,7 @@ function AllDepartments() {
 
     return (
       <IonPage>
-        <IonHeader translucent={true}>
+        <IonHeader translucent={false}>
           <IonToolbar>
             <IonTitle>分类</IonTitle>
             <IonButton slot="start" fill="clear" size='small' onClick={close}>
@@ -77,7 +77,7 @@ function AllDepartments() {
 
   return (
     <IonPage>
-      <IonHeader translucent={true}>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonTitle>分类</IonTitle>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>

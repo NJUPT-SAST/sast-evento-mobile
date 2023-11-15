@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'sast.evento.mobile',
-  appName: 'Sast-Evento-Mobile',
+  appName: 'SAST-EVENTO',
   webDir: 'dist',
   server: {
     androidScheme: 'http'

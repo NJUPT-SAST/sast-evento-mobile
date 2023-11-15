@@ -110,7 +110,7 @@ const DepartmentPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader translucent={true}>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonButton slot="start" fill="clear" size='small' onClick={close}>
             <IonBackButton></IonBackButton>

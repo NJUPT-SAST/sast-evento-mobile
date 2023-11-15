@@ -19,7 +19,7 @@ const Me: React.FC = () => {
 
 	const logOut = () => {
 		localStorage.clear();
-		setUserInfo(null)
+		setUserInfo(null);
 	}
 
 	const toHistoryEvents = () => {
@@ -32,7 +32,7 @@ const Me: React.FC = () => {
 
 	return (
 		<IonPage>
-			<IonHeader translucent={true}>
+			<IonHeader translucent={false}>
 				<IonToolbar>
 					<IonButton id='scaning' fill="clear" slot="end" size='small'>
 						<IonIcon icon={scanOutline} color="primary"></IonIcon>

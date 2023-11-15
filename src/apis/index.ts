@@ -1,7 +1,8 @@
+import { Toast } from '@capacitor/toast';
 import axios, { AxiosInstance } from 'axios';
 
-const BASEURL = 'http://192.168.0.154:19711/api';
-// const BASEURL = 'https://evento.sast.fun/api';
+// const BASEURL = 'http://192.168.0.154:19711/api';
+const BASEURL = 'https://evento.sast.fun/api';
 const TIMEOUT = 10000;
 
 const createAxiosInstance = (): AxiosInstance => {
@@ -9,7 +10,7 @@ const createAxiosInstance = (): AxiosInstance => {
     baseURL: BASEURL,
     timeout: TIMEOUT,
   });
-  
+
   instance.interceptors.request.use((config) => {
     // config.headers['Content-Type'] = 'application/json';
     const token = window.localStorage.getItem('token');
@@ -23,19 +24,21 @@ const createAxiosInstance = (): AxiosInstance => {
 
   instance.interceptors.response.use((response) => {
     if (response.data.success !== true) {
-      if (response.data.errCode === '1003') {
-        window.localStorage.removeItem('token');
-        window.location.href = '/login';
+      if ((response.data.errCode === 1000 && String(response.data.errMsg).includes('login has expired')) || response.data.errCode === 1003) {
+        window.localStorage.clear();
+        Toast.show({
+          text: "登录过期",
+          duration: "short"
+        })
       } else {
         console.log(response.data.errCode + ": " + response.data.errMsg);
       }
       throw new Error("Error");
     }
     console.log(response.data);
-    
+
     return response.data;
-  },
-    (error) => {
+  }, (error) => {
       return Promise.reject(error);
     }
   )

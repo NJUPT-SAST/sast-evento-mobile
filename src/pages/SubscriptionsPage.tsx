@@ -15,7 +15,7 @@ const SubscriptionsPage: React.FC = () => {
   }
   return (
     <IonPage>
-      <IonHeader translucent={true}>
+      <IonHeader translucent={false}>
         <IonToolbar>
           <IonSegment onIonChange={handleSegmentChange} value={selectedSegment}>
             <IonSegmentButton value="subscriptions">
