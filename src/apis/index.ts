@@ -12,7 +12,6 @@ const createAxiosInstance = (): AxiosInstance => {
   });
 
   instance.interceptors.request.use((config) => {
-    // config.headers['Content-Type'] = 'application/json';
     const token = window.localStorage.getItem('token');
     config.headers['TOKEN'] = token !== null ? token : null;
     return config;
@@ -31,7 +30,10 @@ const createAxiosInstance = (): AxiosInstance => {
           duration: "short"
         })
       } else {
-        console.log(response.data.errCode + ": " + response.data.errMsg);
+        Toast.show({
+          text: response.data.errCode + " + " + response.data.errMsg,
+          duration: "short"
+        })
       }
       throw new Error("Error");
     }
