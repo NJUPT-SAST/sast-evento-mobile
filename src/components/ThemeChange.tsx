@@ -21,13 +21,13 @@ const ThemeChange = (props: { children?: ReactNode }) => {
   const toggleDarkTheme = (shouldAdd: boolean) => {
     document.body.classList.toggle('dark', shouldAdd);
     if (shouldAdd) {
-      document.getElementsByTagName('meta')["theme-color"].content = "#414141";
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#414141');
       StatusBar.setBackgroundColor({'color': '#414141'});
-      StatusBar.setStyle({"style": "Dark"});
+      StatusBar.setStyle({"style": Style.Dark});
     } else {
-      document.getElementsByTagName('meta')["theme-color"].content = "#fff";
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#fff');
       StatusBar.setBackgroundColor({'color': '#ffffff'});
-      StatusBar.setStyle({"style": "Light"});
+      StatusBar.setStyle({"style": Style.Light});
     }
   };
 
