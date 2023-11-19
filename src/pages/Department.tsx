@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IonBackButton, IonButton, IonContent, IonHeader, IonIcon, IonItem, IonList, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonBackButton, IonButton, IonContent, IonHeader, IonIcon, IonNote, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import { getAllDepartments, getEventWithFilter, getSubscribeDepartments, subscribeDepartment } from '../apis/user';
-import EventCard from '../components/EventCard';
 import { useLocation } from 'react-router-dom';
 
 import './Department.scss'
 import { Department, Event } from '../context';
 import { alarmSharp } from 'ionicons/icons';
+import EventCardList from '../components/EventCardList';
 
 const DepartmentPage: React.FC = () => {
   const history = useHistory();
+  const maxWeeks = 25;
   const location = useLocation<{ departmentName: string }>();
   const [departmentName, setDepartmentName] = useState<string>(location.state?.departmentName);
   const { departmentId } = useParams<{ departmentId: string }>();
@@ -18,6 +19,7 @@ const DepartmentPage: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
+    // get departmentName
     if (departmentName === undefined) {
       if (localStorage.getItem('departments') !== null) {
         setDepartmentName(
@@ -33,11 +35,17 @@ const DepartmentPage: React.FC = () => {
           );
         })
       }
-      getEventWithFilter('', departmentId, '').then((res) => {
-        console.log(res);
-        setEvents(res);
-      });
     }
+
+    // get events
+    const currentDate = new Date();
+    const date = new Date(currentDate.getTime() - maxWeeks * 7 * 24 * 60 * 60 * 1000);
+    const time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    getEventWithFilter('', departmentId, time).then((res) => {
+      setEvents(res);
+    });
+
+    // get isSubscribe
     if (localStorage.getItem('subscribeDepartments') !== null) {
       if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
         .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
@@ -121,13 +129,8 @@ const DepartmentPage: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div className='eventContainer'>
-          <IonList>
-            {events.map((item, index) => (
-              <IonItem key={item.id}>
-                <EventCard event={item}></EventCard>
-              </IonItem>
-            ))}
-          </IonList>
+          <EventCardList events={events} lines='none'></EventCardList>
+          {events.length === 0 ? <></> : <div style={{ textAlign: "center", margin: "15px" }}><IonNote>没有更多的活动了</IonNote></div>}
         </div>
       </IonContent>
     </IonPage>

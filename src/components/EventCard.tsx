@@ -101,7 +101,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 				</IonCardTitle>
 				<IonCardSubtitle>
 					<div className='oneLineTextOverflow'>
-						<IonIcon icon={peopleOutline}></IonIcon> {(event.departments !== undefined && event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : ""}
+						<IonIcon icon={peopleOutline}></IonIcon> {(event.departments !== undefined && event.departments !== null) ? event.departments.map((department) => department.departmentName).join(' ') : " "}
 					</div>
 				</IonCardSubtitle>
 			</IonCardHeader>

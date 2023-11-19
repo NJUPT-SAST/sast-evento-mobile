@@ -36,11 +36,15 @@
       .departments {
         display: flex;
         flex-direction: row;
-        font-weight: bold;
+        font-weight: 700;
+      }
+      ion-icon {
+        color: #99a2aa;
       }
     }
 
     .categoryWarpper {
+      color: #99a2aa;
       display: flex;
       flex-direction: row;
       align-items: center;
