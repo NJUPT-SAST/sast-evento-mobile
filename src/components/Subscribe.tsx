@@ -1,35 +1,25 @@
-import { IonCard, IonItem, IonLabel } from "@ionic/react";
+import { IonCard, IonItem, IonLabel, IonList, IonListHeader } from "@ionic/react";
 import SubscribeDepartments from "./SubscribeDepartments"
 import "./Subcribe.scss"
 import SubscribedEvents from "./SubscribedEvents";
 const subcribePage = () => {
   return (
     <div className="subscribePageWarpper">
+      <div style={{ height: "5px" }}></div>
       <div className="mySubscribeDepartmentsWarpper">
-        <IonCard>
-          <IonItem lines="full">
-            <div className="mySubscribeDepartmentsTitleWarpper">
-              我订阅的部门
-            </div>
-          </IonItem>
-          <IonItem>
+        <IonList>
+          <IonListHeader>
+            我订阅的部门
+          </IonListHeader>
+          <IonCard>
             <div id="mySubscribeDepartmentsContentWarpper" className="mySubscribeDepartmentsContentWarpper">
               <SubscribeDepartments></SubscribeDepartments>
             </div>
-          </IonItem>
-        </IonCard>
+          </IonCard>
+        </IonList>
       </div>
-      <div className="mySubscribeEventsWarpper">
-        <IonCard>
-          <IonItem lines="full">
-            <div className="mySubscribeEventsTitleWarpper">
-              我订阅的活动
-            </div>
-          </IonItem>
-          <div className="mySubscribeEventsContentWarpper">
-            <SubscribedEvents></SubscribedEvents>
-          </div>
-        </IonCard>
+      <div className="mySubscribeEventsContentWarpper">
+        <SubscribedEvents></SubscribedEvents>
       </div>
     </div>
   )

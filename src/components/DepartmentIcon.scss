@@ -1,4 +1,10 @@
-.departmentIcon {
+.departmentIconsWarpper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  .departmentIcon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,3 +15,4 @@
     font-size: 35px;
     font-weight: 700;
   }
+}

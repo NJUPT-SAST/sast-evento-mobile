@@ -111,13 +111,7 @@ const AllEvent: React.FC = () => {
 
   return (
     <div>
-      <IonItem lines="full">
-        <IonLabel className='eventsTitleWarpper'>
-          <IonIcon icon={archiveOutline}></IonIcon>
-          所有活动
-        </IonLabel>
-      </IonItem>
-      <EventCardList events={events} lines="none"></EventCardList>
+      <EventCardList eventsTitle="所有活动" events={events} lines="none"></EventCardList>
       {fakeInfiniteScroll()}
     </div>
   )

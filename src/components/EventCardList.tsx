@@ -1,14 +1,15 @@
-import { IonCard, IonItem, IonList, IonNote } from "@ionic/react";
+import { IonCard, IonItem, IonLabel, IonList, IonListHeader, IonNote } from "@ionic/react";
 import { Event } from "../context";
 import EventCard from "./EventCard";
 
 interface Props {
   events: Event[] | null;
+  eventsTitle?: string | undefined;
   lines?: "full" | "inset" | "none";
   isShadow?: true | false | undefined;
 }
 
-const EventCardList = ({ events, lines, isShadow }: Props) => {
+const EventCardList = ({ events, eventsTitle, lines, isShadow }: Props) => {
   if (events == null) {
     return (
       <IonList class='eventContainer'>
@@ -32,10 +33,11 @@ const EventCardList = ({ events, lines, isShadow }: Props) => {
   return (
     <>
       <IonList class='eventContainer'>
+        <IonListHeader>
+          <IonLabel>{eventsTitle !== undefined ? eventsTitle : ""}</IonLabel>
+        </IonListHeader>
         {events.map((item, index) => (
-          <IonItem key={item.id} lines={lines}>
-            <EventCard event={item} isShadow={isShadow}></EventCard>
-          </IonItem>
+          <EventCard key={index} event={item} isShadow={isShadow}></EventCard>
         ))}
       </IonList>
     </>
