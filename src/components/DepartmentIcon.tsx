@@ -29,7 +29,7 @@ const DepartmentIcon = ({ department }: any) => {
   }
 
   return (
-    <div className='departmentsWarpper' onClick={() => handleDepartmentClick(department.id)}>
+    <div className='departmentIconsWarpper' onClick={() => handleDepartmentClick(department.id)}>
       <div className='departmentIcon' style={{ backgroundColor: getRandomColor(department.departmentName) }}>{department.departmentName[0]}</div>
       <IonLabel>{department.departmentName}</IonLabel>
     </div>

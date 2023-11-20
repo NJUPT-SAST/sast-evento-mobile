@@ -26,13 +26,7 @@ const ConductingEvents: React.FC = () => {
 
   return (
     <div className="conductingEvents">
-      <IonItem lines="full">
-        <IonLabel className='eventsTitleWarpper'>
-          <IonIcon icon={paperPlaneOutline}></IonIcon>
-          进行中的活动
-        </IonLabel>
-      </IonItem>
-      <EventCardList events={conductingEvent} lines="none"></EventCardList>
+      <EventCardList eventsTitle="进行中的活动" events={conductingEvent} lines="none"></EventCardList>
     </div>
   );
 };

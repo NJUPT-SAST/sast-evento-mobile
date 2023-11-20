@@ -16,7 +16,7 @@ const SubscribedEvents = () => {
   }, [])
   return (
     <div className="subscribedEventsWarpper">
-      <EventCardList events={subcribeEvents} lines="full" isShadow={true}></EventCardList>
+      <EventCardList eventsTitle="我订阅的活动" events={subcribeEvents} lines="none" isShadow={false}></EventCardList>
     </div>
   )
 }

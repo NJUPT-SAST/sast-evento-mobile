@@ -4,16 +4,13 @@
     flex-direction: column;
     width: 100vw;
     max-width: 500px;
-    ion-card {
-      margin-bottom: 0;
-    }
     .mySubscribeDepartmentsTitleWarpper {
       margin: 0;
     }
 
     .mySubscribeDepartmentsContentWarpper {
       overflow-x: auto;
-      margin: 15px 0 15px 0;
+      margin: 15px 0;
     }
   }
   .mySubscribeEventsWarpper {
