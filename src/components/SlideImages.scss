@@ -1,9 +1,8 @@
 .slideWarpper {
   margin-top: 15px;
-  margin-bottom: 20px;
-  width: 85vw;
-  max-width: 500px;
-  border-radius: 1rem;
+  width: calc(100vw - 20px);
+  max-width: 480px;
+  border-radius: 4px;
   height: 160px;
   overflow: hidden;
   position: relative;

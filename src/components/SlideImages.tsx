@@ -10,12 +10,18 @@ import 'swiper/scss/autoplay';
 import "./SlideImages.scss";
 
 const SlideImages: React.FC = () => {
-  const [slideImages, setSlideImages] = useState<Array<any>>([{"id": "1", "url": "https://aliyun.sastimg.mxte.cc/images/2023/07/02/Frame-1438eeca56671d68ff.png", "title": "123"}]);
+  const [slideImages, setSlideImages] = useState<Array<any>>([]);
   useEffect(() => {
     getHomeSlideList().then((res) => {
       setSlideImages(res.slides.slice(0, 2));
     });
   }, []);
+
+  const toLink = (url:string) => {
+    if (url.includes("https://")) {
+      window.open(url, "_blank");
+    }
+  }
 
   return (
     <div className="slideWarpper">
@@ -31,7 +37,7 @@ const SlideImages: React.FC = () => {
       >
         {slideImages.map((item, index) => (
           <SwiperSlide key={item.id}>
-            <IonImg src={item.url} alt={item.title} className="slideImage"></IonImg>
+            <IonImg src={item.url} alt={item.title} className="slideImage" onClick={() => toLink(item.link)}></IonImg>
           </SwiperSlide>
         ))}
       </Swiper>
