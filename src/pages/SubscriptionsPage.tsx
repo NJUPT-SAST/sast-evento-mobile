@@ -32,7 +32,7 @@ const SubscriptionsPage: React.FC = () => {
   }
 
   const onEnd = () => {
-    if (Math.abs(contentMove) > 250) {
+    if (Math.abs(contentMove) > 150) {
       if (contentMove < 0) {
         setSelectedSegment('participate');
       } else {

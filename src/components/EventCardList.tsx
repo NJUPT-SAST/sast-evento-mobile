@@ -10,19 +10,19 @@ interface Props {
 }
 
 const EventCardList = ({ events, eventsTitle, lines, isShadow }: Props) => {
-  if (events == null) {
-    return (
-      <IonList class='eventContainer'>
-        {Array(3).fill({ id: null }).map((item, index) => (
-          <IonItem key={index} lines={lines}>
-            <EventCard event={item} isShadow={isShadow}></EventCard>
-          </IonItem>
-        ))}
-      </IonList>
-    )
-  }
+  // if (events == null) {
+  //   return (
+  //     <IonList class='eventContainer'>
+  //       {Array(3).fill({ id: null }).map((item, index) => (
+  //         <IonItem key={index} lines={lines}>
+  //           <EventCard event={item} isShadow={isShadow}></EventCard>
+  //         </IonItem>
+  //       ))}
+  //     </IonList>
+  //   )
+  // }
 
-  if (events.length === 0) {
+  if (events == null || events.length === 0) {
     return (
       <div style={{ textAlign: "center", margin: "15px" }}>
         <IonNote>没有更多的活动了</IonNote>
