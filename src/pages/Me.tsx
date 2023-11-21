@@ -40,10 +40,6 @@ const Me: React.FC = () => {
     window.location.reload();
   }
 
-	if (userInfo === null) {
-		return (<></>)
-	}
-
 	return (
 		<IonPage>
 			<IonHeader translucent={false}>
@@ -68,7 +64,7 @@ const Me: React.FC = () => {
 								<IonThumbnail slot="start">
 									<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" />
 								</IonThumbnail>
-								<h2 slot="start" className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
+								<h2 slot="start" className='userProfile__name'>{String(userInfo?.studentId).toUpperCase()}</h2>
 							</IonItem>
 						) : (
 							<IonItem onClick={() => {router.push("/login", "forward")}} lines="none">
