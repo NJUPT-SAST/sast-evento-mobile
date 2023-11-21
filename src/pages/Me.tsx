@@ -1,21 +1,31 @@
 import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonRefresher, IonRefresherContent, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, useIonRouter } from '@ionic/react';
 import { albumsOutline, logOutOutline, moon, pencilOutline, scanOutline, settingsOutline, sunnyOutline } from 'ionicons/icons';
 import { ThemeContext } from '../components/ThemeChange';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './Me.scss';
 import OnDevAlert from '../components/OnDevAlert';
+import { getUserInfo } from '../apis/user';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
 	const [userInfo, setUserInfo] = useState<any | null>(JSON.parse(String(localStorage.getItem('userInfo'))));
 	const router = useIonRouter();
-	const isLoggedIn = (() => {
-		const token = localStorage.getItem('token');
-		return token !== null;
-	});
+	const isLoggedIn = localStorage.getItem('token') !== null;;
 
 	const themeIcon = themeToggle ? moon : sunnyOutline;
+
+	useEffect(() => {
+		console.log(isLoggedIn);
+		console.log(userInfo);
+		
+		
+		if (isLoggedIn && userInfo === null) {
+			getUserInfo().then((res) => {
+				setUserInfo(res);
+			});
+		}
+	}, [])
 
 	const logOut = () => {
 		localStorage.clear();
@@ -29,6 +39,10 @@ const Me: React.FC = () => {
 	const handleRefresh = () => {
     window.location.reload();
   }
+
+	if (userInfo === null) {
+		return (<></>)
+	}
 
 	return (
 		<IonPage>
@@ -49,10 +63,10 @@ const Me: React.FC = () => {
 				</IonRefresher>
 				<div className='meWarpper'>
 					<IonCard className='userProfileWarpper'>
-						{isLoggedIn() ? (
+						{isLoggedIn ? (
 							<IonItem lines="none">
 								<IonThumbnail slot="start">
-									<IonImg src={userInfo.avatar !== null ? userInfo.avatar : "/link.ico"} alt="avatar" />
+									<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" />
 								</IonThumbnail>
 								<h2 slot="start" className='userProfile__name'>{String(userInfo.studentId).toUpperCase()}</h2>
 							</IonItem>
