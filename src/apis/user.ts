@@ -70,7 +70,12 @@ export const getRegisteredEvents = async () => {
   return response.data;
 }
 
-export const getHistoryEvents =async () => {
+export const getHistoryEvents = async () => {
   const response = await request.get<Event[]>('/event/history');
+  return response.data;
+}
+
+export const getUserInfo =async () => {
+  const response = await request.get<any>('/user/info');
   return response.data;
 }

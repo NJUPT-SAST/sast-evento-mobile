@@ -8,10 +8,10 @@ const subcribePage = () => {
       <div style={{ height: "5px" }}></div>
       <div className="mySubscribeDepartmentsWarpper">
         <IonList>
-          <IonListHeader>
+          <IonListHeader mode="ios" style={{"--color": "none"}}>
             我订阅的部门
           </IonListHeader>
-          <IonCard>
+          <IonCard style={{"--color": "none", "padding": "0 5px"}}>
             <div id="mySubscribeDepartmentsContentWarpper" className="mySubscribeDepartmentsContentWarpper">
               <SubscribeDepartments></SubscribeDepartments>
             </div>

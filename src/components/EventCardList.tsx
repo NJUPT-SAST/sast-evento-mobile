@@ -33,7 +33,7 @@ const EventCardList = ({ events, eventsTitle, lines, isShadow }: Props) => {
   return (
     <>
       <IonList class='eventContainer'>
-        <IonListHeader>
+        <IonListHeader mode="ios" style={{"--color": "none"}}>
           <IonLabel>{eventsTitle !== undefined ? eventsTitle : ""}</IonLabel>
         </IonListHeader>
         {events.map((item, index) => (
