@@ -6,6 +6,7 @@ import { getEventInfo, getUserParticipant, registerEvent, subcribeEvent } from '
 import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline, alarmOutline, alarmSharp, timeOutline, businessOutline, documentOutline, statsChartOutline, statsChartSharp } from 'ionicons/icons';
 import './Event.scss';
 import { Share } from '@capacitor/share';
+import { LocalNotificationSchema, LocalNotifications, ScheduleOptions, Schedule, LocalNotificationDescriptor, CancelOptions } from '@capacitor/local-notifications';
 
 
 const EventPage: React.FC = () => {
@@ -61,6 +62,28 @@ const EventPage: React.FC = () => {
   const subscribe = () => {
     subcribeEvent(Number(eventId), true).then(() => {
       setIsSubscribe(true);
+      const scheduleDate = new Date();
+      scheduleDate.setFullYear(Number(event.gmtEventStart.slice(0, 4)));
+      scheduleDate.setMonth(Number(event.gmtEventStart.slice(5, 7)) - 1);
+      scheduleDate.setDate(Number(event.gmtEventStart.slice(8, 10)));
+      scheduleDate.setHours(Number(event.gmtEventStart.slice(11, 13)));
+      scheduleDate.setMinutes(Number(event.gmtEventStart.slice(14, 16)));
+      scheduleDate.setSeconds(0);
+      const schedule: Schedule = {
+        at: scheduleDate
+      }
+      const localNotificationSchema: LocalNotificationSchema = {
+        title: "即将开始：" + event.title,
+        body: event.description,
+        schedule: schedule,
+        id: Number(eventId)
+      };
+      const scheduleOptions: ScheduleOptions = {
+        notifications: [localNotificationSchema]
+      }
+      LocalNotifications.schedule(scheduleOptions);
+      console.log(scheduleOptions);
+      console.log(localNotificationSchema);
     }, (error) => {
       console.log(error);
       setIsSubscribe(false);
@@ -70,6 +93,14 @@ const EventPage: React.FC = () => {
   const unsubscribe = () => {
     subcribeEvent(Number(eventId), false).then(() => {
       setIsSubscribe(false);
+      const localNotificationDescriptor: LocalNotificationDescriptor = {
+        id: Number(eventId)
+      }
+      const cancelOptions: CancelOptions = {
+        notifications: [localNotificationDescriptor]
+      }
+      LocalNotifications.cancel(cancelOptions);
+      console.log(cancelOptions);
     }, (error) => {
       console.log(error);
       setIsSubscribe(true);
