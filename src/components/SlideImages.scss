@@ -1,21 +1,24 @@
-.slideWarpper {
-  margin-top: 15px;
-  width: calc(100vw - 20px);
-  max-width: 480px;
-  border-radius: 4px;
-  height: 160px;
-  overflow: hidden;
-  position: relative;
-  .slideImage {
-    object-fit: cover;
-    margin: 0 auto;
+  .slideWarpper {
+    margin-top: 15px;
+    width: 95vw;
+    border-radius: 4px;
+    height: 30vw;
+    max-height: 380px;
+    overflow: hidden;
+    position: relative;
+
+    .slideImage {
+      object-fit: cover;
+      margin: 0 auto;
+    }
+
+    .swiper-slide {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 30vw;
+      max-height: 380px;
+    }
   }
-  .swiper-slide {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 160px;
-  }
-}

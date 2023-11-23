@@ -1,6 +1,6 @@
 .eventCard {
   max-width: 500px;
-  height: 148px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -41,12 +41,12 @@
   ion-card-content {
     padding-bottom: 5px;
     p {
-      height: 40px;
+      height: 100%;
       margin-bottom: 13px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-Box-orient: vertical;
     }
 

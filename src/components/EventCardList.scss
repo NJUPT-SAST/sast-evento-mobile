@@ -1,5 +1,28 @@
-.eventContainer {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.eventCardListContainer {
+  width: 100vw;
+  padding: 0 min(1vw, 20px);
+
+  .eventsContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 0px;
+    @media screen and (min-width: 1601px) {
+      column-width: 25%;
+      column-count: 4;
+    }
+    @media screen and (min-width: 1051px) and (max-width: 1600px) {
+      column-width: 33%;
+      column-count: 3;
+    }
+    @media screen and (min-width: 500px) and (max-width: 1050px) {
+      column-width: 50%;
+      column-count: 2;
+    }
+
+    @media screen and (min-width: 300px) and (max-width: 499px) {
+      column-width: 100%;
+      column-count: 1;
+    }
+  }
 }
