@@ -15,45 +15,45 @@ const SubscriptionsPage: React.FC = () => {
     setSelectedSegment(e.detail.value);
   }
 
-  const onStart = () => {
-    console.log('onStart');
-  }
+  // const onStart = () => {
+  //   console.log('onStart');
+  // }
 
-  const onMove = (detail: GestureDetail) => {
-    console.log('onMove');
-    const { type, currentX, deltaX, velocityX } = detail;
-    // move ion-content
-    if (selectedSegment === 'subscriptions' && deltaX < 0) {
-      content.style.transform = `translateX(${deltaX}px)`;
-    } else if (selectedSegment === 'participate' && deltaX > 0) {
-      content.style.transform = `translateX(${deltaX}px)`;
-    }
-    contentMove = deltaX;
-  }
+  // const onMove = (detail: GestureDetail) => {
+  //   console.log('onMove');
+  //   const { type, currentX, deltaX, velocityX } = detail;
+  //   // move ion-content
+  //   if (selectedSegment === 'subscriptions' && deltaX < 0) {
+  //     content.style.transform = `translateX(${deltaX}px)`;
+  //   } else if (selectedSegment === 'participate' && deltaX > 0) {
+  //     content.style.transform = `translateX(${deltaX}px)`;
+  //   }
+  //   contentMove = deltaX;
+  // }
 
-  const onEnd = () => {
-    if (Math.abs(contentMove) > 150) {
-      if (contentMove < 0) {
-        setSelectedSegment('participate');
-      } else {
-        setSelectedSegment('subscriptions');
-      }
-    }
-    content.style.transform = 'translateX(0px)';
-  }
+  // const onEnd = () => {
+  //   if (Math.abs(contentMove) > 150) {
+  //     if (contentMove < 0) {
+  //       setSelectedSegment('participate');
+  //     } else {
+  //       setSelectedSegment('subscriptions');
+  //     }
+  //   }
+  //   content.style.transform = 'translateX(0px)';
+  // }
 
-  useEffect(() => {
-    // use createGesture to achive left and right swipe
-    const gesture = createGesture({
-      el: document.querySelector('ion-content')!,
-      gestureName: 'swipe',
-      onStart: () => onStart(),
-      onMove: (detail) => onMove(detail),
-      onEnd: () => onEnd(),
-      passive: false,
-    });
-    gesture.enable();
-  })
+  // useEffect(() => {
+  //   // use createGesture to achive left and right swipe
+  //   const gesture = createGesture({
+  //     el: document.querySelector('ion-content')!,
+  //     gestureName: 'swipe',
+  //     onStart: () => onStart(),
+  //     onMove: (detail) => onMove(detail),
+  //     onEnd: () => onEnd(),
+  //     passive: false,
+  //   });
+  //   gesture.enable();
+  // })
   return (
     <IonPage>
       <IonHeader translucent={false}>
