@@ -62,14 +62,14 @@ const Me: React.FC = () => {
 						{isLoggedIn ? (
 							<IonItem lines="none">
 								<IonThumbnail slot="start">
-									<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" />
+									<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" className='userProfileAvatar' />
 								</IonThumbnail>
 								<h2 slot="start" className='userProfile__name'>{String(userInfo?.studentId).toUpperCase()}</h2>
 							</IonItem>
 						) : (
 							<IonItem onClick={() => {router.push("/login", "forward")}} lines="none">
 								<IonThumbnail slot="start">
-									<IonImg src="/link.ico" alt="avatar" />
+									<IonImg src="/link.ico" alt="avatar" className='userProfileAvatar' />
 								</IonThumbnail>
 								<h2 slot="start" className='userProfile__name'>请登录/注册</h2>
 							</IonItem>

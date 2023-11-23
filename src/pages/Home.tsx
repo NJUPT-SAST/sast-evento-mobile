@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonPage, IonSegment, IonSegmentButton, IonTitle, IonToast, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonPage, IonRefresher, IonRefresherContent, IonSegment, IonSegmentButton, IonTitle, IonToast, IonToolbar } from '@ionic/react';
 import ConductingEvents from '../components/ConductingEvents';
 import AllEvent from '../components/AllEvents';
 import { useHistory } from 'react-router';
@@ -14,6 +14,10 @@ const Home: React.FC = () => {
     history.push('/departments', { direction: 'forward' });
   }
 
+  const handleRefresh = () => {
+    window.location.reload();
+  }
+
   // TODO: change layout styles to falls
   return (
     <IonPage>
@@ -26,6 +30,9 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <div className='homeComponentsWarpper'>
           <SlideImages></SlideImages>
           <ConductingEvents></ConductingEvents>
