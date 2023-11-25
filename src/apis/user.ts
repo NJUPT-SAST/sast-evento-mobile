@@ -1,5 +1,5 @@
 import request from '.';
-import { Department, Event } from '../context';
+import { Department, Event, UserInfo } from '../context';
 
 export const getAllConductingEvent = async () => {
   const response = await request.get<Event[]>('/event/conducting');
@@ -75,7 +75,12 @@ export const getHistoryEvents = async () => {
   return response.data;
 }
 
-export const getUserInfo =async () => {
-  const response = await request.get<any>('/user/info');
+export const getUserInfo = async () => {
+  const response = await request.get<UserInfo>('/user/info');
+  return response.data;
+}
+
+export const updateUserInfo = async (userInfo: UserInfo) => {
+  const response = await request.put<any>('/user/info', userInfo);
   return response.data;
 }
