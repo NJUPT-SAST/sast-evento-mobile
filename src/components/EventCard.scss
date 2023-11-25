@@ -6,10 +6,10 @@
   justify-content: flex-end;
   margin-top: 5px;
   padding-bottom: 3px;
+  animation: zoomFade 0.7s ease-in-out forwards;
 
   ion-card-header {
-    padding-bottom: 10px;
-
+    padding: 12px 20px 15px 20px;
     .oneLineTextOverflow {
       white-space: nowrap;
       overflow: hidden;
@@ -101,5 +101,19 @@
     background-color: var(--circle-color, #3498db);
     margin-left: 5px;
     margin-bottom: 2px;
+  }
+}
+
+@keyframes zoomFade {
+  0% {
+    transform: scale(0.7) translateY(50%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.37;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
   }
 }

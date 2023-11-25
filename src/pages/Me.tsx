@@ -6,30 +6,33 @@ import React, { useEffect, useState } from 'react';
 import './Me.scss';
 import OnDevAlert from '../components/OnDevAlert';
 import { getUserInfo } from '../apis/user';
+import Profile from '../components/Profile';
+import { useUserInfoStore } from '../util/store';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
-	const [userInfo, setUserInfo] = useState<any | null>(JSON.parse(String(localStorage.getItem('userInfo'))));
+	const userInfoStore = useUserInfoStore((state) => state);
+	const userInfo = userInfoStore.userInfo;
 	const router = useIonRouter();
-	const isLoggedIn = localStorage.getItem('token') !== null;;
+	const isLoggedIn = localStorage.getItem('token') !== null;
 
 	const themeIcon = themeToggle ? moon : sunnyOutline;
 
 	useEffect(() => {
 		console.log(isLoggedIn);
 		console.log(userInfo);
-		
-		
-		if (isLoggedIn && userInfo === null) {
+
+
+		if (isLoggedIn && userInfo === undefined) {
 			getUserInfo().then((res) => {
-				setUserInfo(res);
+				userInfoStore.updateUserInfo(res);
 			});
 		}
-	}, [])
+	}, [userInfo])
 
 	const logOut = () => {
 		localStorage.clear();
-		setUserInfo(null);
+		userInfoStore.rmUserInfo();
 	}
 
 	const toHistoryEvents = () => {
@@ -37,8 +40,8 @@ const Me: React.FC = () => {
 	}
 
 	const handleRefresh = () => {
-    window.location.reload();
-  }
+		window.location.reload();
+	}
 
 	return (
 		<IonPage>
@@ -60,14 +63,17 @@ const Me: React.FC = () => {
 				<div className='meWarpper'>
 					<IonCard className='userProfileWarpper'>
 						{isLoggedIn ? (
-							<IonItem lines="none">
-								<IonThumbnail slot="start">
-									<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" className='userProfileAvatar' />
-								</IonThumbnail>
-								<h2 slot="start" className='userProfile__name'>{String(userInfo?.studentId).toUpperCase()}</h2>
-							</IonItem>
+							<>
+								<IonItem lines="none" id='userBasicInfo'>
+									<IonThumbnail slot="start">
+										<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" className='userProfileAvatar' />
+									</IonThumbnail>
+									<h2 slot="start" className='userProfile__name'>{String(userInfo?.nickname)}</h2>
+								</IonItem>
+								<Profile trigger='userBasicInfo' ></Profile>
+							</>
 						) : (
-							<IonItem onClick={() => {router.push("/login", "forward")}} lines="none">
+							<IonItem onClick={() => { router.push("/login", "forward") }} lines="none">
 								<IonThumbnail slot="start">
 									<IonImg src="/link.ico" alt="avatar" className='userProfileAvatar' />
 								</IonThumbnail>

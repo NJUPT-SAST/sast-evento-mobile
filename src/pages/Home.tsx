@@ -18,7 +18,6 @@ const Home: React.FC = () => {
     window.location.reload();
   }
 
-  // TODO: change layout styles to falls
   return (
     <IonPage>
       <IonHeader translucent={false}>
