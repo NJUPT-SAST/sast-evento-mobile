@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonCard, IonContent, IonHeader, IonInput, IonItem, IonList, IonModal, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonList, IonModal, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import './Profile.scss'
 import { useRef } from 'react';
 import { useUserInfoStore } from '../util/store';
@@ -12,7 +12,7 @@ interface Props {
 const Profile: React.FC<Props> = ({ trigger }) => {
   const modal = useRef<HTMLIonModalElement>(null);
   const userInfoStore = useUserInfoStore((state) => state);
-  const userInfo = userInfoStore.userInfo;
+  const userInfo = userInfoStore.userInfo as UserInfo;
   const saveChanges = () => {
     updateUserInfo(userInfo as UserInfo).then((res) => {
       userInfoStore.updateUserInfo(userInfo);
