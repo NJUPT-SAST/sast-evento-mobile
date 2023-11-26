@@ -107,3 +107,8 @@
 ion-item {
   --transition: none;
 }
+
+body.scanner-active {
+  --background: transparent;
+  --ion-background-color: transparent;
+}
