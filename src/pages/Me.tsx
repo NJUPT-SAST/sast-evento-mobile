@@ -1,13 +1,16 @@
-import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonRefresher, IonRefresherContent, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, useIonRouter } from '@ionic/react';
+import { IonButton, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonPage, IonRefresher, IonRefresherContent, IonThumbnail, IonToggle, IonToolbar, ToggleCustomEvent, getPlatforms, isPlatform, useIonRouter } from '@ionic/react';
 import { albumsOutline, logOutOutline, moon, pencilOutline, scanOutline, settingsOutline, sunnyOutline } from 'ionicons/icons';
 import { ThemeContext } from '../components/ThemeChange';
 import React, { useEffect, useState } from 'react';
 
 import './Me.scss';
 import OnDevAlert from '../components/OnDevAlert';
-import { getUserInfo } from '../apis/user';
+import { eventCheckIn, getUserInfo } from '../apis/user';
 import Profile from '../components/Profile';
 import { useUserInfoStore } from '../util/store';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { Toast } from '@capacitor/toast';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
@@ -30,6 +33,55 @@ const Me: React.FC = () => {
 		}
 	}, [userInfo])
 
+	const takePicture = async () => {
+		const image = await Camera.getPhoto({
+			quality: 90,
+			allowEditing: true,
+			resultType: CameraResultType.Uri
+		});
+	
+		// image.webPath will contain a path that can be set as an image src.
+		// You can access the original file using image.path, which can be
+		// passed to the Filesystem API to read the raw data of the image,
+		// if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+		var imageUrl = image.webPath;
+		console.log(imageUrl);
+		
+		// Can be set to the src of an image now
+		// imageElement.src = imageUrl;
+	};
+
+	const stopScan = () => {
+		BarcodeScanner.showBackground();
+		BarcodeScanner.stopScan();
+	};
+
+	const startScan = async () => {
+		if (isPlatform("ios")) {
+			Toast.show({
+				text: "iOS暂不支持扫码功能",
+				duration: "short"
+			})
+			return;
+		}
+
+		await BarcodeScanner.checkPermission({ force: true });
+	
+		BarcodeScanner.hideBackground();
+		document.querySelector('body')?.classList.add('scanner-active');
+		const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
+	
+		// if the result has content
+		if (result.hasContent) {
+			console.log(result.content); // log the raw scanned content
+			if (result.content.length < 10) {
+				eventCheckIn(result.content);
+			}
+			document.querySelector('body')?.classList.remove('scanner-active');
+			stopScan();
+		}
+	};
+	
 	const logOut = () => {
 		localStorage.clear();
 		userInfoStore.rmUserInfo();
@@ -37,6 +89,15 @@ const Me: React.FC = () => {
 
 	const toHistoryEvents = () => {
 		router.push("/history", 'forward');
+	}
+
+	const toGitHub = () => {
+		const url = "https://github.com/NJUPT-SAST/sast-evento-mobile/issues";
+		window.open(url, '_blank')?.focus();
+	}
+
+	const toScanner = () => {
+		router.push("/scanner", 'forward');
 	}
 
 	const handleRefresh = () => {
@@ -87,11 +148,10 @@ const Me: React.FC = () => {
 								<IonIcon icon={albumsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>历史活动</IonLabel>
 							</IonItem>
-							<IonItem id='suggestion' button={true} lines='full'>
+							<IonItem id='suggestion' onClick={toGitHub} button={true} lines='full'>
 								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
 								<IonLabel>意见反馈</IonLabel>
 							</IonItem>
-							<OnDevAlert trigger='suggestion'></OnDevAlert>
 							<IonItem id='setting' button={true} lines='none'>
 								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>设置</IonLabel>

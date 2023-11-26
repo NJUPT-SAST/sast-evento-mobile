@@ -84,3 +84,8 @@ export const updateUserInfo = async (userInfo: UserInfo) => {
   const response = await request.put<any>('/user/info', userInfo);
   return response.data;
 }
+
+export const eventCheckIn = async (code: string) => {
+  const response = await request.get<string>('/event/checkIn', { params: { code } });
+  return response.data;
+}
