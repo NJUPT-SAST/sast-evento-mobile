@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { devtools, persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware'
 import { UserInfo } from "../context"
 
 interface UserInfoStore {
@@ -9,15 +9,14 @@ interface UserInfoStore {
 }
 
 export const useUserInfoStore = create<UserInfoStore>()(
-  devtools(
-    persist(
-      (set) => ({
-        userInfo: undefined,
-        rmUserInfo: () => set({ userInfo: undefined }),
-        updateUserInfo: (userInfo) => set({ userInfo }),
-      }),
-      {
-        name: 'userInfo-store'
-      })
-  ),
+  persist(
+    (set) => ({
+      userInfo: undefined,
+      rmUserInfo: () => set({ userInfo: undefined }),
+      updateUserInfo: (userInfo) => set({ userInfo }),
+    }),
+    {
+      name: 'userInfo-store'
+    }
+  )
 )

@@ -100,6 +100,10 @@ const Me: React.FC = () => {
 		router.push("/scanner", 'forward');
 	}
 
+	const toSetting = () => {
+		router.push("/setting", 'forward');
+	}
+
 	const handleRefresh = () => {
 		window.location.reload();
 	}
@@ -152,11 +156,11 @@ const Me: React.FC = () => {
 								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
 								<IonLabel>意见反馈</IonLabel>
 							</IonItem>
-							<IonItem id='setting' button={true} lines='none'>
+							<IonItem id='setting' button={true} lines='none' onClick={toSetting}>
 								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
 								<IonLabel>设置</IonLabel>
 							</IonItem>
-							<OnDevAlert trigger='setting'></OnDevAlert>
+							{/* <OnDevAlert trigger='setting'></OnDevAlert> */}
 						</IonList>
 					</IonCard>
 					<IonCard className='logoutWarpper'>
