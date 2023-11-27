@@ -51,8 +51,8 @@ const App: React.FC = () => (
               <Route path="/departments" component={DepartmentsPage} exact />
               <Route path="/event/:eventId" component={EventPage} exact />
               <Route path="/department/:departmentId" component={DepartmentPage} exact />
-              <Route path="/oauth" component={OAuth} exact ></Route>
-              <Route path="/login" component={Login} exact ></Route>
+              <Route path="/oauth" component={OAuth} exact />
+              <Route path="/login" component={Login} exact />
               <Route path="/home" component={Home} exact />
               <Route path="/me" component={Me} exact />
               <Route path="/history" component={HistoryEvents} exact />

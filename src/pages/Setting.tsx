@@ -11,7 +11,7 @@ const Setting = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Setting</IonTitle>
-          <IonButtons>
+          <IonButtons slot="start">
             <IonBackButton></IonBackButton>
           </IonButtons>
         </IonToolbar>

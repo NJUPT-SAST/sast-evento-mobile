@@ -129,18 +129,18 @@ const Me: React.FC = () => {
 					<IonCard className='userProfileWarpper'>
 						{isLoggedIn ? (
 							<>
-								<IonItem lines="none" id='userBasicInfo'>
+								<IonItem lines="none" id='userBasicInfo' detail={true}>
 									<IonThumbnail slot="start">
-										<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/link.ico"} alt="avatar" className='userProfileAvatar' />
+										<IonImg src={userInfo?.avatar !== null ? userInfo?.avatar : "/app.ico"} alt="avatar" className='userProfileAvatar' />
 									</IonThumbnail>
 									<h2 slot="start" className='userProfile__name'>{String(userInfo?.nickname)}</h2>
 								</IonItem>
 								<Profile trigger='userBasicInfo' ></Profile>
 							</>
 						) : (
-							<IonItem onClick={() => { router.push("/login", "forward") }} lines="none">
+							<IonItem onClick={() => { router.push("/login", "forward") }} lines="none" detail={true}>
 								<IonThumbnail slot="start">
-									<IonImg src="/link.ico" alt="avatar" className='userProfileAvatar' />
+									<IonImg src="/app.ico" alt="avatar" className='userProfileAvatar' />
 								</IonThumbnail>
 								<h2 slot="start" className='userProfile__name'>请登录/注册</h2>
 							</IonItem>
@@ -148,16 +148,16 @@ const Me: React.FC = () => {
 					</IonCard>
 					<IonCard className='functionsWarpper'>
 						<IonList>
-							<IonItem button={true} onClick={toHistoryEvents} lines='full'>
-								<IonIcon icon={albumsOutline} className='functionIcon'></IonIcon>
+							<IonItem button={true} onClick={toHistoryEvents}>
+								<IonIcon aria-hidden="true" icon={albumsOutline} slot='start'></IonIcon>
 								<IonLabel>历史活动</IonLabel>
 							</IonItem>
-							<IonItem id='suggestion' onClick={toGitHub} button={true} lines='full'>
-								<IonIcon icon={pencilOutline} className='functionIcon'></IonIcon>
+							<IonItem button={true} id='suggestion' onClick={toGitHub}>
+								<IonIcon aria-hidden="true" icon={pencilOutline} slot='start'></IonIcon>
 								<IonLabel>意见反馈</IonLabel>
 							</IonItem>
-							<IonItem id='setting' button={true} lines='none' onClick={toSetting}>
-								<IonIcon icon={settingsOutline} className='functionIcon'></IonIcon>
+							<IonItem button={true} id='setting' onClick={toSetting}>
+								<IonIcon aria-hidden="true" icon={settingsOutline} slot='start'></IonIcon>
 								<IonLabel>设置</IonLabel>
 							</IonItem>
 							{/* <OnDevAlert trigger='setting'></OnDevAlert> */}
@@ -166,7 +166,7 @@ const Me: React.FC = () => {
 					<IonCard className='logoutWarpper'>
 						<IonList>
 							<IonItem button={true} onClick={logOut} lines='none'>
-								<IonIcon icon={logOutOutline} color='danger' className='functionIcon'></IonIcon>
+								<IonIcon icon={logOutOutline} color='danger' className='functionIcon' slot='start'></IonIcon>
 								<IonLabel color="danger">退出登录</IonLabel>
 							</IonItem>
 						</IonList>

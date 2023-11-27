@@ -26,11 +26,10 @@ const Profile: React.FC<Props> = ({ trigger }) => {
       <IonModal trigger={trigger} ref={modal}>
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Modal</IonTitle>
+            <IonTitle>简介</IonTitle>
             <IonButtons slot="start">
               <IonButton onClick={() => modal.current?.dismiss()}>Close</IonButton>
             </IonButtons>
-
             <IonButtons slot="end">
               <IonButton onClick={saveChanges}>Save</IonButton>
             </IonButtons>
@@ -41,6 +40,7 @@ const Profile: React.FC<Props> = ({ trigger }) => {
             <IonItem>
               <IonInput
                 label='昵称'
+                placeholder='请输入昵称'
                 value={userInfo?.nickname}
                 onIonChange={(e) => { userInfo.nickname = e.detail.value! }}
               ></IonInput>

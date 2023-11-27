@@ -18,7 +18,7 @@ const showActions = async () => {
       },
       {
         title: '暂不登录',
-        // style: ActionSheetButtonStyle.Destructive,
+        style: ActionSheetButtonStyle.Cancel,
       },
     ],
   });

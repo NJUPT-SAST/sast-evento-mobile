@@ -1,9 +1,8 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonToolbar, IonButton, IonInput, IonItem, IonLabel, IonList, IonToast, IonIcon, IonBackButton, IonButtons, isPlatform } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonToast, IonBackButton, IonButtons, isPlatform, IonCard, IonAvatar, IonTitle } from '@ionic/react';
 import './Login.scss';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { closeOutline } from 'ionicons/icons';
 import { getLoginKey, pwLogin } from '../apis/login';
 import JSEncrypt from 'jsencrypt';
 import { Browser } from '@capacitor/browser';
@@ -44,7 +43,7 @@ const Login: React.FC = () => {
 
   const linkLogin = async () => {
     if (isPlatform("ios")) {
-      await Browser.open({url: linkUrl});
+      await Browser.open({ url: linkUrl });
     } else {
       const a = document.createElement('a');
       a.setAttribute('href', linkUrl);
@@ -64,47 +63,62 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
+      <IonHeader translucent={false}>
+        <IonToolbar>
+          <IonTitle>登录</IonTitle>
+          <IonButtons slot="start">
+            <IonBackButton></IonBackButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
-        <IonHeader collapse="condense" className="headerWarpper" translucent={false}>
-          <IonToolbar>
-            <IonButtons slot="start" onClick={close}>
-              <IonIcon icon={closeOutline} size='large'></IonIcon>
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <div className='loginWarpper'>
-            <IonLabel>
-              <h1 className='loginText'>登录</h1>
-            </IonLabel>
-            <IonList>
-              <IonItem className='inputWarpper'>
-                <IonInput
-                  label='用户名'
-                  labelPlacement='floating'
-                  value={username}
-                  clearOnEdit={true}
-                  onIonChange={e => setUsername(e.detail.value!)}
-                ></IonInput>
-              </IonItem>
-              <IonItem>
-                <IonInput
-                  label='密码'
-                  labelPlacement='floating'
-                  type="password"
-                  value={password}
-                  clearOnEdit={true}
-                  onIonChange={e => setPassword(e.detail.value!)}
-                ></IonInput>
-              </IonItem>
-            </IonList>
-            <IonButton expand="block" shape="round" onClick={login}>
-              登录
-            </IonButton>
-            <IonButton expand="block" fill='outline' shape="round" onClick={linkLogin}>
-              Link 登录
-            </IonButton>
-            {/* <div className='oauthIconWarpper'>
+        <IonCard>
+          <IonList>
+            <IonItem className='inputWarpper'>
+              <IonInput
+                label='用户名'
+                labelPlacement="fixed"
+                placeholder='请输入用户名'
+                value={username}
+                clearOnEdit={true}
+                onIonChange={e => setUsername(e.detail.value!)}
+              ></IonInput>
+            </IonItem>
+            <IonItem>
+              <IonInput
+                label='密码'
+                labelPlacement="fixed"
+                placeholder='请输入密码'
+                type="password"
+                value={password}
+                clearOnEdit={true}
+                onIonChange={e => setPassword(e.detail.value!)}
+              ></IonInput>
+            </IonItem>
+          </IonList>
+        </IonCard>
+        <IonCard>
+          <IonList>
+            <IonItem onClick={login} disabled={(username !== null) && (password !== null)}>
+              <IonLabel color={(username !== null) && (password !== null) ? "medium" : "primary"}>登录</IonLabel>
+            </IonItem>
+            <IonItem onClick={register} id='registerItem'>
+              <IonLabel color="primary">注册</IonLabel>
+            </IonItem>
+            <OnDevAlert trigger='registerItem'></OnDevAlert>
+          </IonList>
+        </IonCard>
+        <IonCard>
+          <IonList lines='none' inset={true}>
+            <IonItem onClick={linkLogin}>
+              <IonAvatar slot='start'>
+                <img alt='linkLogin' src='/link.ico' />
+              </IonAvatar>
+              <IonLabel color="">Link 登录</IonLabel>
+            </IonItem>
+          </IonList>
+        </IonCard>
+        {/* <div className='oauthIconWarpper'>
             <div className='oauthIcon'>
               <img src='/link.ico'></img>
             </div>
@@ -115,21 +129,14 @@ const Login: React.FC = () => {
               <img src='/link.ico'></img>
             </div>
           </div> */}
-            <div className='registerWarpper' id='registerButton'>
-              <IonLabel>还没有账号？ </IonLabel>
-              <IonLabel color="tertiary">注册</IonLabel>
-            </div>
-            <OnDevAlert trigger='registerButton'></OnDevAlert>
-          </div>
-        </IonContent>
-        <IonToast
-          isOpen={showToast}
-          onDidDismiss={() => setShowToast(false)}
-          message="用户名或密码错误"
-          duration={2000}
-          color="danger"
-        />
       </IonContent>
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="用户名或密码错误"
+        duration={2000}
+        color="danger"
+      />
     </IonPage >
   );
 }
