@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { getAllDepartments } from '../apis/user';
 import { Department } from '../context';
-import { IonBackButton, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonList, IonPage, IonRow, IonSkeletonText, IonThumbnail, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonBackButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonList, IonPage, IonRow, IonSkeletonText, IonThumbnail, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 
 import './AllDepartments.scss'
 import DepartmentIcon from '../components/DepartmentIcon';
 
 function AllDepartments() {
   const [departments, setDepartments] = useState<Department[]>([]);
-  const router = useIonRouter();
 
   useEffect(() => {
     getAllDepartments().then((res) => {
@@ -33,10 +32,6 @@ function AllDepartments() {
     )
   }
 
-  const close = () => {
-    router.push('/home', 'back');
-  }
-
   if (departments.length === 0 || departments === null) {
 
     return (
@@ -44,9 +39,9 @@ function AllDepartments() {
         <IonHeader translucent={false}>
           <IonToolbar>
             <IonTitle>分类</IonTitle>
-            <IonButton slot="start" fill="clear" size='small' onClick={close}>
-              <IonBackButton text="首页"></IonBackButton>
-            </IonButton>
+            <IonButtons slot="start">
+              <IonBackButton></IonBackButton>
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonContent>
@@ -80,9 +75,9 @@ function AllDepartments() {
       <IonHeader translucent={false}>
         <IonToolbar>
           <IonTitle>分类</IonTitle>
-          <IonButton slot="start" fill="clear" size='small' onClick={close}>
-            <IonBackButton text="首页"></IonBackButton>
-          </IonButton>
+          <IonButtons slot="start">
+            <IonBackButton></IonBackButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true} >

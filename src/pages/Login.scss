@@ -2,7 +2,6 @@
   margin: auto;
   width: 80%;
   max-width: 400px;
-  --ion-item-background: 0;
   .inputWarpper {
     padding: 0px;
   }
@@ -45,10 +44,4 @@
   .registerWarpper {
     margin-top: 15px;
   }
-}
-
-.headerWarpper {
-  display: flex;
-  padding: 5px;
-  height: auto;
 }

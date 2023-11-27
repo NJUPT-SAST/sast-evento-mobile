@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert, IonProgressBar, useIonRouter } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonIcon, IonHeader, IonToolbar, IonBackButton, IonAlert, useIonRouter, IonButtons } from '@ionic/react';
 import { Event } from '../context';
 import { getEventInfo, getUserParticipant, registerEvent, subcribeEvent } from '../apis/user';
-import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline, alarmOutline, alarmSharp, timeOutline, businessOutline, documentOutline, statsChartOutline, statsChartSharp } from 'ionicons/icons';
+import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline, alarmSharp, timeOutline, businessOutline, documentOutline, statsChartOutline, statsChartSharp } from 'ionicons/icons';
 import './Event.scss';
 import { Share } from '@capacitor/share';
 import { LocalNotificationSchema, LocalNotifications, ScheduleOptions, Schedule, LocalNotificationDescriptor, CancelOptions } from '@capacitor/local-notifications';
@@ -18,7 +18,6 @@ const EventPage: React.FC = () => {
   const [showSubscribeAlert, setShowSubscribeAlert] = useState(false);
   const [isParticipate, setIsParticipate] = useState<boolean>(false);
 
-  // const history = useHistory();
   const router = useIonRouter();
 
   useEffect(() => {
@@ -52,11 +51,6 @@ const EventPage: React.FC = () => {
       return startTime.slice(5, -3).replace("-", ".") + " - " + endTime.slice(11, -3).replace("-", ".");
     }
     return startTime.slice(5, -3).replace("-", ".") + " - " + endTime.slice(5, -3).replace("-", ".");
-  }
-
-
-  const close = () => {
-    router.goBack;
   }
 
   const subscribe = () => {
@@ -170,9 +164,9 @@ const EventPage: React.FC = () => {
     <IonPage>
       <IonHeader translucent={false}>
         <IonToolbar>
-          <IonButton slot="start" fill="clear" size='small' onClick={close}>
+          <IonButtons slot="start">
             <IonBackButton></IonBackButton>
-          </IonButton>
+          </IonButtons>
           <IonButton slot="end" fill="clear" size='small' onClick={share}>
             <IonIcon icon={shareSocialOutline}></IonIcon>
           </IonButton>

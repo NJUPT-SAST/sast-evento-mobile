@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IonBackButton, IonButton, IonContent, IonHeader, IonIcon, IonNote, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonNote, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import { getAllDepartments, getEventWithFilter, getSubscribeDepartments, subscribeDepartment } from '../apis/user';
 import { useLocation } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ import { alarmSharp } from 'ionicons/icons';
 import EventCardList from '../components/EventCardList';
 
 const DepartmentPage: React.FC = () => {
-  const history = useHistory();
   const maxWeeks = 25;
   const location = useLocation<{ departmentName: string }>();
   const [departmentName, setDepartmentName] = useState<string>(location.state?.departmentName);
@@ -66,10 +65,6 @@ const DepartmentPage: React.FC = () => {
     });
   }
 
-  const close = () => {
-    history.push(`/home`, { direction: 'back' });
-  }
-
   const subscribe = () => {
     subscribeDepartment(Number(departmentId), true).then((res) => {
       setIsSubscribed(true);
@@ -120,9 +115,9 @@ const DepartmentPage: React.FC = () => {
     <IonPage>
       <IonHeader translucent={false}>
         <IonToolbar>
-          <IonButton slot="start" fill="clear" size='small' onClick={close}>
+          <IonButtons slot="start">
             <IonBackButton></IonBackButton>
-          </IonButton>
+          </IonButtons>
           <IonTitle>{departmentName}</IonTitle>
           {subscribeButton()}
         </IonToolbar>

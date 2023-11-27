@@ -6,8 +6,8 @@ import RegisteredEvents from '../components/RegisteredEvents';
 
 const SubscriptionsPage: React.FC = () => {
   const [selectedSegment, setSelectedSegment] = useState<string>('subscriptions');
-  const content = document.querySelector('ion-content') as HTMLElement;
-  let contentMove = 0;
+  // const content = document.querySelector('ion-content') as HTMLElement;
+  // let contentMove = 0;
   const handleRefresh = () => {
     window.location.reload();
   }
@@ -68,7 +68,7 @@ const SubscriptionsPage: React.FC = () => {
           </IonSegment>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent className='subscriptionsPageWarpper'>
         <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
