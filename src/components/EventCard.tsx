@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonCardSubtitle, IonIcon, IonLabel, IonNote, isPlatform, IonSkeletonText, useIonRouter } from '@ionic/react';
 import './EventCard.scss';
 import { Event } from '../context';
 import { folderOpenOutline, peopleOutline, pricetagsOutline, timeOutline } from 'ionicons/icons';
-import { useHistory } from 'react-router-dom';
 import { Toast } from '@capacitor/toast';
+import { useSettingStore } from '../util/setting';
 
 interface EventCardProps {
 	event: Event;
@@ -17,6 +17,17 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 	const stateColor = ['#92949c', '#3dc2ff', '#2dd36f', '#ffc409', '#eb445a', '#92949c'];
 	const titleWidth = isPlatform('ios') ? "100%" : "calc(100% - 60px)";
 
+	const settingStore = useSettingStore();
+	
+	useEffect(() => {
+		document.querySelectorAll('.eventCard').forEach((element) => {
+			if (settingStore.isShowEventCardAnime) {
+				element.classList.add('eventCardAnimation');
+			} else {
+				element.classList.remove('eventCardAnimation');
+			}
+		})
+	})
 	const stateInfo = () => {
 		/*    
 		EventState: 
@@ -44,7 +55,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 
 	if (event.id === null) {
 		return (
-			<IonCard className='eventCard' style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
+			<IonCard className="eventCard eventCardAnimation" style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
 				<IonCardHeader>
 					<IonCardTitle>
 						<div className='oneLineTextOverflow' style={{ 'width': titleWidth }}>
@@ -94,7 +105,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 	}
 
 	return (
-		<IonCard className='eventCard' onClick={toEvent} style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
+		<IonCard className='eventCard eventCardAnimation' onClick={toEvent} style={{ boxShadow: isShadow ? "none" : "rgba(0, 0, 0, 0.12) 0px 4px 16px" }}>
 			<IonCardHeader>
 				<IonCardTitle>
 					<div className='oneLineTextOverflow' style={{ 'width': titleWidth }}>{event.title}</div>
