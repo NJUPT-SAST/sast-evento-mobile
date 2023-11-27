@@ -8,6 +8,7 @@ import { getLoginKey, pwLogin } from '../apis/login';
 import JSEncrypt from 'jsencrypt';
 import { Browser } from '@capacitor/browser';
 import OnDevAlert from '../components/OnDevAlert';
+import { useSettingStore } from '../util/setting';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -41,9 +42,9 @@ const Login: React.FC = () => {
     // history.push('/register');
   }
 
-  const linkLogin = () => {
+  const linkLogin = async () => {
     if (isPlatform("ios")) {
-      Browser.open({url: linkUrl});
+      await Browser.open({url: linkUrl});
     } else {
       const a = document.createElement('a');
       a.setAttribute('href', linkUrl);
@@ -57,6 +58,7 @@ const Login: React.FC = () => {
   }
 
   const close = () => {
+    useSettingStore.setState({ isGuestMode: true })
     history.goBack();
   }
 

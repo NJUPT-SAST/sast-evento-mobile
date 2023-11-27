@@ -2,8 +2,6 @@
     margin-top: 15px;
     width: 95vw;
     border-radius: 4px;
-    height: 40vw;
-    max-height: 380px;
     overflow: hidden;
     position: relative;
 
@@ -19,5 +17,6 @@
       align-items: center;
       text-align: center;
       max-height: 380px;
+      height: 40vw;
     }
   }

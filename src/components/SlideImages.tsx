@@ -27,7 +27,7 @@ const SlideImages: React.FC = () => {
     <div className="slideWarpper">
       <Swiper
         spaceBetween={50}
-        slidesPerView={1}
+        slidesPerView="auto"
         loop={true}
         pagination={{
           dynamicBullets: true,

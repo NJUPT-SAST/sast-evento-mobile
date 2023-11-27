@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@capacitor-community/barcode-scanner": "^4.0.1",
+    "@capacitor/action-sheet": "^5.0.6",
     "@capacitor/android": "5.5.0",
     "@capacitor/app": "5.0.6",
     "@capacitor/browser": "^5.1.0",
