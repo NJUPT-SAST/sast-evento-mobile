@@ -11,6 +11,7 @@ import { useUserInfoStore } from '../util/store';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { Toast } from '@capacitor/toast';
+import { logout } from '../apis/login';
 
 const Me: React.FC = () => {
 	const { themeToggle, toggleChange } = React.useContext(ThemeContext);
@@ -22,10 +23,6 @@ const Me: React.FC = () => {
 	const themeIcon = themeToggle ? moon : sunnyOutline;
 
 	useEffect(() => {
-		console.log(isLoggedIn);
-		console.log(userInfo);
-
-
 		if (isLoggedIn && userInfo === undefined) {
 			getUserInfo().then((res) => {
 				userInfoStore.updateUserInfo(res);
@@ -83,6 +80,7 @@ const Me: React.FC = () => {
 	};
 	
 	const logOut = () => {
+		logout();
 		localStorage.clear();
 		userInfoStore.rmUserInfo();
 	}
@@ -160,12 +158,11 @@ const Me: React.FC = () => {
 								<IonIcon aria-hidden="true" icon={settingsOutline} slot='start'></IonIcon>
 								<IonLabel>设置</IonLabel>
 							</IonItem>
-							{/* <OnDevAlert trigger='setting'></OnDevAlert> */}
 						</IonList>
 					</IonCard>
 					<IonCard className='logoutWarpper'>
 						<IonList>
-							<IonItem button={true} onClick={logOut} lines='none'>
+							<IonItem button={true} onClick={logOut} lines='none' disabled={!isLoggedIn}>
 								<IonIcon icon={logOutOutline} color='danger' className='functionIcon' slot='start'></IonIcon>
 								<IonLabel color="danger">退出登录</IonLabel>
 							</IonItem>

@@ -7,6 +7,7 @@ import { folderOpenOutline, peopleOutline, pricetagsOutline, shareSocialOutline,
 import './Event.scss';
 import { Share } from '@capacitor/share';
 import { LocalNotificationSchema, LocalNotifications, ScheduleOptions, Schedule, LocalNotificationDescriptor, CancelOptions } from '@capacitor/local-notifications';
+import { useRefreshStore } from '../util/refresh';
 
 
 const EventPage: React.FC = () => {
@@ -17,6 +18,7 @@ const EventPage: React.FC = () => {
   const [isSubscribe, setIsSubscribe] = useState<boolean>(false);
   const [showSubscribeAlert, setShowSubscribeAlert] = useState(false);
   const [isParticipate, setIsParticipate] = useState<boolean>(false);
+  const refreshStore = useRefreshStore();
 
   const router = useIonRouter();
 
@@ -55,6 +57,7 @@ const EventPage: React.FC = () => {
 
   const subscribe = () => {
     subcribeEvent(Number(eventId), true).then(() => {
+      refreshStore.setIsSubscribedEventsRefresh(true);
       setIsSubscribe(true);
       const scheduleDate = new Date();
       scheduleDate.setFullYear(Number(event.gmtEventStart.slice(0, 4)));
@@ -86,6 +89,7 @@ const EventPage: React.FC = () => {
 
   const unsubscribe = () => {
     subcribeEvent(Number(eventId), false).then(() => {
+      refreshStore.setIsSubscribedEventsRefresh(true);
       setIsSubscribe(false);
       const localNotificationDescriptor: LocalNotificationDescriptor = {
         id: Number(eventId)
@@ -128,6 +132,7 @@ const EventPage: React.FC = () => {
 
   const register = () => {
     registerEvent(Number(eventId), true).then(() => {
+      refreshStore.setIsRegisteredEventsRefresh(true);
       setIsRegistration(true);
     }, (error) => {
       console.log(error);
@@ -137,6 +142,7 @@ const EventPage: React.FC = () => {
 
   const unregister = () => {
     registerEvent(Number(eventId), false).then(() => {
+      refreshStore.setIsRegisteredEventsRefresh(true);
       setIsRegistration(false);
     }, (error) => {
       console.log(error);

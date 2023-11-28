@@ -2,7 +2,7 @@ import { IonCard, IonItem, IonLabel, IonList, IonListHeader } from "@ionic/react
 import SubscribeDepartments from "./SubscribeDepartments"
 import "./Subcribe.scss"
 import SubscribedEvents from "./SubscribedEvents";
-const subcribePage = () => {
+const subcribe = () => {
   return (
     <div className="subscribePageWarpper">
       <div style={{ height: "5px" }}></div>
@@ -25,4 +25,4 @@ const subcribePage = () => {
   )
 }
 
-export default subcribePage;
+export default subcribe;

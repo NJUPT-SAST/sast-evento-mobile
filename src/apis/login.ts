@@ -5,6 +5,11 @@ export const login = async (studentId: string, password: string) => {
   return response.data;
 };
 
+export const logout = async () => {
+  const response = await request.post<any>("/user/logout");
+  return response.data;
+}
+
 export const linkLogin = async (code: string, type: number = 2) => {
   let data = new FormData();
   data.append('code', code);
