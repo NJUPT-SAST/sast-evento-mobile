@@ -99,8 +99,8 @@ const Login: React.FC = () => {
         </IonCard>
         <IonCard>
           <IonList>
-            <IonItem onClick={login} disabled={(username !== null) && (password !== null)}>
-              <IonLabel color={(username !== null) && (password !== null) ? "medium" : "primary"}>登录</IonLabel>
+            <IonItem onClick={login} disabled={(username ===  "") || (password === "")}>
+              <IonLabel color={(username ===  "") || (password === "") ? "medium" : "primary"}>登录</IonLabel>
             </IonItem>
             <IonItem onClick={register} id='registerItem'>
               <IonLabel color="primary">注册</IonLabel>

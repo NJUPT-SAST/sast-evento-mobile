@@ -32,7 +32,7 @@ import DepartmentsPage from './pages/AllDepartments';
 import EventPage from './pages/Event';
 import Home from './pages/Home';
 import Me from './pages/Me';
-import SubscriptionsPage from './pages/SubscriptionsPage';
+import SubscriptionsPage from './pages/Schedule';
 import DepartmentPage from './pages/Department';
 import HistoryEvents from './pages/HistoryEvents';
 import ScanningPage from './pages/ScanningPage';
@@ -56,7 +56,7 @@ const App: React.FC = () => (
               <Route path="/home" component={Home} exact />
               <Route path="/me" component={Me} exact />
               <Route path="/history" component={HistoryEvents} exact />
-              <Route path="/subscriptions" component={SubscriptionsPage} exact />
+              <Route path="/schedule" component={SubscriptionsPage} exact />
               <Route path="/scanner" component={ScanningPage} exact />
               <Route path="/setting" component={Setting} exact />
               <Redirect exact from="/" to="/home" />
@@ -67,7 +67,7 @@ const App: React.FC = () => (
                 <IonIcon icon={homeOutline}></IonIcon>
                 {/* <IonLabel>首页</IonLabel> */}
               </IonTabButton>
-              <IonTabButton tab="subscriptions" href="/subscriptions">
+              <IonTabButton tab="schedule" href="/schedule">
                 <IonIcon icon={layersOutline}></IonIcon>
               </IonTabButton>
               <IonTabButton tab="me" href="/me">

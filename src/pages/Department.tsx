@@ -8,6 +8,7 @@ import './Department.scss'
 import { Department, Event } from '../context';
 import { alarmSharp } from 'ionicons/icons';
 import EventCardList from '../components/EventCardList';
+import { useRefreshStore } from '../util/refresh';
 
 const DepartmentPage: React.FC = () => {
   const maxWeeks = 25;
@@ -16,6 +17,7 @@ const DepartmentPage: React.FC = () => {
   const { departmentId } = useParams<{ departmentId: string }>();
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const [events, setEvents] = useState<Event[]>([]);
+  const refreshStore = useRefreshStore();
 
   useEffect(() => {
     // get departmentName
@@ -57,6 +59,7 @@ const DepartmentPage: React.FC = () => {
 
   const updateSubscribeDepartments = () => {
     getSubscribeDepartments().then((res) => {
+      refreshStore.setIsSubscribedDepartmentRefresh(true);
       localStorage.setItem('subscribeDepartments', JSON.stringify(res));
       if (JSON.parse(String(localStorage.getItem('subscribeDepartments')))
         .find((department: Department) => department.id === Number(departmentId)) !== undefined) {
@@ -67,6 +70,7 @@ const DepartmentPage: React.FC = () => {
 
   const subscribe = () => {
     subscribeDepartment(Number(departmentId), true).then((res) => {
+      refreshStore.setIsSubscribedDepartmentRefresh(true);
       setIsSubscribed(true);
       updateSubscribeDepartments();
     });
@@ -123,6 +127,11 @@ const DepartmentPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{departmentName}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <div className='eventContainer'>
           <EventCardList events={events} lines='none'></EventCardList>
           {events.length === 0 ? <></> : <div style={{ textAlign: "center", margin: "15px" }}><IonNote>没有更多的活动了</IonNote></div>}

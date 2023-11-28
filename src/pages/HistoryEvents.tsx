@@ -18,12 +18,17 @@ const HistoryEvents = () => {
       <IonHeader translucent={false}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton text="我的"></IonBackButton>
+            <IonBackButton></IonBackButton>
           </IonButtons>
           <IonTitle>历史活动</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonHeader translucent={false} collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">历史活动</IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <EventCardList events={historyEvents} lines="none" />
       </IonContent>
     </IonPage>
