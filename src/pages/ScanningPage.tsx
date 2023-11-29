@@ -1,7 +1,7 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonPage, IonToolbar, isPlatform, useIonRouter } from "@ionic/react"
 
 import "./ScanningPage.scss"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { eventCheckIn } from "../apis/user";
 import { useZxing } from "react-zxing";
 import { Toast } from "@capacitor/toast";
@@ -9,12 +9,10 @@ import { Toast } from "@capacitor/toast";
 const ScanningPage = () => {
 	const [result, setResult] = useState("");
 	const router = useIonRouter();
-
-	const cancelScanning = () => {
-		console.log(ref);
-		useZxing({ paused: true });
-	}
-
+	useEffect(() => {
+		document.getElementById("app-tab-bar")?.style.setProperty("opacity", "0");
+		return () => {document.getElementById("app-tab-bar")?.style.removeProperty("opacity")};
+	}, [])
 	const { ref } = useZxing({
 		onDecodeResult(result) {
 			setResult(result.getText());
@@ -25,29 +23,32 @@ const ScanningPage = () => {
 						text: res,
 						duration: 'short'
 					});
-					router.push('/me', 'back');
 				});
+			} else {
+				Toast.show({
+					text: "Invalid QR Code: " + result.getText(),
+					duration: "short"
+				})
 			}
+			goBack();
 		},
 		paused: result !== "",
 	});
+
+	const goBack = () => {
+		router.push("/me", 'back');
+	}
 	return (
 		<IonPage>
-			<IonHeader>
-				<IonToolbar>
-					<IonButtons slot="start" onClick={cancelScanning}>
-						<IonBackButton text=""></IonBackButton>
-					</IonButtons>
-				</IonToolbar>
-			</IonHeader>
-			<IonContent fullscreen>
-				<div>
-					<IonButton onClick={cancelScanning}>
-						cancel
-					</IonButton>
-				</div>
-				<div className="scannerContainer">
-					<video ref={ref} />
+			<IonContent fullscreen className="scannerContainer">
+				<div className="goBackButtonContainer">
+					<div onClick={goBack} className="goBackButton">
+						<div className="goBackButtonTop"></div>
+						<div className="goBackButtonBottom"></div>
+					</div>
+					<div className="scannerContainer">
+						<video ref={ref} />
+					</div>
 				</div>
 			</IonContent>
 		</IonPage>
