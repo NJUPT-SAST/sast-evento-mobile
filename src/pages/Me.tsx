@@ -29,55 +29,6 @@ const Me: React.FC = () => {
 			});
 		}
 	}, [userInfo])
-
-	const takePicture = async () => {
-		const image = await Camera.getPhoto({
-			quality: 90,
-			allowEditing: true,
-			resultType: CameraResultType.Uri
-		});
-	
-		// image.webPath will contain a path that can be set as an image src.
-		// You can access the original file using image.path, which can be
-		// passed to the Filesystem API to read the raw data of the image,
-		// if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-		var imageUrl = image.webPath;
-		console.log(imageUrl);
-		
-		// Can be set to the src of an image now
-		// imageElement.src = imageUrl;
-	};
-
-	const stopScan = () => {
-		BarcodeScanner.showBackground();
-		BarcodeScanner.stopScan();
-	};
-
-	const startScan = async () => {
-		if (isPlatform("ios")) {
-			Toast.show({
-				text: "iOS暂不支持扫码功能",
-				duration: "short"
-			})
-			return;
-		}
-
-		await BarcodeScanner.checkPermission({ force: true });
-	
-		BarcodeScanner.hideBackground();
-		document.querySelector('body')?.classList.add('scanner-active');
-		const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
-	
-		// if the result has content
-		if (result.hasContent) {
-			console.log(result.content); // log the raw scanned content
-			if (result.content.length < 10) {
-				eventCheckIn(result.content);
-			}
-			document.querySelector('body')?.classList.remove('scanner-active');
-			stopScan();
-		}
-	};
 	
 	const logOut = () => {
 		logout();
@@ -110,10 +61,10 @@ const Me: React.FC = () => {
 		<IonPage>
 			<IonHeader translucent={false}>
 				<IonToolbar>
-					<IonButton id='scaning' fill="clear" slot="end" size='small'>
+					<IonButton id='scaning' fill="clear" slot="end" size='small' onClick={toScanner}>
 						<IonIcon icon={scanOutline} color="primary"></IonIcon>
 					</IonButton>
-					<OnDevAlert trigger='scaning'></OnDevAlert>
+					{/* <OnDevAlert trigger='scaning'></OnDevAlert> */}
 					<IonButton fill='clear' slot='end' size='small' onClick={toggleChange}>
 						<IonIcon icon={themeIcon} color="primary"></IonIcon>
 					</IonButton>
