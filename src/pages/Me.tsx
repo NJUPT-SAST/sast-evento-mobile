@@ -8,9 +8,6 @@ import OnDevAlert from '../components/OnDevAlert';
 import { eventCheckIn, getUserInfo } from '../apis/user';
 import Profile from '../components/Profile';
 import { useUserInfoStore } from '../util/store';
-import { Camera, CameraResultType } from '@capacitor/camera';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { Toast } from '@capacitor/toast';
 import { logout } from '../apis/login';
 
 const Me: React.FC = () => {
