@@ -13,7 +13,7 @@ const SlideImages: React.FC = () => {
   const [slideImages, setSlideImages] = useState<Array<any>>([]);
   useEffect(() => {
     getHomeSlideList().then((res) => {
-      setSlideImages(res.slides.slice(0, 2));
+      setSlideImages(res.slides.slice(0, 3));
     });
   }, []);
 
@@ -26,7 +26,6 @@ const SlideImages: React.FC = () => {
   return (
     <div className="slideWarpper">
       <Swiper
-        spaceBetween={50}
         slidesPerView="auto"
         loop={true}
         pagination={{
