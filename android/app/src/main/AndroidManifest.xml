@@ -29,10 +29,8 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <data android:scheme="sast.evento.mobile"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-ad
         </activity>
 
         <provider
