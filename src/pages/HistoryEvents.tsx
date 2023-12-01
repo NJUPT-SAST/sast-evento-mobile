@@ -3,6 +3,8 @@ import { Event } from "../context";
 import { getHistoryEvents } from "../apis/user";
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import EventCardList from "../components/EventCardList";
+import "./HistoryEvents.scss";
+
 const HistoryEvents = () => {
   const [historyEvents, setHistoryEvents] = useState<Event[] | null>(null);
   useEffect(() => {
@@ -23,7 +25,7 @@ const HistoryEvents = () => {
           <IonTitle>历史活动</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent className="HistoryEventsContainer">
         <IonHeader translucent={false} collapse="condense">
           <IonToolbar>
             <IonTitle size="large">历史活动</IonTitle>

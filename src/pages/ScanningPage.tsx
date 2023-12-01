@@ -5,13 +5,20 @@ import { useEffect, useState } from "react"
 import { eventCheckIn } from "../apis/user";
 import { useZxing } from "react-zxing";
 import { Toast } from "@capacitor/toast";
+import { StatusBar } from "@capacitor/status-bar";
 
 const ScanningPage = () => {
 	const [result, setResult] = useState("");
 	const router = useIonRouter();
+	
+	// Hide status bar and tab bar to fit full screen
 	useEffect(() => {
+		StatusBar.hide();
 		document.getElementById("app-tab-bar")?.style.setProperty("opacity", "0");
-		return () => {document.getElementById("app-tab-bar")?.style.removeProperty("opacity")};
+		return () => {
+			document.getElementById("app-tab-bar")?.style.removeProperty("opacity");
+			StatusBar.show();
+		};
 	}, [])
 	const { ref } = useZxing({
 		onDecodeResult(result) {
@@ -46,9 +53,12 @@ const ScanningPage = () => {
 						<div className="goBackButtonTop"></div>
 						<div className="goBackButtonBottom"></div>
 					</div>
-					<div className="scannerContainer">
-						<video ref={ref} />
-					</div>
+				</div>
+				<div className="scanningAnimaionContainer">
+					<div className="scanningAnimation" />
+				</div>
+				<div className="scannerContainer">
+					<video ref={ref} />
 				</div>
 			</IonContent>
 		</IonPage>

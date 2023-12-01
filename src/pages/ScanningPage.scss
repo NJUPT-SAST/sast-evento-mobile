@@ -2,14 +2,14 @@
   .goBackButton {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
-    background-color: white;
+    // border-radius: 50%;
+    // background-color: #fff, 0.8;
     position: fixed;
-    top: 8%;
-    left: 15px;
+    top: 2%;
+    left: 5%;
     z-index: 10;
     .goBackButtonTop {
-      background-color: grey;
+      background-color: rgb(83, 83, 83);
       height: 3px;
       width: 20px;
       position: relative;
@@ -19,7 +19,7 @@
       transform: rotate(-0.1turn);
     }
     .goBackButtonBottom {
-      background-color: grey;
+      background-color: rgb(83, 83, 83);
       height: 3px;
       width: 20px;
       position: relative;
@@ -33,11 +33,31 @@
 .scannerContainer {
   display: flex;
   align-items: center;
+  .scanningAnimaionContainer {
+    .scanningAnimation {
+      position: fixed;
+      width: 100%;
+      height: 70px;
+      z-index: 12;
+      // top: -70px;
+      animation: scanningAnimation 5s linear infinite normal;
+      background: linear-gradient(#3ee49100, 60%, #3ee491);
+    }
+  }
   video {
     width: 100%;
     height: calc(100vh);
     // z-index: 1001;
     // height: calc(100vh - 50px);
     object-fit: cover;
+  }
+}
+
+@keyframes scanningAnimation {
+  0% {
+    top: -70px;
+  }
+  100% {
+    top: calc(100% + 100px);
   }
 }
