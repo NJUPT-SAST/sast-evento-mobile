@@ -1,11 +1,12 @@
-import { IonBackButton, IonButtons, IonCard, IonContent, IonHeader, IonItem, IonList, IonPage, IonTitle, IonToggle, IonToolbar } from "@ionic/react"
+import { IonBackButton, IonButtons, IonCard, IonContent, IonHeader, IonItem, IonList, IonPage, IonText, IonTitle, IonToggle, IonToolbar } from "@ionic/react"
 import { useSettingStore } from "../util/setting";
+import "./Setting.scss"
 
 const Setting = () => {
   const settingStore = useSettingStore();
   const { isGuestMode, setIsGuestMode } = settingStore;
   const { isShowEventCardAnime, setIsShowEventCardAnime } = settingStore;
-  
+
   return (
     <IonPage>
       <IonHeader>
@@ -31,6 +32,11 @@ const Setting = () => {
             </IonItem>
           </IonList>
         </IonCard>
+        <div className="versionNumberContainer">
+          <IonText color="medium">
+            <p>Version: 1.0.0-alpha</p>
+          </IonText>
+        </div>
       </IonContent>
     </IonPage>
   )
