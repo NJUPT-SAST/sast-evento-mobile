@@ -123,7 +123,7 @@ const EventPage: React.FC = () => {
       );
     } else {
       return (
-        <IonButton fill="outline" size="small" onClick={subscribe} disabled={event.state !== "NOT_STARTED" && event.state !== "CHECKING_IN"} className='subscribeButton'>
+        <IonButton fill="outline" size="small" onClick={subscribe} disabled={event.state !== 1 && event.state !== 2} className='subscribeButton'>
           <IonIcon icon={alarmSharp}></IonIcon>
         </IonButton>
       );
@@ -159,7 +159,7 @@ const EventPage: React.FC = () => {
       );
     } else {
       return (
-        <IonButton size="small" onClick={register} disabled={event.state !== "REGISTRATION"} className='registerButton'>
+        <IonButton size="small" onClick={register} disabled={event.state === 4 || event.state === 5} className='registerButton'>
           <IonIcon icon={statsChartSharp}></IonIcon>报名
         </IonButton>
       );

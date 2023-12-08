@@ -134,8 +134,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 				</div>
 			</IonCardContent>
 			<div className='stateWarpper'>
-				{states[event.state - 1]}
-				<div className='stateCircle' style={{ '--circle-color': stateColor[event.state - 1] }}></div>
+				{states[event.state]}
+				<div className='stateCircle' style={{ '--circle-color': stateColor[event.state] }}></div>
 			</div>
 		</IonCard>
 	);

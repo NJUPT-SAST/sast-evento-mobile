@@ -62,7 +62,7 @@ const AllEvent: React.FC = () => {
       'gmtRegistrationEnd': 'UNLIMITED',
       'gmtRegistrationStart': 'UNLIMITED',
       'tag': 'HIDDEN',
-      'state': 'IN_PROGRESS',
+      'state': 3,
       'eventType': {
         'id': 0,
         'typeName': 'HIDDEN',
