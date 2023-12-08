@@ -8,7 +8,7 @@ export interface Event {
   gmtRegistrationStart: string;
   id: number;
   location: string;
-  state: string;
+  state: number;
   tag: string;
   title: string;
   [property: string]: any;

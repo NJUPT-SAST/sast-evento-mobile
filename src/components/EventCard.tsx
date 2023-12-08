@@ -18,7 +18,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 	const titleWidth = isPlatform('ios') ? "100%" : "calc(100% - 60px)";
 
 	const settingStore = useSettingStore();
-	
+
 	useEffect(() => {
 		document.querySelectorAll('.eventCard').forEach((element) => {
 			if (settingStore.isShowEventCardAnime) {
@@ -37,20 +37,20 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 		CANCELED(4, "已取消"),
 		ENDED(5, "已结束");
 		 */
-		switch (event.state) {
-			case 'NOT_STARTED':
-				return '1';
-			case 'CHECKING_IN':
-				return '2';
-			case 'IN_PROGRESS':
-				return '3';
-			case 'CANCELED':
-				return '4';
-			case 'ENDED':
-				return '5';
-			default:
-				return '0';
-		}
+		// switch (event.state) {
+		// 	case 'NOT_STARTED':
+		// 		return '1';
+		// 	case 'CHECKING_IN':
+		// 		return '2';
+		// 	case 'IN_PROGRESS':
+		// 		return '3';
+		// 	case 'CANCELED':
+		// 		return '4';
+		// 	case 'ENDED':
+		// 		return '5';
+		// 	default:
+		// 		return '0';
+		// }
 	}
 
 	if (event.id === null) {
@@ -134,8 +134,8 @@ const EventCard: React.FC<EventCardProps> = ({ event, isShadow }) => {
 				</div>
 			</IonCardContent>
 			<div className='stateWarpper'>
-				{states[stateInfo()]}
-				<div className='stateCircle' style={{ '--circle-color': stateColor[stateInfo()] }}></div>
+				{states[event.state - 1]}
+				<div className='stateCircle' style={{ '--circle-color': stateColor[event.state - 1] }}></div>
 			</div>
 		</IonCard>
 	);
