@@ -25,7 +25,7 @@ const ConductingEvents: React.FC = () => {
   }
 
   return (
-    <div className="conductingEvents">
+    <div>
       <EventCardList eventsTitle="进行中的活动" events={conductingEvent} lines="none"></EventCardList>
     </div>
   );
