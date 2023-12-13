@@ -37,15 +37,16 @@ import DepartmentPage from './pages/Department';
 import HistoryEvents from './pages/HistoryEvents';
 import ScanningPage from './pages/ScanningPage';
 import Setting from './pages/Setting';
+import AppUrlListener from './pages/AppUrlListener';
 
 setupIonicReact({ swipeBackEnabled: false });
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+      <AppUrlListener></AppUrlListener>
       <IonRouterOutlet>
         <ThemeChange>
-          
           <IonTabs>
             <IonRouterOutlet>
               <Route path="/departments" component={DepartmentsPage} exact />

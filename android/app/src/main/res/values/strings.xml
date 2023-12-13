@@ -3,5 +3,5 @@
     <string name="app_name">SAST-EVENTO</string>
     <string name="title_activity_main">SAST-EVENTO</string>
     <string name="package_name">sast.evento.mobile</string>
-    <string name="custom_url_scheme">sast.evento.mobile</string>
+    <string name="custom_url_scheme">evento</string>
 </resources>
