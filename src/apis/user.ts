@@ -89,3 +89,8 @@ export const eventCheckIn = async (code: string) => {
   const response = await request.get<string>('/event/checkIn', { params: { code } });
   return response.data;
 }
+
+export const getNewestEvents = async () => {
+  const response = await request.get<Event[]>('/event/newest');
+  return response.data;
+}

@@ -109,7 +109,7 @@ const EventPage: React.FC = () => {
     await Share.share({
       title: event.title,
       text: event.description,
-      url: window.location.href,
+      url: "https://evento.sast.fun" + window.location.pathname,
       dialogTitle: '分享活动'
     })
   }

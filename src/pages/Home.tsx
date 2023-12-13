@@ -3,6 +3,7 @@ import ConductingEvents from '../components/ConductingEvents';
 import AllEvent from '../components/AllEvents';
 import { useHistory } from 'react-router';
 import SlideImages from '../components/SlideImages';
+import NewestEvents from '../components/NewestEvents';
 import { menuOutline } from 'ionicons/icons';
 
 import './Home.scss';
@@ -35,6 +36,7 @@ const Home: React.FC = () => {
         <div className='homeComponentsWarpper'>
           <SlideImages></SlideImages>
           <ConductingEvents></ConductingEvents>
+          <NewestEvents></NewestEvents>
           <AllEvent></AllEvent>
         </div>
       </IonContent>

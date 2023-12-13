@@ -9,26 +9,10 @@ const showActions = async () => {
   if (settingStore.isGuestMode) {
     return;
   }
-  const result = await ActionSheet.showActions({
-    title: '是否以游客身份继续浏览',
-    message: '如果不登录，部分功能会受到限制',
-    options: [
-      {
-        title: '前往登录',
-      },
-      {
-        title: '暂不登录',
-        style: ActionSheetButtonStyle.Cancel,
-      },
-    ],
-  });
-  console.log('Action Sheet result:', result.index);
-  
-  if (result.index === 0) {
-    window.location.href = '/login';
-  } else {
-    settingStore.setIsGuestMode(true);
-  }
+  Toast.show({
+    text: "未登录（登录过期），请登录",
+    duration: "short"
+  })
 };
 
 // const BASEURL = 'http://192.168.0.154:19711/api';
